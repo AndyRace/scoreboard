@@ -3,14 +3,7 @@
 ################################################################################
 
 /FlipDotServer/obj
-/FlipDotServer - Copy/bin/Debug/netcoreapp1.0
-/FlipDotServer - Copy/bin/Debug/netcoreapp1.0
-/.vs/scoreboard/v15/.suo
-/controller
-/controller
-/controller/listener/Server.cs
-/controller/listener/Server.cs
-/controller/Properties/AssemblyInfo.cs
-/packages/Microsoft.Net.Compilers.1.3.2
+/packages
 /backup
-/backup/controller/listener/Server.cs
+/.vs/
+/FlipDotServer/bin/
