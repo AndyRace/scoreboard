@@ -16,8 +16,8 @@
 }
 
 // MCC and controller-specific code
-var scoreboard = new MicroControllerScoreboard();
-// var scoreboard = new TestScoreboard();
+//var scoreboard = new MicroControllerScoreboard();
+var scoreboard = new Scoreboard();
 
 
 function initialise() {

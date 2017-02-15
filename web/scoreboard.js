@@ -7,27 +7,23 @@ function debugInfo(info) {
 // default controller
 function Controller(group) {
     this.group = group;
+    this.values = {};
 
     this.setValue = function (value) {
         debugInfo("Controller.SetValue: " + this.group + ", value: " + value);
 
+        this.values[this.group.name] = value;
+
         if (isNaN(value)) { value = ""; }
         this.group.valueElement.innerText = value;
-        if (this.group.newValueElement !== undefined) {
+        if (this.group.newValueElement !== null) {
             this.group.newValueElement.value = value;
         }
     };
 
     this.getValue = function () {
-        var value = this.valueElement.innerText;
-        if (value === "") {
-            value = NaN;
-        }
-
-        value = Number(value);
-
+        value = this.values[this.group.name];
         debugInfo("Controller.GetValue: " + this.group + ", value: " + value);
-
         return value;
     };
 }
@@ -35,7 +31,7 @@ function Controller(group) {
 function Group(group, value, nDigits, newValue, update) {
     var self = this;
 
-    this.controller = new Controller(group);
+    this.controller = new Controller(self);
     this.name = group;
     this.valueElement = document.getElementById(value);
     this.nDigits = nDigits;
