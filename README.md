@@ -1,2 +1,0 @@
-# scoreboard
-Scoreboard controller
