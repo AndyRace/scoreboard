@@ -2,8 +2,4 @@
 # This .gitignore file was automatically created by Microsoft(R) Visual Studio.
 ################################################################################
 
-/FlipDotServer/obj
-/packages
-/backup
-/.vs/
-/FlipDotServer/bin/
+/.vs/pi/v15/.suo
