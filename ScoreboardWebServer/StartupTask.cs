@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Net.Http;
 using Windows.ApplicationModel.Background;
-using SelfHostedHttpServer;
 using Windows.System.Threading;
 using ScoreboardWebServerHelper;
 
@@ -12,7 +7,6 @@ using ScoreboardWebServerHelper;
 
 namespace ScoreboardWebServer
 {
-    
     public sealed class StartupTask : IBackgroundTask
     {
         private static BackgroundTaskDeferral _Deferral = null;

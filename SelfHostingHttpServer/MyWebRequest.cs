@@ -16,8 +16,14 @@ namespace SelfHostedHttpServer
         private StreamSocket _socket;
         private Uri _requestUri;
         private Stream _requestStream;
+        private WebHeaderCollection _headers;
 
-        public override WebHeaderCollection Headers { get; set; }
+        public override WebHeaderCollection Headers
+        {
+            get { return _headers; }
+            set { _headers = value; }
+        }
+
         public override string Method { get; set; }
 
         public override Uri RequestUri { get => _requestUri; }
@@ -32,7 +38,7 @@ namespace SelfHostedHttpServer
         public MyWebRequest(StreamSocket socket) : base()
         {
             _socket = socket;
-            Headers = new WebHeaderCollection();
+            _headers = new WebHeaderCollection();
         }
 
         public async Task Initialise()

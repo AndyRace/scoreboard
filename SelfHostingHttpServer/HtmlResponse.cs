@@ -29,7 +29,7 @@ namespace SelfHostedHttpServer
         // see: https://en.wikipedia.org/wiki/Media_type
         public override string ContentType => "text/html";
 
-        public override Uri ResponseUri => throw new NotImplementedException();
+        public override Uri ResponseUri => null; // TBD throw new NotImplementedException();
 
         public override Stream GetResponseStream()
         {
@@ -48,7 +48,7 @@ namespace SelfHostedHttpServer
         // todo: Need to map extension to conent type
         public override string ContentType => "text/html";
 
-        public override Uri ResponseUri => throw new NotImplementedException();
+        public override Uri ResponseUri => null; // throw new NotImplementedException();
 
         public override Stream GetResponseStream()
         {

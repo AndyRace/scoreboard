@@ -8,24 +8,6 @@ namespace ScoreboardWebServerHelper
 {
     public class MyWebServer : ServerBase
     {
-        /// <summary>
-        /// Get the response
-        /// </summary>
-        /// <param name="bag">
-        /// header
-        ///     .method:   GET, PUT, POST
-        ///     .query:     The request's query
-        ///     .version:   1.1
-        /// 
-        /// attributes[]
-        ///     .Item1:     request header attribute name
-        ///     .Item2:     request header attribute value
-        /// 
-        /// body:   The PUT/POST payload
-        /// </param>
-        /// <returns>
-        /// The response as a Stream.
-        /// </returns>
         protected override async Task<WebResponse> GetResponse(WebRequest request)
         {
             var pathAndQuery = request.RequestUri.PathAndQuery;
@@ -63,7 +45,6 @@ namespace ScoreboardWebServerHelper
                 switch (method)
                 {
                     case "GET":
-                        // return await GetResponse(method, $"TODO: Load Web resource: {arg}");
                         return new HtmlResponseFromFile(arg);
 
                     default:
