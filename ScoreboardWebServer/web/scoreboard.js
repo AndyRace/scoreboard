@@ -19,9 +19,13 @@ function Group(group, value, nDigits, newValue) {
     };
 
     this.setValue = function (value) {
-        value = Number(value);
-        if (value < 0) { value = NaN; }
-        if (value > this.maxValue) { value = this.maxValue; }
+        if (value === "") {
+            value = NaN;
+        } else {
+            value = Number(value);
+            if (value < 0) { value = NaN; }
+            if (value > this.maxValue) { value = this.maxValue; }
+        }
 
         this.value = value;
     };

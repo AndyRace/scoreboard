@@ -83,6 +83,9 @@ function MicroGroup(group, value, nDigits, newValue, update) {
 
     this.setValue = function (value) {
         this.updateScore(value, false);
+
+        value = this.__proto__.getValue();
+
         this.apiPut.put("group=" + self.name + "&value=" + value);
 
         // do a cheeky get after every put
