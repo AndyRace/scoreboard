@@ -46,7 +46,17 @@ namespace SelfHostedHttpServer
 
         // see: https://en.wikipedia.org/wiki/Media_type
         // todo: Need to map extension to conent type
-        public override string ContentType => "text/html";
+        // text/javascript
+        public override string ContentType {
+            get
+            {
+                if (Path.GetExtension(_filename).ToLowerInvariant() == ".js")
+                {
+                    return "text/javascript";
+                }
+                return "text/html";
+            }
+        }
 
         public override Uri ResponseUri => null; // throw new NotImplementedException();
 
@@ -61,6 +71,10 @@ namespace SelfHostedHttpServer
 
         public HtmlResponseFromFile(string filename)
         {
+            if(filename == "")
+            {
+                filename = "index.html";
+            }
             _filename = filename;
         }
     }

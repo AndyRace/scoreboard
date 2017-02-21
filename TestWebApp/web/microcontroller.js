@@ -43,75 +43,45 @@ function api(fnUri) {
     };
 }
 
-function MicroGroup(group, value, nDigits, newValue, update) {
-    this.__proto__ = new Group(group, value, nDigits, newValue, update);
-
+function MicroController(group, apiGet, apiPut) {
     var self = this;
+    this.__proto__ = new Controller(group);
 
     this.apiGet = new api(cValueApiUri);
     this.apiPut = new api(cValueApiUri);
 
-    this.apiGet.request.onreadystatechange = function () {
+    this.apiGet.onreadystatechange = function () {
         if (this.readyState === 4 && this.status === 200) {
             var xhttp = this;
             setTimeout(function () {
-                console.log("Get: group:" + self.name + ", value:'" + xhttp.responseText + "'");
-
                 var response = JSON.parse(xhttp.responseText);
 
                 // todo: assert response.key == group
-                self.updateScore(response.Value, true);
+                self.updateScore(response.Value);
             }, 100);
         }
     };
 
-    this.updateScore = function (value, scoreboardHasResponded) {
-        this.__proto__.setValue(value);
-
-        console.log("Set: group:" + this.name + ", value:'" + value + "', hasResponded: " + scoreboardHasResponded);
-
-        value = this.__proto__.getValue();
-
+    this.updateScore = function (value) {
         if (isNaN(value)) {
-            //this.setDisplayText("*", scoreboardHasResponded);
-            this.setDisplayText("", scoreboardHasResponded);
-        } else {            //this.setDisplayText("*" + value + "*", scoreboardHasResponded);
-            this.setDisplayText(value, scoreboardHasResponded);
-            //this.setNewValueText(value);
+            this.group.setDisplayText("*");
+            this.group.setNewValueText("");
+        } else {
+            this.group.setDisplayText("*" + value + "*");
+            this.group.setNewValueText(value);
         }
     };
 
     this.setValue = function (value) {
-        this.updateScore(value, false);
-        this.apiPut.put("group=" + self.name + "&value=" + value);
-
-        // do a cheeky get after every put
-        this.refresh();
-    };
-
-    this.timeoutVar = null;
-    this.refresh = function () {
-        if (self.timeoutVar !== null) {
-            clearTimeout(self.timeoutVar);
-            console.log("clearTimeout(" + self.name + "): " + self.timeoutVar);
-        }
-
-        self.timeoutVar = setTimeout(function () {
-            // kick another refresh off in case anyone else is updating
-            self.timeoutVar = setTimeout(function () {
-                self.refresh();
-            }, 2000);
-
-            // do a get which itself will call this refresh()
-            self.apiGet.get("group=" + self.name);
-        }, 500);
-
-        console.log("setTimeout(" + self.name + "): " + self.timeoutVar);
+        this.updateScore(value);
+        this.apiPut.put("group=" + self.group.name + "&value=" + value);
     };
 
     // Keep updating the score.
     // This allows for others updating the score.
-    // setInterval(this.refresh, 2000);
+    setInterval(function () {
+        self.apiGet.get("group=" + self.group.name);
+    }, 10000);
 }
 
 function MicroControllerScoreboard() {
@@ -121,7 +91,9 @@ function MicroControllerScoreboard() {
     this.textApi = new api(cTextApiUri);
 
     this.createGroup = function (groupName, value, nDigits, newValue, update) {
-        return new MicroGroup(groupName, value, nDigits, newValue, update);
+        var group = this.__proto__.createGroup(groupName, value, nDigits, newValue, update);
+        group.controller = new MicroController(group, this.apiGet, this.apiPut);
+        return group;
     };
 
     this.test = function () {

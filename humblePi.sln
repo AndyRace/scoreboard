@@ -9,6 +9,28 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScoreboardWebServer", "Scor
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScoreboardWebServerHelper", "ScoreboardWebServerHelper\ScoreboardWebServerHelper.csproj", "{B67F3261-FC29-4275-95C2-6B02726C1CF9}"
 EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "TestWebApp(1)", "TestWebApp\", "{3BF73203-5D20-4F36-9C74-0C30741BA119}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.5.2"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_32746"
+		Debug.AspNetCompiler.PhysicalPath = "TestWebApp\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_32746\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_32746"
+		Release.AspNetCompiler.PhysicalPath = "TestWebApp\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_32746\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "32746"
+		SlnRelativePath = "TestWebApp\"
+		DefaultWebSiteLanguage = "Visual C#"
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -75,6 +97,22 @@ Global
 		{B67F3261-FC29-4275-95C2-6B02726C1CF9}.Release|x64.Build.0 = Release|x64
 		{B67F3261-FC29-4275-95C2-6B02726C1CF9}.Release|x86.ActiveCfg = Release|x86
 		{B67F3261-FC29-4275-95C2-6B02726C1CF9}.Release|x86.Build.0 = Release|x86
+		{3BF73203-5D20-4F36-9C74-0C30741BA119}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3BF73203-5D20-4F36-9C74-0C30741BA119}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3BF73203-5D20-4F36-9C74-0C30741BA119}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{3BF73203-5D20-4F36-9C74-0C30741BA119}.Debug|ARM.Build.0 = Debug|Any CPU
+		{3BF73203-5D20-4F36-9C74-0C30741BA119}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{3BF73203-5D20-4F36-9C74-0C30741BA119}.Debug|x64.Build.0 = Debug|Any CPU
+		{3BF73203-5D20-4F36-9C74-0C30741BA119}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{3BF73203-5D20-4F36-9C74-0C30741BA119}.Debug|x86.Build.0 = Debug|Any CPU
+		{3BF73203-5D20-4F36-9C74-0C30741BA119}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{3BF73203-5D20-4F36-9C74-0C30741BA119}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{3BF73203-5D20-4F36-9C74-0C30741BA119}.Release|ARM.ActiveCfg = Debug|Any CPU
+		{3BF73203-5D20-4F36-9C74-0C30741BA119}.Release|ARM.Build.0 = Debug|Any CPU
+		{3BF73203-5D20-4F36-9C74-0C30741BA119}.Release|x64.ActiveCfg = Debug|Any CPU
+		{3BF73203-5D20-4F36-9C74-0C30741BA119}.Release|x64.Build.0 = Debug|Any CPU
+		{3BF73203-5D20-4F36-9C74-0C30741BA119}.Release|x86.ActiveCfg = Debug|Any CPU
+		{3BF73203-5D20-4F36-9C74-0C30741BA119}.Release|x86.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

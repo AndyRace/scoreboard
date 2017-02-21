@@ -10,7 +10,7 @@ using Windows.Storage.Streams;
 
 namespace SelfHostedHttpServer
 {
-    internal class MyWebRequest : WebRequest
+    internal class SelfHostedWebRequest : WebRequest
     {
         private const uint BufferSize = 8192;
         private StreamSocket _socket;
@@ -27,6 +27,7 @@ namespace SelfHostedHttpServer
         public override string Method { get; set; }
 
         public override Uri RequestUri { get => _requestUri; }
+
         public override string ContentType { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
         public override async Task<Stream> GetRequestStreamAsync()
@@ -35,7 +36,7 @@ namespace SelfHostedHttpServer
             return await Task.Run(() => _requestStream);
         }
 
-        public MyWebRequest(StreamSocket socket) : base()
+        public SelfHostedWebRequest(StreamSocket socket) : base()
         {
             _socket = socket;
             _headers = new WebHeaderCollection();

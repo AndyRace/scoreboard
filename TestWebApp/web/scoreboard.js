@@ -4,14 +4,27 @@ function debugInfo(info) {
     // alert(info);
 }
 
-function Group(group, value, nDigits, newValue) {
+// default controller
+function Controller(group) {
+    this.group = group;
+
+    this.setValue = function (value) {
+        debugInfo("Controller.SetValue: " + this.group + ", value: " + value);
+        this.group.setDisplayText(value);
+        this.group.setNewValueText(value);
+    };
+}
+
+function Group(group, value, nDigits, newValue, update) {
     var self = this;
 
+    this.controller = new Controller(self);
     this.name = group;
     this.valueElement = document.getElementById(value);
     this.nDigits = nDigits;
     this.maxValue = Math.pow(10, nDigits) - 1;
     this.newValueElement = document.getElementById(newValue);
+    this.updateElement = document.getElementById(update);
     this.value = NaN;
 
     this.getValue = function () {
@@ -24,6 +37,9 @@ function Group(group, value, nDigits, newValue) {
         if (value > this.maxValue) { value = this.maxValue; }
 
         this.value = value;
+
+        // plug in the model here
+        this.controller.setValue(value);
     };
 
     this.setNewValueText = function (text) {
@@ -32,14 +48,8 @@ function Group(group, value, nDigits, newValue) {
         }
     };
 
-    // todo: HtmlEncode(text)
-    this.setDisplayText = function (text, scoreboardHasResponded) {
-        if (scoreboardHasResponded) {
-            this.valueElement.innerHTML = "<span class='confirmed'>" + text + "</span>";
-        }
-        else {
-            this.valueElement.innerText = text;
-        }
+    this.setDisplayText = function (text) {
+        this.valueElement.innerText = text;
     };
 
     this.inc = function (incValue) {
@@ -52,9 +62,11 @@ function Group(group, value, nDigits, newValue) {
         this.setValue(value + incValue);
     };
 
-    this.refresh = function () {
-        // called to update the display to the current value
-    };
+    if (this.updateElement !== null) {
+        this.updateElement.onclick = function (event) {
+            self.setValue(self.newValueElement.value);
+        };
+    }
 }
 
 function Ticker(groups) {
@@ -143,9 +155,9 @@ function Scoreboard() {
         });
     };
 
-    this.refresh = function () {
+    this.update = function () {
         this.groups.forEach(function (group) {
-            group.refresh();
+            group.setValue(group.getValue());
         });
     };
 
@@ -182,10 +194,6 @@ function Scoreboard() {
     };
 }
 
-function inc(groupName, value) {
-    scoreboard.findGroup(groupName).inc(value);
-}
-
-function setValue(groupName, value) {
-    scoreboard.findGroup(groupName).setValue(value);
+function inc(group, value) {
+    scoreboard.findGroup(group).inc(value);
 }

@@ -14,10 +14,6 @@
             font-size: xx-large;
         }
 
-        .confirmed {
-            font-style: normal;
-        }
-
         button.inc {
             color: brown;
             text-align: center;
@@ -33,7 +29,6 @@
 
         .value {
             font-size: xx-large;
-            font-style: italic;
             color: darkgoldenrod;
             font-family: "Lucida Console", Monaco, monospace;
             /*
@@ -51,7 +46,6 @@
         }
     </style>
 
-    <script src="jquery-3.1.1.min.js"></script>
     <script src="scoreboard.js"></script>
     <script src="microController.js"></script>
     <script src="configuration.js"></script>
@@ -92,7 +86,7 @@
                         <td>
                             <label>
                                 New Total:&nbsp;<input id="totalNew" value="142" maxlength="3" size="3" />
-                                <button onclick="setValue('total', totalNew.value)">Update</button>
+                                <button id="totalUpdate">Update</button>
                             </label>
                         </td>
                     </tr>
@@ -149,7 +143,7 @@
                             <label>
                                 1st Innings Total:&nbsp;
                                 <input id="firstInningsNew" value="214" maxlength="3" size="3" />
-                                <button onclick="setValue('firstInnings', firstInningsNew.value)">Update</button></label>
+                                <button id="firstInningsUpdate">Update</button></label>
                         </td>
                     </tr>
                     <tr>

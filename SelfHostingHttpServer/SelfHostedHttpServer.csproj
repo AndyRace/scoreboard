@@ -110,7 +110,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="HtmlResponse.cs" />
-    <Compile Include="MyWebRequest.cs" />
+    <Compile Include="SelfHostedWebRequest.cs" />
     <Compile Include="ResponseException.cs" />
     <Compile Include="ServerBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

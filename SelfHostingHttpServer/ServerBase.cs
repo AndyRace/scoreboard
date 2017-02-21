@@ -4,14 +4,13 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.Networking.Sockets;
 using System.Net;
+using System.Globalization;
 
 namespace SelfHostedHttpServer
 {
 
     public class ServerBase
     {
-        private const string Title = "Self-Hosted Server";
-
         //public class RequestEventArgs : EventArgs
         //{
         //}
@@ -35,7 +34,7 @@ namespace SelfHostedHttpServer
             {
                 try
                 {
-                    var myWebRequest = new MyWebRequest(args.Socket);
+                    var myWebRequest = new SelfHostedWebRequest(args.Socket);
                     using (var output = args.Socket.OutputStream)
                     using (var responseStream = output.AsStreamForWrite())
                     {
@@ -43,22 +42,46 @@ namespace SelfHostedHttpServer
                         {
                             await myWebRequest.Initialise();
 
-                            var response = await GetResponse(myWebRequest);
+                            var response = await CreateResponse(myWebRequest);
 
                             await WriteResponse(responseStream, response);
                         }
-                        catch (ResponseException ex)
-                        {
-                            var info = WebUtility.HtmlEncode(ex.Message).Replace("\r\n", "<br/>");
-                            var html = $"<html><head><title>{Title}</title></head><body><h1>Error</h1>{info}</body></html>";
-                            await WriteResponse(responseStream, html, $"{ex.ErrorCode} {WebUtility.HtmlEncode(ex.ErrorCodeShortDescription)}");
-                        }
                         catch (Exception ex)
                         {
+                            string error;
+                            var exType = ex.GetType();
+                            if (exType == typeof(ResponseException))
+                            {
+                                var responseEx = (ResponseException)ex;
+                                error = $"{responseEx.ErrorCode} {responseEx.ErrorCodeShortDescription}";
+                            }
+                            else if (exType == typeof(DirectoryNotFoundException)
+                                        || exType == typeof(FileNotFoundException))
+                            {
+                                error = "404 Not Found";
+                            }
+                            else
+                            {
+                                error = "400 Bad Request";
+                            }
+
+                            // todo: Map exceptions to status codes
                             // See: https://en.wikipedia.org/wiki/List_of_HTTP_status_codes
                             var info = WebUtility.HtmlEncode(ex.Message).Replace("\r\n", "<br/>");
-                            var html = $"<html><head><title>{Title}</title></head><body><h1>Error</h1>{info}</body></html>";
-                            await WriteResponse(responseStream, html, "400 Bad Request");
+                            info += "<hr/>";
+                            // TODO: DEBUG only
+                            info += WebUtility.HtmlEncode(ex.StackTrace).Replace("\r\n", "<br/>");
+
+                            var html = $"<html>" +
+                                            $"<head>" +
+                                                $"<title>Error</title>" +
+                                            $"</head>" +
+                                            $"<body>" +
+                                                $"<h1>{error}</h1>" +
+                                                $"{info}" +
+                                            $"</body>" +
+                                        $"</html>";
+                            await WriteResponse(responseStream, html, error);
                         }
                     }
                 }
@@ -67,6 +90,11 @@ namespace SelfHostedHttpServer
                     // todo: LOG THIS FATAL ERROR
                 }
             };
+        }
+
+        protected WebResponse CreateApiResponse(string body = "")
+        {
+            return new HtmlResponse(body);
         }
 
         /// <summary>
@@ -87,7 +115,7 @@ namespace SelfHostedHttpServer
         /// <returns>
         /// The response as a Stream.
         /// </returns>
-        protected virtual async Task<WebResponse> GetResponse(WebRequest request)
+        protected virtual async Task<WebResponse> CreateResponse(WebRequest request)
         {
             var body = new StringBuilder(
                     $"Command: {WebUtility.HtmlEncode(request.Method)}<br/>" +
@@ -108,16 +136,16 @@ namespace SelfHostedHttpServer
             body.Append($"<tr><td>Body</td><td>{WebUtility.HtmlEncode(text)}</td></tr>" +
                     "</table>");
 
-            return await GetResponse(request.Method, body.ToString());
+            return await CreateHtmlResponse(request.Method, body.ToString());
         }
 
-        protected async virtual Task<WebResponse> GetResponse(string header, string htmlBody)
+        protected async virtual Task<WebResponse> CreateHtmlResponse(string h1, string body)
         {
             return await Task.Run(() => new HtmlResponse($"<html><head>" +
                 $"<title>Background Message</title>" +
                 $"</head>" +
-                $"<h1>{WebUtility.HtmlEncode(header)}</h1>" +
-                $"<body>{htmlBody}</body>" +
+                $"<h1>{WebUtility.HtmlEncode(h1)}</h1>" +
+                $"<body>{body}</body>" +
                 $"</html>"));
         }
 
@@ -134,6 +162,7 @@ namespace SelfHostedHttpServer
             AppendTo(responseStream, $"HTTP/1.1 {responseCode}\r\n" +
                 $"Content-Length: {response.ContentLength}\r\n" +
                 $"Content-Type: {response.ContentType}\r\n" +
+                $"Date: {DateTime.Now.ToString("R", DateTimeFormatInfo.InvariantInfo)}\r\n" +
                 $"Connection: close\r\n");
 
             foreach (var header in response.Headers.AllKeys)

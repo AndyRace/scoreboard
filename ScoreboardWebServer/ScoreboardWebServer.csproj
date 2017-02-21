@@ -139,16 +139,22 @@
       <InProject>false</InProject>
     </Content>
     <Content Include="web\configuration.js">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="web\favicon.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="web\index.html">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="web\jquery-3.1.1.min.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="web\microcontroller.js">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="web\scoreboard.js">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <ItemGroup>
@@ -157,7 +163,7 @@
       <Name>ScoreboardWebServerHelper</Name>
     </ProjectReference>
     <ProjectReference Include="..\SelfHostingHttpServer\SelfHostedHttpServer.csproj">
-      <Project>{042A2E9C-DF7F-4CBD-8A47-ABB16291A5F0}</Project>
+      <Project>{042a2e9c-df7f-4cbd-8a47-abb16291a5f0}</Project>
       <Name>SelfHostedHttpServer</Name>
     </ProjectReference>
   </ItemGroup>

@@ -19,44 +19,26 @@
 //var scoreboard = new MicroControllerScoreboard();
 var scoreboard;
 
-function DummyGroup(groupName, value, nDigits, newValue, update) {
-    this.__proto__ = new Group(groupName, value, nDigits, newValue, update);
-
-    this.setValue = function (value) {
-        this.__proto__.setValue(value);
-
-        debugInfo("DummyScoreboard.SetValue: " + this.group + ", value: " + value);
-        this.group.setDisplayText(value, true);
-        //this.group.setNewValueText(value);
-    };
-}
-
-function DummyScoreboard() {
-    this.__proto__ = new Scoreboard();
-
-    this.createGroup = function (groupName, value, nDigits, newValue, update) {
-        return new DummyGroup(groupName, value, nDigits, newValue, update);
-    };
-}
-
 function changeConnection(isConnected) {
     if (isConnected) {
         scoreboard = new MicroControllerScoreboard();
     } else {
-        scoreboard = new DummyScoreboard();
+        scoreboard = new Scoreboard();
+        scoreboard.reset();
     }
 
-    scoreboard.groups.push(scoreboard.createGroup('total', 'totalValue', 3, 'totalNew'));
-    scoreboard.groups.push(scoreboard.createGroup('firstInnings', 'firstInningsValue', 3, 'firstInningsNew'));
+    scoreboard.groups.push(scoreboard.createGroup('total', 'totalValue', 3, 'totalNew', 'totalUpdate'));
+    scoreboard.groups.push(scoreboard.createGroup('firstInnings', 'firstInningsValue', 3, 'firstInningsNew', 'firstInningsUpdate'));
     scoreboard.groups.push(scoreboard.createGroup('overs', 'oversValue', 2));
     scoreboard.groups.push(scoreboard.createGroup('wickets', 'wicketsValue', 1));
 
-    scoreboard.refresh();
+    scoreboard.update();
 }
 
 function initialise() {
-    initialiseLayout();
-
     // todo: find a way to determine whether or not it's connected
     changeConnection(true);
+
+    initialiseLayout();
+    scoreboard.reset();
 }
