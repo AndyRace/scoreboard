@@ -55,7 +55,7 @@ function MicroGroup(group, value, nDigits, newValue, update) {
         if (this.readyState === 4 && this.status === 200) {
             var xhttp = this;
             setTimeout(function () {
-                console.log("Get: group:" + self.name + ", value:'" + xhttp.responseText + "'");
+                //console.log("Get: group:" + self.name + ", value:'" + xhttp.responseText + "'");
 
                 var response = JSON.parse(xhttp.responseText);
 
@@ -68,7 +68,7 @@ function MicroGroup(group, value, nDigits, newValue, update) {
     this.updateScore = function (value, scoreboardHasResponded) {
         this.__proto__.setValue(value);
 
-        console.log("Set: group:" + this.name + ", value:'" + value + "', hasResponded: " + scoreboardHasResponded);
+        //console.log("Set: group:" + this.name + ", value:'" + value + "', hasResponded: " + scoreboardHasResponded);
 
         value = this.__proto__.getValue();
 
@@ -93,7 +93,7 @@ function MicroGroup(group, value, nDigits, newValue, update) {
     this.refresh = function () {
         if (self.timeoutVar !== null) {
             clearTimeout(self.timeoutVar);
-            console.log("clearTimeout(" + self.name + "): " + self.timeoutVar);
+            //console.log("clearTimeout(" + self.name + "): " + self.timeoutVar);
         }
 
         self.timeoutVar = setTimeout(function () {
@@ -106,7 +106,7 @@ function MicroGroup(group, value, nDigits, newValue, update) {
             self.apiGet.get("group=" + self.name);
         }, 500);
 
-        console.log("setTimeout(" + self.name + "): " + self.timeoutVar);
+        //console.log("setTimeout(" + self.name + "): " + self.timeoutVar);
     };
 
     // Keep updating the score.
