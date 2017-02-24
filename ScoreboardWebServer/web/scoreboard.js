@@ -39,10 +39,10 @@ function Group(group, value, nDigits, newValue) {
     // todo: HtmlEncode(text)
     this.setDisplayText = function (text, scoreboardHasResponded) {
         if (scoreboardHasResponded) {
-            this.valueElement.innerHTML = "<span class='confirmed'>" + text + "</span>";
+            this.valueElement.innerText = text;
         }
         else {
-            this.valueElement.innerText = text;
+            this.valueElement.innerHTML = "<span class='unconfirmed'>" + text + "</span>";
         }
     };
 
