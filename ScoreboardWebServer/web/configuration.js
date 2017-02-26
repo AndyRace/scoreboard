@@ -19,8 +19,8 @@
 //var scoreboard = new MicroControllerScoreboard();
 var scoreboard;
 
-function DummyGroup(scoreboard, groupName, value, nDigits, newValue, update) {
-    this.__proto__ = new Group(scoreboard, groupName, value, nDigits, newValue, update);
+function DummyGroup(scoreboard, groupName, value, nDigits) {
+    this.__proto__ = new Group(scoreboard, groupName, value, nDigits);
 
     Object.defineProperty(this, 'value', {
         set: function (value) {
@@ -30,7 +30,6 @@ function DummyGroup(scoreboard, groupName, value, nDigits, newValue, update) {
 
             console.log("DummyScoreboard[" + this.name + "].value=" + value);
             this.setDisplayText(value, true);
-            //this.group.setNewValueText(value);
         },
 
         // it appears that JS doesn't search up the prototype chain for getters
@@ -43,8 +42,8 @@ function DummyGroup(scoreboard, groupName, value, nDigits, newValue, update) {
 function DummyScoreboard() {
     this.__proto__ = new Scoreboard();
 
-    this.createGroup = function (groupName, value, nDigits, newValue, update) {
-        return new DummyGroup(this, groupName, value, nDigits, newValue, update);
+    this.createGroup = function (groupName, value, nDigits) {
+        return new DummyGroup(this, groupName, value, nDigits);
     };
 }
 
@@ -55,10 +54,10 @@ function setConnected(isConnected) {
         scoreboard = new DummyScoreboard();
     }
 
-    scoreboard.groups.push(scoreboard.createGroup('total', 'totalValue', 3, 'totalNew'));
+    scoreboard.groups.push(scoreboard.createGroup('total', 'totalValue', 3));
     scoreboard.groups.push(scoreboard.createGroup('wickets', 'wicketsValue', 1));
     scoreboard.groups.push(scoreboard.createGroup('overs', 'oversValue', 2));
-    scoreboard.groups.push(scoreboard.createGroup('firstInnings', 'firstInningsValue', 3, 'firstInningsNew'));
+    scoreboard.groups.push(scoreboard.createGroup('firstInnings', 'firstInningsValue', 3));
 
     scoreboard.refresh();
 }

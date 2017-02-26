@@ -8,7 +8,7 @@ function debugInfo(info) {
     // alert(info);
 }
 
-function Group(scoreboard, group, value, nDigits, newValue) {
+function Group(scoreboard, group, value, nDigits) {
     var self = this;
 
     this.scoreboard = scoreboard;
@@ -16,7 +16,6 @@ function Group(scoreboard, group, value, nDigits, newValue) {
     this.valueElement = document.getElementById(value);
     this.nDigits = nDigits;
     this.maxValue = Math.pow(10, nDigits) - 1;
-    this.newValueElement = document.getElementById(newValue);
     this._value = NaN;
 
     Object.defineProperty(this, 'value', {
@@ -36,12 +35,6 @@ function Group(scoreboard, group, value, nDigits, newValue) {
             this._value = value;
         }
     });
-
-    this.setNewValueText = function (text) {
-        if (this.newValueElement !== null) {
-            this.newValueElement.value = text;
-        }
-    };
 
     // todo: HtmlEncode(text)
     this.setDisplayText = function (text, scoreboardHasResponded) {
@@ -192,8 +185,8 @@ function Scoreboard() {
         alert(text);
     };
 
-    this.createGroup = function (groupName, value, nDigits, newValue, update) {
-        return new Group(this, groupName, value, nDigits, newValue, update);
+    this.createGroup = function (groupName, value, nDigits, update) {
+        return new Group(this, groupName, value, nDigits, update);
     };
 }
 

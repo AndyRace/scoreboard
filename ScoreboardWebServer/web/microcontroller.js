@@ -19,7 +19,7 @@ function api(fnUri) {
         // I'm worried about multi-threading so ping a timeout here io serialise it
         setTimeout(function () {
             var uri = self.uri;
-            if (parameters != null) {
+            if (typeof parameters !== "undefined" && parameters !== null) {
                 uri += "?" + parameters;
             }
 
@@ -43,8 +43,8 @@ function api(fnUri) {
     };
 }
 
-function MicroGroup(scoreboard, group, value, nDigits, newValue, update) {
-    this.__proto__ = new Group(scoreboard, group, value, nDigits, newValue, update);
+function MicroGroup(scoreboard, group, value, nDigits) {
+    this.__proto__ = new Group(scoreboard, group, value, nDigits);
 
     var self = this;
 
@@ -124,8 +124,8 @@ function MicroControllerScoreboard() {
     this.testApi = new api(cTestApiUri);
     this.textApi = new api(cTextApiUri);
 
-    this.createGroup = function (groupName, value, nDigits, newValue, update) {
-        return new MicroGroup(this, groupName, value, nDigits, newValue, update);
+    this.createGroup = function (groupName, value, nDigits) {
+        return new MicroGroup(this, groupName, value, nDigits);
     };
 
     this.test = function () {
