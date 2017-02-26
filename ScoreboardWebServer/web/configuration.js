@@ -22,15 +22,22 @@ var scoreboard;
 function DummyGroup(scoreboard, groupName, value, nDigits, newValue, update) {
     this.__proto__ = new Group(scoreboard, groupName, value, nDigits, newValue, update);
 
-    this.setValue = function (value) {
-        this.__proto__.setValue(value);
+    Object.defineProperty(this, 'value', {
+        set: function (value) {
+            this.__proto__.value = value;
 
-        value = this.__proto__.getValue();
+            value = this.__proto__.value;
 
-        console.log("DummyScoreboard.SetValue: " + this.name + ", value: " + value);
-        this.setDisplayText(value, true);
-        //this.group.setNewValueText(value);
-    };
+            console.log("DummyScoreboard[" + this.name + "].value=" + value);
+            this.setDisplayText(value, true);
+            //this.group.setNewValueText(value);
+        },
+
+        // it appears that JS doesn't search up the prototype chain for getters
+        get: function() {
+            return this.__proto__.value;
+        }
+    });
 }
 
 function DummyScoreboard() {

@@ -17,23 +17,25 @@ function Group(scoreboard, group, value, nDigits, newValue) {
     this.nDigits = nDigits;
     this.maxValue = Math.pow(10, nDigits) - 1;
     this.newValueElement = document.getElementById(newValue);
-    this.value = NaN;
+    this._value = NaN;
 
-    this.getValue = function () {
-        return this.value;
-    };
+    Object.defineProperty(this, 'value', {
+        get: function () {
+            return this._value;
+        },
 
-    this.setValue = function (value) {
-        if (value === "") {
-            value = NaN;
-        } else {
-            value = Number(value);
-            if (value < 0) { value = NaN; }
-            if (value > this.maxValue) { value = this.maxValue; }
+        set: function (value) {
+            if (value === "") {
+                value = NaN;
+            } else {
+                value = Number(value);
+                if (value < 0) { value = NaN; }
+                if (value > this.maxValue) { value = this.maxValue; }
+            }
+
+            this._value = value;
         }
-
-        this.value = value;
-    };
+    });
 
     this.setNewValueText = function (text) {
         if (this.newValueElement !== null) {
@@ -57,10 +59,11 @@ function Group(scoreboard, group, value, nDigits, newValue) {
         incValue = Number(incValue);
         if (isNaN(incValue)) incValue = 0;
 
-        var value = this.value;
-        if (isNaN(value)) value = 0;
+        var newvalue = this.value;
 
-        this.setValue(value + incValue);
+        if (isNaN(newvalue)) newvalue = 0;
+
+        this.value = newvalue + incValue;
     };
 
     this.refresh = function () {
@@ -76,7 +79,7 @@ function Ticker(groups) {
     self.initialValues = groups.map(
         function (group) {
             return {
-                group: group, originalValue: group.getValue()
+                group: group, originalValue: group.value
             };
         });
 
@@ -89,14 +92,14 @@ function Ticker(groups) {
         }
 
         if (self.state === 0) {
-            self.groups.forEach(function (value) {
-                value.setValue(NaN);
+            self.groups.forEach(function (group) {
+                group.value = NaN;
             });
             return;
         }
 
-        self.initialValues.forEach(function (value) {
-            value.group.setValue(value.originalValue);
+        self.initialValues.forEach(function (groupValue) {
+            groupValue.group.value = groupValue.originalValue;
         });
 
         self.state = NaN;
@@ -121,17 +124,17 @@ function Ticker(groups) {
 
         self.multipliers.forEach(function (value) {
             if (self.state === 10) {
-                value.group.setValue(NaN);
+                value.group.value = NaN;
                 return;
             }
 
-            value.group.setValue(value.multiplier * self.state);
+            value.group.value = value.multiplier * self.state;
         });
     };
 
     this.stopTicker = function (button) {
-        self.initialValues.forEach(function (value) {
-            value.group.setValue(value.originalValue);
+        self.initialValues.forEach(function (groupValue) {
+            groupValue.group.value = groupValue.originalValue;
         });
 
         clearInterval(self.intervalVar);
@@ -150,7 +153,7 @@ function Scoreboard() {
 
     this.reset = function () {
         this.groups.forEach(function (group) {
-            group.setValue(NaN);
+            group.value = NaN;
         });
     };
 
@@ -166,6 +169,7 @@ function Scoreboard() {
             button.locked = true;
 
             if (button.ticker !== undefined) {
+                // stop ticking
                 button.ticker.stopTicker();
                 button.ticker = undefined;
                 button.innerText = button.initialText;
@@ -198,5 +202,5 @@ function inc(groupName, value) {
 }
 
 function setValue(groupName, value) {
-    scoreboard.findGroup(groupName).setValue(value);
+    scoreboard.findGroup(groupName).value = value;
 }

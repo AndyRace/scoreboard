@@ -19,7 +19,7 @@ function api(fnUri) {
         // I'm worried about multi-threading so ping a timeout here io serialise it
         setTimeout(function () {
             var uri = self.uri;
-            if (parameters !== null) {
+            if (parameters != null) {
                 uri += "?" + parameters;
             }
 
@@ -63,28 +63,17 @@ function MicroGroup(scoreboard, group, value, nDigits, newValue, update) {
                 self.updateScore(response.Value, true);
 
                 // track last response time
-                // self.scoreboard.lastResponse = new Date();
+                self.scoreboard.lastResponse = new Date();
             }, 100);
         }
     };
 
     this.updateScore = function (value, scoreboardHasResponded) {
-        this.__proto__.setValue(value);
+        this.__proto__.value = value;
 
-        value = this.__proto__.getValue();
+        value = this.__proto__.value;
 
         this.setDisplayText(value, scoreboardHasResponded);
-    };
-
-    this.setValue = function (value) {
-        this.updateScore(value, false);
-
-        value = this.__proto__.getValue();
-
-        this.apiPut.put("group=" + self.name + "&value=" + value);
-
-        // do a cheeky get after every put
-        this.refresh();
     };
 
     this.timeoutVar = null;
@@ -110,6 +99,23 @@ function MicroGroup(scoreboard, group, value, nDigits, newValue, update) {
     // Keep updating the score.
     // This allows for others updating the score.
     // setInterval(this.refresh, 2000);
+
+    Object.defineProperty(this, 'value', {
+        set: function (value) {
+            this.updateScore(value, false);
+
+            value = this.__proto__.value;
+
+            this.apiPut.put("group=" + self.name + "&value=" + value);
+
+            // do a cheeky get after every put
+            this.refresh();
+        },
+
+        get: function () {
+            return this.__proto__.value;
+        }
+    });
 }
 
 function MicroControllerScoreboard() {
