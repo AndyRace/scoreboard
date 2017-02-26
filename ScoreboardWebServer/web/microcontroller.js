@@ -15,7 +15,7 @@ function api(fnUri) {
 
     this.uri = fnUri;
 
-    this.execute = function (method, parameters = null, obj = null) {
+    this.execute = function (method, parameters /*= null*/, obj /*= null*/) {
         // I'm worried about multi-threading so ping a timeout here io serialise it
         setTimeout(function () {
             var uri = self.uri;
@@ -30,21 +30,21 @@ function api(fnUri) {
         }, 100);
     };
 
-    this.put = function (parameters = null, obj = null) {
+    this.put = function (parameters /*= null*/, obj /*= null*/) {
         this.execute("PUT", parameters, obj);
     };
 
-    this.get = function (parameters, obj = null) {
+    this.get = function (parameters, obj /*= null*/) {
         this.execute("GET", parameters, obj);
     };
 
-    this.post = function (parameters, obj = null) {
+    this.post = function (parameters, obj /*= null*/) {
         this.execute("POST", parameters, obj);
     };
 }
 
-function MicroGroup(group, value, nDigits, newValue, update) {
-    this.__proto__ = new Group(group, value, nDigits, newValue, update);
+function MicroGroup(scoreboard, group, value, nDigits, newValue, update) {
+    this.__proto__ = new Group(scoreboard, group, value, nDigits, newValue, update);
 
     var self = this;
 
@@ -61,6 +61,9 @@ function MicroGroup(group, value, nDigits, newValue, update) {
 
                 // todo: assert response.key == group
                 self.updateScore(response.Value, true);
+
+                // track last response time
+                // self.scoreboard.lastResponse = new Date();
             }, 100);
         }
     };
@@ -68,17 +71,9 @@ function MicroGroup(group, value, nDigits, newValue, update) {
     this.updateScore = function (value, scoreboardHasResponded) {
         this.__proto__.setValue(value);
 
-        //console.log("Set: group:" + this.name + ", value:'" + value + "', hasResponded: " + scoreboardHasResponded);
-
         value = this.__proto__.getValue();
 
-        if (isNaN(value)) {
-            //this.setDisplayText("*", scoreboardHasResponded);
-            this.setDisplayText("", scoreboardHasResponded);
-        } else {            //this.setDisplayText("*" + value + "*", scoreboardHasResponded);
-            this.setDisplayText(value, scoreboardHasResponded);
-            //this.setNewValueText(value);
-        }
+        this.setDisplayText(value, scoreboardHasResponded);
     };
 
     this.setValue = function (value) {
@@ -124,7 +119,7 @@ function MicroControllerScoreboard() {
     this.textApi = new api(cTextApiUri);
 
     this.createGroup = function (groupName, value, nDigits, newValue, update) {
-        return new MicroGroup(groupName, value, nDigits, newValue, update);
+        return new MicroGroup(this, groupName, value, nDigits, newValue, update);
     };
 
     this.test = function () {

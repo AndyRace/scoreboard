@@ -19,11 +19,13 @@
 //var scoreboard = new MicroControllerScoreboard();
 var scoreboard;
 
-function DummyGroup(groupName, value, nDigits, newValue, update) {
-    this.__proto__ = new Group(groupName, value, nDigits, newValue, update);
+function DummyGroup(scoreboard, groupName, value, nDigits, newValue, update) {
+    this.__proto__ = new Group(scoreboard, groupName, value, nDigits, newValue, update);
 
     this.setValue = function (value) {
         this.__proto__.setValue(value);
+
+        value = this.__proto__.getValue();
 
         console.log("DummyScoreboard.SetValue: " + this.name + ", value: " + value);
         this.setDisplayText(value, true);
@@ -35,7 +37,7 @@ function DummyScoreboard() {
     this.__proto__ = new Scoreboard();
 
     this.createGroup = function (groupName, value, nDigits, newValue, update) {
-        return new DummyGroup(groupName, value, nDigits, newValue, update);
+        return new DummyGroup(this, groupName, value, nDigits, newValue, update);
     };
 }
 
@@ -58,5 +60,17 @@ function initialise() {
     initialiseLayout();
 
     // todo: find a way to determine whether or not it's connected
-    setConnected(true);
+    switch (window.location.protocol) {
+        case 'http:':
+        case 'https:':
+            //remote file over http or https
+            setConnected(true);
+            break;
+        case 'file:':
+            //local file
+            setConnected(false);
+            break;
+        default:
+        //some other protocol
+    }
 }

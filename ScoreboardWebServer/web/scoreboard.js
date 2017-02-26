@@ -1,12 +1,17 @@
-﻿const cTestInterval = 500;
+﻿// todo: SCRIPT438: Object doesn't support property or method 'find'
+// scoreboard.js(141, 9)
+
+
+const cTestInterval = 500;
 
 function debugInfo(info) {
     // alert(info);
 }
 
-function Group(group, value, nDigits, newValue) {
+function Group(scoreboard, group, value, nDigits, newValue) {
     var self = this;
 
+    this.scoreboard = scoreboard;
     this.name = group;
     this.valueElement = document.getElementById(value);
     this.nDigits = nDigits;
@@ -38,6 +43,8 @@ function Group(group, value, nDigits, newValue) {
 
     // todo: HtmlEncode(text)
     this.setDisplayText = function (text, scoreboardHasResponded) {
+        if (isNaN(text)) text = "";
+
         if (scoreboardHasResponded) {
             this.valueElement.innerText = text;
         }
@@ -181,8 +188,8 @@ function Scoreboard() {
         alert(text);
     };
 
-    this.createGroup = function (group, value, nDigits, newValue, update) {
-        return new Group(group, value, nDigits, newValue, update);
+    this.createGroup = function (groupName, value, nDigits, newValue, update) {
+        return new Group(this, groupName, value, nDigits, newValue, update);
     };
 }
 

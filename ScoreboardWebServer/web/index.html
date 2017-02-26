@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Scoreboard</title>
     <style>
+        div {
+            /* border: 1px solid red; */
+        }
+
         h1 {
             color: maroon;
             text-align: center;
@@ -17,6 +21,8 @@
         button.inc {
             color: brown;
             text-align: center;
+            width: 100%;
+            height: 40px;
         }
 
         .alignleft {
@@ -25,6 +31,12 @@
 
         .alignright {
             float: right;
+        }
+
+        .row::after {
+            content: "";
+            clear: both;
+            display: table;
         }
 
         .unconfirmed {
@@ -50,12 +62,42 @@
             margin: auto;
         }
 
-        .inc {
-            width: 30px;
-            height: 30px;
+        .container4 {
+            width: 100%;
+            text-align: center;
         }
+
+            .container4 > div > .inc {
+                width: 100%;
+            }
+
+            .container4 > div {
+                width: calc(96%/4);
+                display: inline-block;
+                vertical-align: top;
+                border: 0px solid red;
+                text-align: center;
+                margin: 0%;
+                padding: 0px;
+            }
+
+        .container2 {
+            width: 100%;
+            text-align: center;
+        }
+
+            .container2 > div {
+                width: calc(98%/2);
+                display: inline-block;
+                vertical-align: top;
+                border: 0px solid red;
+                text-align: center;
+                margin: 0%;
+                padding: 0px;
+            }
     </style>
 
+    <script src="EMCA.js"></script>
     <script src="jquery-3.1.1.min.js"></script>
     <script src="scoreboard.js"></script>
     <script src="microController.js"></script>
@@ -63,113 +105,95 @@
 </head>
 
 <body onload="initialise()">
-    <table>
-        <tr>
-            <td id="header" />
-        </tr>
-        <tr>
-            <td>
-                <p>&nbsp;</p>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <table class="centered">
-                    <tr>
-                        <td>
-                            <span class="alignleft big">Total:</span>
-                            <span class="alignright value" id="totalValue"></span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <button class="inc" onclick="inc('total', this.innerText)">-6</button>
-                            <button class="inc" onclick="inc('total', this.innerText)">-4</button>
-                            <button class="inc" onclick="inc('total', this.innerText)">-2</button>
-                            <button class="inc" onclick="inc('total', this.innerText)">-1</button>
-                            <button class="inc" onclick="inc('total', this.innerText)">+1</button>
-                            <button class="inc" onclick="inc('total', this.innerText)">+2</button>
-                            <button class="inc" onclick="inc('total', this.innerText)">+4</button>
-                            <button class="inc" onclick="inc('total', this.innerText)">+6</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label>
-                                Set Total:&nbsp;<input id="totalNew" value="" maxlength="3" size="3" />
-                                <button onclick="setValue('total', totalNew.value)">Update</button>
-                            </label>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <hr />
-                        </td>
-                    </tr>
+    <div id="header" class="clearfix"></div>
+    <div class="row">
+        <div class="alignleft big">Total:</div>
+        <div class="alignright value" id="totalValue"></div>
+    </div>
+    <div class="row container4">
+        <div>
+            <button class="inc" onclick="inc('total', this.innerText)">+1</button>
+        </div>
+        <div>
+            <button class="inc" onclick="inc('total', this.innerText)">+2</button>
+        </div>
+        <div>
+            <button class="inc" onclick="inc('total', this.innerText)">+4</button>
+        </div>
+        <div>
+            <button class="inc" onclick="inc('total', this.innerText)">+6</button>
+        </div>
+    </div>
+    <div class="row container4">
+        <div>
+            <button class="inc" onclick="inc('total', this.innerText)">-1</button>
+        </div>
+        <div>
+            <button class="inc" onclick="inc('total', this.innerText)">-2</button>
+        </div>
+        <div>
+            <button class="inc" onclick="inc('total', this.innerText)">-4</button>
+        </div>
+        <div>
+            <button class="inc" onclick="inc('total', this.innerText)">-6</button>
+        </div>
+    </div>
+    <div class="row">
+        Set Total:&nbsp;<input id="totalNew" value="" maxlength="3" size="3" />
+        <button onclick="setValue('total', totalNew.value)">Update</button>
+    </div>
+    <hr />
 
-                    <tr>
-                        <td>
-                            <span class="alignleft big">Wickets:</span>
-                            <span class="alignright value" id="wicketsValue" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <button class="inc" onclick="inc('wickets', this.innerText)">-1</button>
-                            <button class="inc" onclick="inc('wickets', this.innerText)">+1</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <hr />
-                        </td>
-                    </tr>
+    <div class="row">
+        <div class="alignleft big">Wickets:</div>
+        <div class="alignright value" id="wicketsValue"></div>
+    </div>
+    <div class="row">
+        <div class="container2">
+            <div>
+                <button class="inc" onclick="inc('wickets', this.innerText)">+1</button>
+            </div>
+            <div>
+                <button class="inc" onclick="inc('wickets', this.innerText)">-1</button>
+            </div>
+        </div>
+    </div>
+    <hr />
 
-                    <tr>
-                        <td>
-                            <span class="alignleft big">Overs:</span>
-                            <span class="alignright value" id="oversValue" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <button class="inc" onclick="inc('overs', this.innerText)">-1</button>
-                            <button class="inc" onclick="inc('overs', this.innerText)">+1</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <hr />
-                        </td>
-                    </tr>
+    <div class="row">
+        <div class="alignleft big">Overs:</div>
+        <div class="alignright value" id="oversValue"></div>
+    </div>
+    <div class="row">
+        <div class="container2">
+            <div>
+                <button class="inc" onclick="inc('overs', this.innerText)">+1</button>
+            </div>
+            <div>
+                <button class="inc" onclick="inc('overs', this.innerText)">-1</button>
+            </div>
+        </div>
+    </div>
+    <hr />
 
-                    <tr>
-                        <td>
-                            <span class="alignleft big">1st Innings:</span>
-                            <span class="alignright value" id="firstInningsValue" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label>
-                                Set
-                                1st Innings:&nbsp;
+    <div class="row">
+        <div class="alignleft big">1st Innings:</div>
+        <div class="alignright value" id="firstInningsValue"></div>
+    </div>
+    <div class="row">
+        <div>
+            Set 1st Innings:&nbsp;
                                 <input id="firstInningsNew" value="" maxlength="3" size="3" />
-                                <button onclick="setValue('firstInnings', firstInningsNew.value)">Update</button></label>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <hr />
-                        </td>
-                    </tr>
+            <button onclick="setValue('firstInnings', firstInningsNew.value)">Update</button>
+        </div>
+    </div>
+    <hr />
 
-                    <tr>
-                        <td>
-                            <button onclick="scoreboard.reset()">Reset</button>
-                            <button onclick="scoreboard.cycle(this)">Cycle</button>
-                            <button onclick="scoreboard.test(this)">Test</button>
-                            <!--
+    <div class="row">
+        <button onclick="scoreboard.reset()">Reset</button>
+        <button onclick="scoreboard.cycle(this)">Cycle</button>
+        <button onclick="scoreboard.test(this)">Test</button>
+        <!--
                             <br />
                             <label>
                                 Text:
@@ -186,11 +210,6 @@
                                 <input type="text" value="" id="text3" /></label>
                             <button onclick="scoreboard.displayText(text3.value)">Show</button>
                         -->
-                        </td>
-                    </tr>
-                </table>
-            </td>
-        </tr>
-    </table>
+    </div>
 </body>
 </html>
