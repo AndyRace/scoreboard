@@ -67,13 +67,6 @@ function Group(scoreboard, groupName, valueElement, nDigits) {
 function Scoreboard() {
     this.groups = [];
 
-    Object.defineProperty(this, 'lastReponse', {
-        set: function (dtValue) {
-
-            this._lastResponse = dtValue;
-        }
-    });
-
     this.findGroup = function (group) {
         return this.groups.find(function (value) { return value.name === group; });
     };

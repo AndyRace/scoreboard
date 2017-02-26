@@ -52,7 +52,7 @@ function setConnected(isConnected) {
     //.visibility = isConnected ? "visible" : "hidden";
 
     if (isConnected) {
-        scoreboard = new MicroControllerScoreboard(document.getElementById('lastReponse'));
+        scoreboard = new MicroControllerScoreboard(document.getElementById('lastResponse'));
     } else {
         scoreboard = new DummyScoreboard();
     }
