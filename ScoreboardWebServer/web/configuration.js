@@ -33,7 +33,7 @@ function DummyGroup(scoreboard, groupName, valueElement, nDigits) {
         },
 
         // it appears that JS doesn't search up the prototype chain for getters
-        get: function() {
+        get: function () {
             return this.__proto__.value;
         }
     });
@@ -48,8 +48,11 @@ function DummyScoreboard() {
 }
 
 function setConnected(isConnected) {
+    document.getElementById('microcontrollerOnly').style.display = isConnected ? "" : "none";
+    //.visibility = isConnected ? "visible" : "hidden";
+
     if (isConnected) {
-        scoreboard = new MicroControllerScoreboard();
+        scoreboard = new MicroControllerScoreboard(document.getElementById('lastReponse'));
     } else {
         scoreboard = new DummyScoreboard();
     }

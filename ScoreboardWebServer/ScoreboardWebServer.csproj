@@ -161,6 +161,7 @@
     <Content Include="web\scoreboard.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="web\ticker.js" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ScoreboardWebServerHelper\ScoreboardWebServerHelper.csproj">

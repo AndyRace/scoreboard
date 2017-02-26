@@ -102,10 +102,13 @@
     <script src="scoreboard.js"></script>
     <script src="microController.js"></script>
     <script src="configuration.js"></script>
+    <script src="ticker.js"></script>
 </head>
 
 <body onload="initialise()">
     <div id="header" class="clearfix"></div>
+    <hr />
+
     <div class="row">
         <div class="alignleft big">Total:</div>
         <div class="alignright value" id="totalValue"></div>
@@ -189,10 +192,20 @@
     </div>
     <hr />
 
+    <div id="microcontrollerOnly" class="row">
+        <div>
+            Last response from scoreboard server:
+            <div id="lastResponse"></div>
+        </div>
+        <div>
+            <button onclick="scoreboard.test(this)">Test</button>
+        </div>
+        <hr />
+    </div>
+
     <div class="row">
         <button onclick="scoreboard.reset()">Reset</button>
         <button onclick="scoreboard.cycle(this)">Cycle</button>
-        <button onclick="scoreboard.test(this)">Test</button>
         <!--
                             <br />
                             <label>

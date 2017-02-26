@@ -118,8 +118,10 @@ function MicroGroup(scoreboard, groupName, valueElement, nDigits) {
     });
 }
 
-function MicroControllerScoreboard() {
+function MicroControllerScoreboard(lastReponseElement) {
     this.__proto__ = new Scoreboard();
+
+    this._lastReponseElement = lastReponseElement;
 
     this.testApi = new api(cTestApiUri);
     this.textApi = new api(cTextApiUri);
@@ -135,4 +137,11 @@ function MicroControllerScoreboard() {
     this.displayText = function (text) {
         this.textApi.post(null, text);
     };
+
+    Object.defineProperty(this, 'lastResponse', {
+        set: function (dtValue) {
+            this._lastReponseElement.innerText = dtValue;
+            this._lastResponse = dtValue;
+        }
+    });
 }
