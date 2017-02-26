@@ -19,8 +19,8 @@
 //var scoreboard = new MicroControllerScoreboard();
 var scoreboard;
 
-function DummyGroup(scoreboard, groupName, value, nDigits) {
-    this.__proto__ = new Group(scoreboard, groupName, value, nDigits);
+function DummyGroup(scoreboard, groupName, valueElement, nDigits) {
+    this.__proto__ = new Group(scoreboard, groupName, valueElement, nDigits);
 
     Object.defineProperty(this, 'value', {
         set: function (value) {
@@ -54,10 +54,10 @@ function setConnected(isConnected) {
         scoreboard = new DummyScoreboard();
     }
 
-    scoreboard.groups.push(scoreboard.createGroup('total', 'totalValue', 3));
-    scoreboard.groups.push(scoreboard.createGroup('wickets', 'wicketsValue', 1));
-    scoreboard.groups.push(scoreboard.createGroup('overs', 'oversValue', 2));
-    scoreboard.groups.push(scoreboard.createGroup('firstInnings', 'firstInningsValue', 3));
+    scoreboard.groups.push(scoreboard.createGroup('total', document.getElementById('totalValue'), 3));
+    scoreboard.groups.push(scoreboard.createGroup('wickets', document.getElementById('wicketsValue'), 1));
+    scoreboard.groups.push(scoreboard.createGroup('overs', document.getElementById('oversValue'), 2));
+    scoreboard.groups.push(scoreboard.createGroup('firstInnings', document.getElementById('firstInningsValue'), 3));
 
     scoreboard.refresh();
 }

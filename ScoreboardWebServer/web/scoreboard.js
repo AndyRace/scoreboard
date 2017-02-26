@@ -8,12 +8,12 @@ function debugInfo(info) {
     // alert(info);
 }
 
-function Group(scoreboard, group, value, nDigits) {
+function Group(scoreboard, groupName, valueElement, nDigits) {
     var self = this;
 
     this.scoreboard = scoreboard;
-    this.name = group;
-    this.valueElement = document.getElementById(value);
+    this.name = groupName;
+    this.valueElement = valueElement;
     this.nDigits = nDigits;
     this.maxValue = Math.pow(10, nDigits) - 1;
     this._value = NaN;

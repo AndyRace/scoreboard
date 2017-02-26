@@ -43,8 +43,8 @@ function api(fnUri) {
     };
 }
 
-function MicroGroup(scoreboard, group, value, nDigits) {
-    this.__proto__ = new Group(scoreboard, group, value, nDigits);
+function MicroGroup(scoreboard, groupName, valueElement, nDigits) {
+    this.__proto__ = new Group(scoreboard, groupName, valueElement, nDigits);
 
     var self = this;
 
