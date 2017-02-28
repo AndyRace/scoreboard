@@ -1,0 +1,42 @@
+﻿<Page
+    x:Class="UsbTests.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:UsbTests"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    >
+
+
+    <!-- ItemsSource="{Binding Source={StaticResource UsbDeviceListData}}" -->
+    <!--
+    <StackPanel>
+    </StackPanel>
+    -->
+    <Grid Background="{StaticResource ApplicationPageBackgroundThemeBrush}"
+          DataContext="{Binding MainViewModel, Source={StaticResource Locator}}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"></RowDefinition>
+            <RowDefinition Height="80"></RowDefinition>
+            <RowDefinition Height="40"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Button Grid.Row="0" Content="Get Devices" HorizontalAlignment="Stretch" Command="{Binding GetDevicesCommand}"/>
+        
+        <ListView Grid.Row="1" 
+                  Name="lvDevices"
+                  ItemsSource="{Binding Devices}"
+                  SelectedItem="{Binding SelectedDevice, Mode=TwoWay}"
+                  DisplayMemberPath="Name"/>
+        
+        <Button Grid.Row="2" Content="Connect" 
+                HorizontalAlignment="Stretch" 
+                IsEnabled="{Binding ElementName=lvDevices, Path=SelectedItems.Count}" 
+                Command="{Binding ConnectCommand}" />
+        
+        <ListView Grid.Row="3" />
+
+    </Grid>
+</Page>

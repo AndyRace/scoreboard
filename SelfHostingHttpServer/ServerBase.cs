@@ -6,12 +6,16 @@ using Windows.Networking.Sockets;
 using System.Net;
 using System.Globalization;
 using SelfHostingHttpServer;
+using System.Threading;
 
 namespace SelfHostedHttpServer
 {
 
   public class ServerBase
   {
+    const int DefaultReponseStreamBufferSize = 8120;
+    const int CancellationTimeoutMs = 1000;
+
     //public class RequestEventArgs : EventArgs
     //{
     //}
@@ -38,8 +42,10 @@ namespace SelfHostedHttpServer
           // Logger.WriteLn($"Connection reveived: Start {args.Socket.Information.RemoteAddress}");
 
           var myWebRequest = new SelfHostedWebRequest(args.Socket);
-          using (var output = args.Socket.OutputStream)
-          using (var responseStream = output.AsStreamForWrite())
+          //using (var output = args.Socket.OutputStream)
+          var output = args.Socket.OutputStream;
+          // using (var responseStream = output.AsStreamForWrite())
+          var responseStream = output.AsStreamForWrite();
           {
             try
             {
@@ -179,8 +185,12 @@ namespace SelfHostedHttpServer
       }
       AppendTo(responseStream, "\r\n");
 
-      await response.GetResponseStream().CopyToAsync(responseStream);
-      await responseStream.FlushAsync();
+      await response.GetResponseStream().CopyToAsync(
+        responseStream,
+        DefaultReponseStreamBufferSize,
+        new CancellationTokenSource(CancellationTimeoutMs).Token);
+
+      await responseStream.FlushAsync(new CancellationTokenSource(CancellationTimeoutMs).Token);
     }
 
     protected async static Task WriteResponse(Stream responseStream, string htmlString, string responseCode = "200 OK")
