@@ -318,6 +318,15 @@
           "ref/netstandard1.3/Microsoft.Win32.Primitives.dll": {}
         }
       },
+      "Newtonsoft.Json/8.0.3": {
+        "type": "package",
+        "compile": {
+          "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll": {}
+        },
+        "runtime": {
+          "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll": {}
+        }
+      },
       "runtime.native.System.IO.Compression/4.1.0": {
         "type": "package",
         "dependencies": {
@@ -2174,10 +2183,26 @@
           }
         }
       },
+      "Catnap.Server/1.0.0": {
+        "type": "project",
+        "framework": "UAP,Version=v10.0",
+        "dependencies": {
+          "Microsoft.NETCore.UniversalWindowsPlatform": "5.0.0",
+          "Newtonsoft.Json": "8.0.3"
+        }
+      },
+      "FadeCandy/1.0.0": {
+        "type": "project",
+        "framework": "UAP,Version=v10.0",
+        "dependencies": {
+          "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2"
+        }
+      },
       "ScoreboardWebServerHelper/1.0.0": {
         "type": "project",
         "framework": "UAP,Version=v10.0",
         "dependencies": {
+          "FadeCandy": "1.0.0",
           "Microsoft.NETCore.UniversalWindowsPlatform": "5.3.0",
           "SelfHostedHttpServer": "1.0.0"
         }
@@ -2453,6 +2478,15 @@
         },
         "compile": {
           "ref/netstandard1.3/Microsoft.Win32.Primitives.dll": {}
+        }
+      },
+      "Newtonsoft.Json/8.0.3": {
+        "type": "package",
+        "compile": {
+          "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll": {}
+        },
+        "runtime": {
+          "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll": {}
         }
       },
       "runtime.any.System.Collections/4.0.11": {
@@ -4471,10 +4505,26 @@
           "lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
       },
+      "Catnap.Server/1.0.0": {
+        "type": "project",
+        "framework": "UAP,Version=v10.0",
+        "dependencies": {
+          "Microsoft.NETCore.UniversalWindowsPlatform": "5.0.0",
+          "Newtonsoft.Json": "8.0.3"
+        }
+      },
+      "FadeCandy/1.0.0": {
+        "type": "project",
+        "framework": "UAP,Version=v10.0",
+        "dependencies": {
+          "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2"
+        }
+      },
       "ScoreboardWebServerHelper/1.0.0": {
         "type": "project",
         "framework": "UAP,Version=v10.0",
         "dependencies": {
+          "FadeCandy": "1.0.0",
           "Microsoft.NETCore.UniversalWindowsPlatform": "5.3.0",
           "SelfHostedHttpServer": "1.0.0"
         }
@@ -4751,6 +4801,15 @@
         },
         "compile": {
           "ref/netstandard1.3/Microsoft.Win32.Primitives.dll": {}
+        }
+      },
+      "Newtonsoft.Json/8.0.3": {
+        "type": "package",
+        "compile": {
+          "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll": {}
+        },
+        "runtime": {
+          "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll": {}
         }
       },
       "runtime.aot.System.Collections/4.0.10": {
@@ -6807,10 +6866,26 @@
           "runtimes/aot/lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
       },
+      "Catnap.Server/1.0.0": {
+        "type": "project",
+        "framework": "UAP,Version=v10.0",
+        "dependencies": {
+          "Microsoft.NETCore.UniversalWindowsPlatform": "5.0.0",
+          "Newtonsoft.Json": "8.0.3"
+        }
+      },
+      "FadeCandy/1.0.0": {
+        "type": "project",
+        "framework": "UAP,Version=v10.0",
+        "dependencies": {
+          "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2"
+        }
+      },
       "ScoreboardWebServerHelper/1.0.0": {
         "type": "project",
         "framework": "UAP,Version=v10.0",
         "dependencies": {
+          "FadeCandy": "1.0.0",
           "Microsoft.NETCore.UniversalWindowsPlatform": "5.3.0",
           "SelfHostedHttpServer": "1.0.0"
         }
@@ -7089,6 +7164,15 @@
         },
         "compile": {
           "ref/netstandard1.3/Microsoft.Win32.Primitives.dll": {}
+        }
+      },
+      "Newtonsoft.Json/8.0.3": {
+        "type": "package",
+        "compile": {
+          "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll": {}
+        },
+        "runtime": {
+          "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll": {}
         }
       },
       "runtime.any.System.Collections/4.0.11": {
@@ -9113,10 +9197,26 @@
           "lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
       },
+      "Catnap.Server/1.0.0": {
+        "type": "project",
+        "framework": "UAP,Version=v10.0",
+        "dependencies": {
+          "Microsoft.NETCore.UniversalWindowsPlatform": "5.0.0",
+          "Newtonsoft.Json": "8.0.3"
+        }
+      },
+      "FadeCandy/1.0.0": {
+        "type": "project",
+        "framework": "UAP,Version=v10.0",
+        "dependencies": {
+          "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2"
+        }
+      },
       "ScoreboardWebServerHelper/1.0.0": {
         "type": "project",
         "framework": "UAP,Version=v10.0",
         "dependencies": {
+          "FadeCandy": "1.0.0",
           "Microsoft.NETCore.UniversalWindowsPlatform": "5.3.0",
           "SelfHostedHttpServer": "1.0.0"
         }
@@ -9396,6 +9496,15 @@
         },
         "compile": {
           "ref/netstandard1.3/Microsoft.Win32.Primitives.dll": {}
+        }
+      },
+      "Newtonsoft.Json/8.0.3": {
+        "type": "package",
+        "compile": {
+          "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll": {}
+        },
+        "runtime": {
+          "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll": {}
         }
       },
       "runtime.aot.System.Collections/4.0.10": {
@@ -11458,10 +11567,26 @@
           "runtimes/aot/lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
       },
+      "Catnap.Server/1.0.0": {
+        "type": "project",
+        "framework": "UAP,Version=v10.0",
+        "dependencies": {
+          "Microsoft.NETCore.UniversalWindowsPlatform": "5.0.0",
+          "Newtonsoft.Json": "8.0.3"
+        }
+      },
+      "FadeCandy/1.0.0": {
+        "type": "project",
+        "framework": "UAP,Version=v10.0",
+        "dependencies": {
+          "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2"
+        }
+      },
       "ScoreboardWebServerHelper/1.0.0": {
         "type": "project",
         "framework": "UAP,Version=v10.0",
         "dependencies": {
+          "FadeCandy": "1.0.0",
           "Microsoft.NETCore.UniversalWindowsPlatform": "5.3.0",
           "SelfHostedHttpServer": "1.0.0"
         }
@@ -11740,6 +11865,15 @@
         },
         "compile": {
           "ref/netstandard1.3/Microsoft.Win32.Primitives.dll": {}
+        }
+      },
+      "Newtonsoft.Json/8.0.3": {
+        "type": "package",
+        "compile": {
+          "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll": {}
+        },
+        "runtime": {
+          "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll": {}
         }
       },
       "runtime.any.System.Collections/4.0.11": {
@@ -13764,10 +13898,26 @@
           "lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
       },
+      "Catnap.Server/1.0.0": {
+        "type": "project",
+        "framework": "UAP,Version=v10.0",
+        "dependencies": {
+          "Microsoft.NETCore.UniversalWindowsPlatform": "5.0.0",
+          "Newtonsoft.Json": "8.0.3"
+        }
+      },
+      "FadeCandy/1.0.0": {
+        "type": "project",
+        "framework": "UAP,Version=v10.0",
+        "dependencies": {
+          "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2"
+        }
+      },
       "ScoreboardWebServerHelper/1.0.0": {
         "type": "project",
         "framework": "UAP,Version=v10.0",
         "dependencies": {
+          "FadeCandy": "1.0.0",
           "Microsoft.NETCore.UniversalWindowsPlatform": "5.3.0",
           "SelfHostedHttpServer": "1.0.0"
         }
@@ -14047,6 +14197,15 @@
         },
         "compile": {
           "ref/netstandard1.3/Microsoft.Win32.Primitives.dll": {}
+        }
+      },
+      "Newtonsoft.Json/8.0.3": {
+        "type": "package",
+        "compile": {
+          "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll": {}
+        },
+        "runtime": {
+          "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll": {}
         }
       },
       "runtime.aot.System.Collections/4.0.10": {
@@ -16109,10 +16268,26 @@
           "runtimes/aot/lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
       },
+      "Catnap.Server/1.0.0": {
+        "type": "project",
+        "framework": "UAP,Version=v10.0",
+        "dependencies": {
+          "Microsoft.NETCore.UniversalWindowsPlatform": "5.0.0",
+          "Newtonsoft.Json": "8.0.3"
+        }
+      },
+      "FadeCandy/1.0.0": {
+        "type": "project",
+        "framework": "UAP,Version=v10.0",
+        "dependencies": {
+          "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2"
+        }
+      },
       "ScoreboardWebServerHelper/1.0.0": {
         "type": "project",
         "framework": "UAP,Version=v10.0",
         "dependencies": {
+          "FadeCandy": "1.0.0",
           "Microsoft.NETCore.UniversalWindowsPlatform": "5.3.0",
           "SelfHostedHttpServer": "1.0.0"
         }
@@ -18522,6 +18697,28 @@
         "ref/xamarinmac20/_._",
         "ref/xamarintvos10/_._",
         "ref/xamarinwatchos10/_._"
+      ]
+    },
+    "Newtonsoft.Json/8.0.3": {
+      "sha512": "KGsYQdS2zLH+H8x2cZaSI7e+YZ4SFIbyy1YJQYl6GYBWjf5o4H1A68nxyq+WTyVSOJQ4GqS/DiPE+UseUizgMg==",
+      "type": "package",
+      "path": "newtonsoft.json/8.0.3",
+      "files": [
+        "lib/net20/Newtonsoft.Json.dll",
+        "lib/net20/Newtonsoft.Json.xml",
+        "lib/net35/Newtonsoft.Json.dll",
+        "lib/net35/Newtonsoft.Json.xml",
+        "lib/net40/Newtonsoft.Json.dll",
+        "lib/net40/Newtonsoft.Json.xml",
+        "lib/net45/Newtonsoft.Json.dll",
+        "lib/net45/Newtonsoft.Json.xml",
+        "lib/portable-net40+sl5+wp80+win8+wpa81/Newtonsoft.Json.dll",
+        "lib/portable-net40+sl5+wp80+win8+wpa81/Newtonsoft.Json.xml",
+        "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll",
+        "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.xml",
+        "newtonsoft.json.8.0.3.nupkg.sha512",
+        "newtonsoft.json.nuspec",
+        "tools/install.ps1"
       ]
     },
     "runtime.any.System.Collections/4.0.11": {
@@ -24388,6 +24585,16 @@
         "system.xml.xmlserializer.nuspec"
       ]
     },
+    "Catnap.Server/1.0.0": {
+      "type": "project",
+      "path": "../../../Catnap.Server/Catnap.Server/Catnap.Server/project.json",
+      "msbuildProject": "../../../Catnap.Server/Catnap.Server/Catnap.Server/Catnap.Server.csproj"
+    },
+    "FadeCandy/1.0.0": {
+      "type": "project",
+      "path": "../../LEDs/FadeCandy/project.json",
+      "msbuildProject": "../../LEDs/FadeCandy/FadeCandy.csproj"
+    },
     "ScoreboardWebServerHelper/1.0.0": {
       "type": "project",
       "path": "../ScoreboardWebServerHelper/project.json",
@@ -24423,6 +24630,9 @@
             },
             "C:\\Users\\andy\\Source\\Repos\\piWeb\\ScoreboardWebServer\\SelfHostingHttpServer\\SelfHostedHttpServer.csproj": {
               "projectPath": "C:\\Users\\andy\\Source\\Repos\\piWeb\\ScoreboardWebServer\\SelfHostingHttpServer\\SelfHostedHttpServer.csproj"
+            },
+            "C:\\Users\\andy\\Source\\Repos\\Catnap.Server\\Catnap.Server\\Catnap.Server\\Catnap.Server.csproj": {
+              "projectPath": "C:\\Users\\andy\\Source\\Repos\\Catnap.Server\\Catnap.Server\\Catnap.Server\\Catnap.Server.csproj"
             }
           }
         }

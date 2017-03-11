@@ -54,6 +54,7 @@
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ScoreboardWebController.cs" />
     <Compile Include="StartupTask.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -102,12 +103,19 @@
     <Content Include="web\microcontroller.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="web\milton-cricket-club-logo.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="web\scoreboard.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="web\ticker.js" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Catnap.Server\Catnap.Server\Catnap.Server\Catnap.Server.csproj">
+      <Project>{1ed5f504-dbe7-45fe-a968-f3f71b26b67e}</Project>
+      <Name>Catnap.Server</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ScoreboardWebServerHelper\ScoreboardWebServerHelper.csproj">
       <Project>{B67F3261-FC29-4275-95C2-6B02726C1CF9}</Project>
       <Name>ScoreboardWebServerHelper</Name>

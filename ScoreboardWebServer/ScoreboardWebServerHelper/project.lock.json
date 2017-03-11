@@ -2174,6 +2174,13 @@
           }
         }
       },
+      "FadeCandy/1.0.0": {
+        "type": "project",
+        "framework": "UAP,Version=v10.0",
+        "dependencies": {
+          "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2"
+        }
+      },
       "SelfHostedHttpServer/1.0.0": {
         "type": "project",
         "framework": "UAP,Version=v10.0",
@@ -4461,6 +4468,13 @@
         },
         "runtime": {
           "lib/netcore50/System.Xml.XmlSerializer.dll": {}
+        }
+      },
+      "FadeCandy/1.0.0": {
+        "type": "project",
+        "framework": "UAP,Version=v10.0",
+        "dependencies": {
+          "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2"
         }
       },
       "SelfHostedHttpServer/1.0.0": {
@@ -6791,6 +6805,13 @@
           "runtimes/aot/lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
       },
+      "FadeCandy/1.0.0": {
+        "type": "project",
+        "framework": "UAP,Version=v10.0",
+        "dependencies": {
+          "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2"
+        }
+      },
       "SelfHostedHttpServer/1.0.0": {
         "type": "project",
         "framework": "UAP,Version=v10.0",
@@ -9087,6 +9108,13 @@
         },
         "runtime": {
           "lib/netcore50/System.Xml.XmlSerializer.dll": {}
+        }
+      },
+      "FadeCandy/1.0.0": {
+        "type": "project",
+        "framework": "UAP,Version=v10.0",
+        "dependencies": {
+          "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2"
         }
       },
       "SelfHostedHttpServer/1.0.0": {
@@ -11426,6 +11454,13 @@
           "runtimes/aot/lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
       },
+      "FadeCandy/1.0.0": {
+        "type": "project",
+        "framework": "UAP,Version=v10.0",
+        "dependencies": {
+          "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2"
+        }
+      },
       "SelfHostedHttpServer/1.0.0": {
         "type": "project",
         "framework": "UAP,Version=v10.0",
@@ -13722,6 +13757,13 @@
         },
         "runtime": {
           "lib/netcore50/System.Xml.XmlSerializer.dll": {}
+        }
+      },
+      "FadeCandy/1.0.0": {
+        "type": "project",
+        "framework": "UAP,Version=v10.0",
+        "dependencies": {
+          "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2"
         }
       },
       "SelfHostedHttpServer/1.0.0": {
@@ -16059,6 +16101,13 @@
         },
         "runtime": {
           "runtimes/aot/lib/netcore50/System.Xml.XmlSerializer.dll": {}
+        }
+      },
+      "FadeCandy/1.0.0": {
+        "type": "project",
+        "framework": "UAP,Version=v10.0",
+        "dependencies": {
+          "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2"
         }
       },
       "SelfHostedHttpServer/1.0.0": {
@@ -24332,6 +24381,11 @@
         "system.xml.xmlserializer.nuspec"
       ]
     },
+    "FadeCandy/1.0.0": {
+      "type": "project",
+      "path": "../../LEDs/FadeCandy/project.json",
+      "msbuildProject": "../../LEDs/FadeCandy/FadeCandy.csproj"
+    },
     "SelfHostedHttpServer/1.0.0": {
       "type": "project",
       "path": "../SelfHostingHttpServer/project.json",
@@ -24357,6 +24411,9 @@
       "frameworks": {
         "uap10.0": {
           "projectReferences": {
+            "C:\\Users\\andy\\Source\\Repos\\piWeb\\LEDs\\FadeCandy\\FadeCandy.csproj": {
+              "projectPath": "C:\\Users\\andy\\Source\\Repos\\piWeb\\LEDs\\FadeCandy\\FadeCandy.csproj"
+            },
             "C:\\Users\\andy\\Source\\Repos\\piWeb\\ScoreboardWebServer\\SelfHostingHttpServer\\SelfHostedHttpServer.csproj": {
               "projectPath": "C:\\Users\\andy\\Source\\Repos\\piWeb\\ScoreboardWebServer\\SelfHostingHttpServer\\SelfHostedHttpServer.csproj"
             }

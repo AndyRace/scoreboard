@@ -105,7 +105,7 @@ namespace SelfHostedHttpServer
                 Headers[attribs.Groups[1].Value] = attribs.Groups[2].Value;
             }
 
-            // todo: Assumes http. The socket includes security info, but what if behind a loiad balancer ... really?? ... a Pi?
+            // todo: Assumes http. The socket includes security info, but what if behind a load balancer ... really?? ... a Pi?
             _requestUri = new Uri($"http://{Headers["Host"]}{query}");
 
             // write the body as if it were the request

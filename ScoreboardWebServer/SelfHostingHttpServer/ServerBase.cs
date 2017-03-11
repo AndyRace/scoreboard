@@ -7,14 +7,16 @@ using System.Net;
 using System.Globalization;
 using SelfHostingHttpServer;
 using System.Threading;
+using System.Diagnostics;
 
 namespace SelfHostedHttpServer
 {
-
-  public class ServerBase
+  public class ServerBase: IDisposable
   {
     const int DefaultReponseStreamBufferSize = 8120;
     const int CancellationTimeoutMs = 1000;
+
+    private StreamSocketListener _listener;
 
     //public class RequestEventArgs : EventArgs
     //{
@@ -32,15 +34,20 @@ namespace SelfHostedHttpServer
     private static int Count;
     private static int Errors;
 
-    public async void Start(int port = 80)
+    public async Task StartAsync(CancellationToken ct, int port = 80)
     {
-      var listener = new StreamSocketListener();
+      Debug.Assert(_listener == null, "Unexpected call to Start while a Socket Listener is already running!");
 
-      await listener.BindServiceNameAsync(port.ToString());
+      _listener = new StreamSocketListener();
 
-      listener.ConnectionReceived += async (sender, args) =>
+      await _listener.BindServiceNameAsync(port.ToString());
+
+      _listener.ConnectionReceived += async (sender, args) =>
       {
-        try
+                throw new Exception("Test");
+
+        /*
+         * try
         {
           Interlocked.Increment(ref Count);
 
@@ -58,7 +65,7 @@ namespace SelfHostedHttpServer
 
                 var response = await CreateResponse(myWebRequest);
 
-                await WriteResponse(responseStream, response);
+                WriteResponse(responseStream, response);
               }
               catch (Exception ex)
               {
@@ -95,25 +102,34 @@ namespace SelfHostedHttpServer
                                           $"{info}" +
                                       $"</body>" +
                                   $"</html>";
-                await WriteResponse(responseStream, html, error);
+                WriteResponse(responseStream, html, error);
               }
             }
           }
         }
         catch (Exception ex)
         {
-          Interlocked.Increment(ref Errors);
+          try
+          {
+            Interlocked.Increment(ref Errors);
 
-          // todo: LOG THIS FATAL ERROR
-          Logger.LogException("Exception in listener.ConnectionReceived", ex);
+            // todo: LOG THIS FATAL ERROR
+            Logger.LogException("Exception in listener.ConnectionReceived", ex);
+          }
+          catch
+          {
+            // paranoid
+          }
         }
         finally
         {
           Interlocked.Decrement(ref Count);
-          
+
           // Logger.WriteLn("Connection reveived: End");
         }
+  */
       };
+
     }
 
     protected WebResponse CreateApiResponse(string body = "")
@@ -176,10 +192,10 @@ namespace SelfHostedHttpServer
     private static void AppendTo(Stream stream, string info)
     {
       var headerArray = Encoding.UTF8.GetBytes(info);
-      stream.WriteAsync(headerArray, 0, headerArray.Length);
+      stream.Write(headerArray, 0, headerArray.Length);
     }
 
-    protected async static Task WriteResponse(Stream responseStream, WebResponse response, string responseCode = "200 OK")
+    protected static void WriteResponse(Stream responseStream, WebResponse response, string responseCode = "200 OK")
     {
       //responseStream.Seek(0, SeekOrigin.Begin);
 
@@ -195,17 +211,14 @@ namespace SelfHostedHttpServer
       }
       AppendTo(responseStream, "\r\n");
 
-      await response.GetResponseStream().CopyToAsync(
-        responseStream,
-        DefaultReponseStreamBufferSize,
-        new CancellationTokenSource(CancellationTimeoutMs).Token);
+      response.GetResponseStream().CopyTo(responseStream);
 
-      await responseStream.FlushAsync(new CancellationTokenSource(CancellationTimeoutMs).Token);
+      responseStream.Flush();// new CancellationTokenSource(CancellationTimeoutMs).Token);
     }
 
-    protected async static Task WriteResponse(Stream responseStream, string htmlString, string responseCode = "200 OK")
+    protected static void WriteResponse(Stream responseStream, string htmlString, string responseCode = "200 OK")
     {
-      await WriteResponse(responseStream, new HtmlResponse(htmlString), responseCode);
+      WriteResponse(responseStream, new HtmlResponse(htmlString), responseCode);
     }
 
     // See: https://tools.ietf.org/html/rfc2616#section-9.3
@@ -220,5 +233,42 @@ namespace SelfHostedHttpServer
 
       return new Uri($"http://localhost/{query[0]}");
     }
+
+    #region IDisposable Support
+    private bool disposedValue = false; // To detect redundant calls
+
+    protected virtual void Dispose(bool disposing)
+    {
+      if (!disposedValue)
+      {
+        if (disposing)
+        {
+          // TODO: dispose managed state (managed objects).
+          _listener.Dispose();
+          _listener = null;
+        }
+
+        // TODO: free unmanaged resources (unmanaged objects) and override a finalizer below.
+        // TODO: set large fields to null.
+
+        disposedValue = true;
+      }
+    }
+
+    // TODO: override a finalizer only if Dispose(bool disposing) above has code to free unmanaged resources.
+    // ~ServerBase() {
+    //   // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
+    //   Dispose(false);
+    // }
+
+    // This code added to correctly implement the disposable pattern.
+    public void Dispose()
+    {
+      // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
+      Dispose(true);
+      // TODO: uncomment the following line if the finalizer is overridden above.
+      // GC.SuppressFinalize(this);
+    }
+    #endregion
   }
 }

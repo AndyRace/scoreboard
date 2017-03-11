@@ -130,6 +130,10 @@
     <EmbeddedResource Include="Properties\ScoreboardWebServerHelper.rd.xml" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\LEDs\FadeCandy\FadeCandy.csproj">
+      <Project>{ff786976-6f50-424c-b5e3-73c5eeac3ecb}</Project>
+      <Name>FadeCandy</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SelfHostingHttpServer\SelfHostedHttpServer.csproj">
       <Project>{042A2E9C-DF7F-4CBD-8A47-ABB16291A5F0}</Project>
       <Name>SelfHostedHttpServer</Name>

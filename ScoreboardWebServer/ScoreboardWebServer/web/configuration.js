@@ -3,7 +3,7 @@
 
     // <img class="centered" src="http://miltoncricket.org.uk/wp-content/themes/mcc-theme/images/milton-cricket-club-logo.png" alt="Milton Cricket Club Logo" />
     var img = document.createElement("img");
-    img.src = "http://miltoncricket.org.uk/wp-content/themes/mcc-theme/images/milton-cricket-club-logo.png";
+    img.src = "milton-cricket-club-logo.png";
     img.alt = "Milton Cricket Club Logo";
     img.className = "centered";
     header.appendChild(img);

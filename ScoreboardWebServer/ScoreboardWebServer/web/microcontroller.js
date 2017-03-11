@@ -59,7 +59,7 @@ function MicroGroup(scoreboard, groupName, valueElement, nDigits) {
 
                 var response = JSON.parse(xhttp.responseText);
 
-                // todo: assert response.key == group
+                // todo: assert response.Group == group
                 self.updateScore(response.Value, true);
 
                 // track last response time
@@ -130,8 +130,25 @@ function MicroControllerScoreboard(lastResponseElement) {
         return new MicroGroup(this, groupName, value, nDigits);
     };
 
-    this.test = function () {
-        this.testApi.post();
+    this.test = function (button) {
+        if (button.locked) { return; }
+        try {
+            button.locked = true;
+
+            if (button.isRunning) {
+                button.innerText = button.initialText;
+                this.testApi.put("running=false");
+                button.isRunning = false;
+                return;
+            }
+
+            button.initialText = button.innerText;
+            button.innerText = "Stop";
+            this.testApi.put("running=true");
+            button.isRunning = true;
+        } finally {
+            button.locked = false;
+        }
     };
 
     this.displayText = function (text) {

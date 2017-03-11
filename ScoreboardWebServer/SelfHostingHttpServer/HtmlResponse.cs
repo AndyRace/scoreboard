@@ -45,7 +45,7 @@ namespace SelfHostedHttpServer
         public override long ContentLength => GetResponseStream().Length;
 
         // see: https://en.wikipedia.org/wiki/Media_type
-        // todo: Need to map extension to conent type
+        // todo: Need to map extension to content type
         // text/javascript
         public override string ContentType {
             get
