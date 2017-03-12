@@ -2176,6 +2176,14 @@
         "dependencies": {
           "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2"
         }
+      },
+      "ScoreboardFadeCandy/1.0.0": {
+        "type": "project",
+        "framework": "UAP,Version=v10.0",
+        "dependencies": {
+          "FadeCandy": "1.0.0",
+          "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2"
+        }
       }
     },
     "UAP,Version=v10.0/win10-arm": {
@@ -4459,6 +4467,14 @@
         "type": "project",
         "framework": "UAP,Version=v10.0",
         "dependencies": {
+          "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2"
+        }
+      },
+      "ScoreboardFadeCandy/1.0.0": {
+        "type": "project",
+        "framework": "UAP,Version=v10.0",
+        "dependencies": {
+          "FadeCandy": "1.0.0",
           "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2"
         }
       }
@@ -6785,6 +6801,14 @@
         "dependencies": {
           "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2"
         }
+      },
+      "ScoreboardFadeCandy/1.0.0": {
+        "type": "project",
+        "framework": "UAP,Version=v10.0",
+        "dependencies": {
+          "FadeCandy": "1.0.0",
+          "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2"
+        }
       }
     },
     "UAP,Version=v10.0/win10-x64": {
@@ -9077,6 +9101,14 @@
         "type": "project",
         "framework": "UAP,Version=v10.0",
         "dependencies": {
+          "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2"
+        }
+      },
+      "ScoreboardFadeCandy/1.0.0": {
+        "type": "project",
+        "framework": "UAP,Version=v10.0",
+        "dependencies": {
+          "FadeCandy": "1.0.0",
           "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2"
         }
       }
@@ -11412,6 +11444,14 @@
         "dependencies": {
           "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2"
         }
+      },
+      "ScoreboardFadeCandy/1.0.0": {
+        "type": "project",
+        "framework": "UAP,Version=v10.0",
+        "dependencies": {
+          "FadeCandy": "1.0.0",
+          "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2"
+        }
       }
     },
     "UAP,Version=v10.0/win10-x86": {
@@ -13704,6 +13744,14 @@
         "type": "project",
         "framework": "UAP,Version=v10.0",
         "dependencies": {
+          "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2"
+        }
+      },
+      "ScoreboardFadeCandy/1.0.0": {
+        "type": "project",
+        "framework": "UAP,Version=v10.0",
+        "dependencies": {
+          "FadeCandy": "1.0.0",
           "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2"
         }
       }
@@ -16037,6 +16085,14 @@
         "type": "project",
         "framework": "UAP,Version=v10.0",
         "dependencies": {
+          "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2"
+        }
+      },
+      "ScoreboardFadeCandy/1.0.0": {
+        "type": "project",
+        "framework": "UAP,Version=v10.0",
+        "dependencies": {
+          "FadeCandy": "1.0.0",
           "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2"
         }
       }
@@ -22245,6 +22301,11 @@
       "type": "project",
       "path": "../FadeCandy/project.json",
       "msbuildProject": "../FadeCandy/FadeCandy.csproj"
+    },
+    "ScoreboardFadeCandy/1.0.0": {
+      "type": "project",
+      "path": "../../ScoreboardFadeCandy/project.json",
+      "msbuildProject": "../../ScoreboardFadeCandy/ScoreboardFadeCandy.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -22278,6 +22339,9 @@
             },
             "C:\\Users\\andy\\Source\\Repos\\piWeb\\LEDs\\FadeCandy\\FadeCandy.csproj": {
               "projectPath": "C:\\Users\\andy\\Source\\Repos\\piWeb\\LEDs\\FadeCandy\\FadeCandy.csproj"
+            },
+            "C:\\Users\\andy\\Source\\Repos\\piWeb\\ScoreboardFadeCandy\\ScoreboardFadeCandy.csproj": {
+              "projectPath": "C:\\Users\\andy\\Source\\Repos\\piWeb\\ScoreboardFadeCandy\\ScoreboardFadeCandy.csproj"
             }
           }
         }

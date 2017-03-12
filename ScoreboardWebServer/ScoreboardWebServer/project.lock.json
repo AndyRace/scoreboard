@@ -2198,20 +2198,12 @@
           "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2"
         }
       },
-      "ScoreboardWebServerHelper/1.0.0": {
+      "ScoreboardFadeCandy/1.0.0": {
         "type": "project",
         "framework": "UAP,Version=v10.0",
         "dependencies": {
           "FadeCandy": "1.0.0",
-          "Microsoft.NETCore.UniversalWindowsPlatform": "5.3.0",
-          "SelfHostedHttpServer": "1.0.0"
-        }
-      },
-      "SelfHostedHttpServer/1.0.0": {
-        "type": "project",
-        "framework": "UAP,Version=v10.0",
-        "dependencies": {
-          "Microsoft.NETCore.UniversalWindowsPlatform": "5.3.0"
+          "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2"
         }
       }
     },
@@ -4520,20 +4512,12 @@
           "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2"
         }
       },
-      "ScoreboardWebServerHelper/1.0.0": {
+      "ScoreboardFadeCandy/1.0.0": {
         "type": "project",
         "framework": "UAP,Version=v10.0",
         "dependencies": {
           "FadeCandy": "1.0.0",
-          "Microsoft.NETCore.UniversalWindowsPlatform": "5.3.0",
-          "SelfHostedHttpServer": "1.0.0"
-        }
-      },
-      "SelfHostedHttpServer/1.0.0": {
-        "type": "project",
-        "framework": "UAP,Version=v10.0",
-        "dependencies": {
-          "Microsoft.NETCore.UniversalWindowsPlatform": "5.3.0"
+          "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2"
         }
       }
     },
@@ -6881,20 +6865,12 @@
           "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2"
         }
       },
-      "ScoreboardWebServerHelper/1.0.0": {
+      "ScoreboardFadeCandy/1.0.0": {
         "type": "project",
         "framework": "UAP,Version=v10.0",
         "dependencies": {
           "FadeCandy": "1.0.0",
-          "Microsoft.NETCore.UniversalWindowsPlatform": "5.3.0",
-          "SelfHostedHttpServer": "1.0.0"
-        }
-      },
-      "SelfHostedHttpServer/1.0.0": {
-        "type": "project",
-        "framework": "UAP,Version=v10.0",
-        "dependencies": {
-          "Microsoft.NETCore.UniversalWindowsPlatform": "5.3.0"
+          "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2"
         }
       }
     },
@@ -9212,20 +9188,12 @@
           "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2"
         }
       },
-      "ScoreboardWebServerHelper/1.0.0": {
+      "ScoreboardFadeCandy/1.0.0": {
         "type": "project",
         "framework": "UAP,Version=v10.0",
         "dependencies": {
           "FadeCandy": "1.0.0",
-          "Microsoft.NETCore.UniversalWindowsPlatform": "5.3.0",
-          "SelfHostedHttpServer": "1.0.0"
-        }
-      },
-      "SelfHostedHttpServer/1.0.0": {
-        "type": "project",
-        "framework": "UAP,Version=v10.0",
-        "dependencies": {
-          "Microsoft.NETCore.UniversalWindowsPlatform": "5.3.0"
+          "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2"
         }
       }
     },
@@ -11582,20 +11550,12 @@
           "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2"
         }
       },
-      "ScoreboardWebServerHelper/1.0.0": {
+      "ScoreboardFadeCandy/1.0.0": {
         "type": "project",
         "framework": "UAP,Version=v10.0",
         "dependencies": {
           "FadeCandy": "1.0.0",
-          "Microsoft.NETCore.UniversalWindowsPlatform": "5.3.0",
-          "SelfHostedHttpServer": "1.0.0"
-        }
-      },
-      "SelfHostedHttpServer/1.0.0": {
-        "type": "project",
-        "framework": "UAP,Version=v10.0",
-        "dependencies": {
-          "Microsoft.NETCore.UniversalWindowsPlatform": "5.3.0"
+          "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2"
         }
       }
     },
@@ -13913,20 +13873,12 @@
           "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2"
         }
       },
-      "ScoreboardWebServerHelper/1.0.0": {
+      "ScoreboardFadeCandy/1.0.0": {
         "type": "project",
         "framework": "UAP,Version=v10.0",
         "dependencies": {
           "FadeCandy": "1.0.0",
-          "Microsoft.NETCore.UniversalWindowsPlatform": "5.3.0",
-          "SelfHostedHttpServer": "1.0.0"
-        }
-      },
-      "SelfHostedHttpServer/1.0.0": {
-        "type": "project",
-        "framework": "UAP,Version=v10.0",
-        "dependencies": {
-          "Microsoft.NETCore.UniversalWindowsPlatform": "5.3.0"
+          "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2"
         }
       }
     },
@@ -16283,20 +16235,12 @@
           "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2"
         }
       },
-      "ScoreboardWebServerHelper/1.0.0": {
+      "ScoreboardFadeCandy/1.0.0": {
         "type": "project",
         "framework": "UAP,Version=v10.0",
         "dependencies": {
           "FadeCandy": "1.0.0",
-          "Microsoft.NETCore.UniversalWindowsPlatform": "5.3.0",
-          "SelfHostedHttpServer": "1.0.0"
-        }
-      },
-      "SelfHostedHttpServer/1.0.0": {
-        "type": "project",
-        "framework": "UAP,Version=v10.0",
-        "dependencies": {
-          "Microsoft.NETCore.UniversalWindowsPlatform": "5.3.0"
+          "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2"
         }
       }
     }
@@ -24595,15 +24539,10 @@
       "path": "../../LEDs/FadeCandy/project.json",
       "msbuildProject": "../../LEDs/FadeCandy/FadeCandy.csproj"
     },
-    "ScoreboardWebServerHelper/1.0.0": {
+    "ScoreboardFadeCandy/1.0.0": {
       "type": "project",
-      "path": "../ScoreboardWebServerHelper/project.json",
-      "msbuildProject": "../ScoreboardWebServerHelper/ScoreboardWebServerHelper.csproj"
-    },
-    "SelfHostedHttpServer/1.0.0": {
-      "type": "project",
-      "path": "../SelfHostingHttpServer/project.json",
-      "msbuildProject": "../SelfHostingHttpServer/SelfHostedHttpServer.csproj"
+      "path": "../../ScoreboardFadeCandy/project.json",
+      "msbuildProject": "../../ScoreboardFadeCandy/ScoreboardFadeCandy.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -24625,14 +24564,14 @@
       "frameworks": {
         "uap10.0": {
           "projectReferences": {
-            "C:\\Users\\andy\\Source\\Repos\\piWeb\\ScoreboardWebServer\\ScoreboardWebServerHelper\\ScoreboardWebServerHelper.csproj": {
-              "projectPath": "C:\\Users\\andy\\Source\\Repos\\piWeb\\ScoreboardWebServer\\ScoreboardWebServerHelper\\ScoreboardWebServerHelper.csproj"
-            },
-            "C:\\Users\\andy\\Source\\Repos\\piWeb\\ScoreboardWebServer\\SelfHostingHttpServer\\SelfHostedHttpServer.csproj": {
-              "projectPath": "C:\\Users\\andy\\Source\\Repos\\piWeb\\ScoreboardWebServer\\SelfHostingHttpServer\\SelfHostedHttpServer.csproj"
-            },
             "C:\\Users\\andy\\Source\\Repos\\Catnap.Server\\Catnap.Server\\Catnap.Server\\Catnap.Server.csproj": {
               "projectPath": "C:\\Users\\andy\\Source\\Repos\\Catnap.Server\\Catnap.Server\\Catnap.Server\\Catnap.Server.csproj"
+            },
+            "C:\\Users\\andy\\Source\\Repos\\piWeb\\ScoreboardFadeCandy\\ScoreboardFadeCandy.csproj": {
+              "projectPath": "C:\\Users\\andy\\Source\\Repos\\piWeb\\ScoreboardFadeCandy\\ScoreboardFadeCandy.csproj"
+            },
+            "C:\\Users\\andy\\Source\\Repos\\piWeb\\LEDs\\FadeCandy\\FadeCandy.csproj": {
+              "projectPath": "C:\\Users\\andy\\Source\\Repos\\piWeb\\LEDs\\FadeCandy\\FadeCandy.csproj"
             }
           }
         }

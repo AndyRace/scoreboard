@@ -1,4 +1,5 @@
 ﻿using FadeCandy;
+using ScoreboardFadeCandy;
 using SelfHostedHttpServer;
 using System;
 using System.Collections.Generic;
@@ -21,11 +22,12 @@ namespace ScoreboardWebServerHelper
 
     internal async Task Test(CancellationToken ct)
     {
-      using (var fadeCandy = await Controller.CreateController())
+      using (var fadeCandy = new ScoreboardFadeCandyController())
       {
         await fadeCandy.InitialiseAsync();
 
-        await fadeCandy.ExecuteTestAsync(ct);
+        // TODO: Configure the offset!
+        await fadeCandy.ExecuteTestAsync(ct, 128);
       }
     }
 

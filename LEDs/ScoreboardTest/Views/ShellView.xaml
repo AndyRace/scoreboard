@@ -11,13 +11,23 @@
             <RowDefinition Height="30"/>
             <RowDefinition Height="30"/>
             <RowDefinition Height="30"/>
+            <RowDefinition Height="60"/>
             <RowDefinition Height="30"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Button Grid.Row="0" Name="Initialise" Content="Initialise" VerticalContentAlignment="Top" HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch"/>
         <Button Grid.Row="1" Name="Run" Content="Run Test" VerticalContentAlignment="Top" HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch"/>
         <Button Grid.Row="2" Name="Stop" Content="Stop Test" VerticalContentAlignment="Top" HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch"/>
-        <TextBlock Grid.Row="3" Name="Info" HorizontalAlignment="Center" VerticalAlignment="Center" />
-        <ListBox Grid.Row="4" x:Name="DebugInfo" FontSize="10"/>
+        <RelativePanel Grid.Row="3">
+            <TextBox Name="Value" Header="Value"  />
+            <Button Name="Inc"
+                    Width="30" 
+                    Content="+" 
+                    RelativePanel.RightOf="Value"/>
+            <Button Name="Dec" Width="30" Content="-" RelativePanel.Below="Inc" RelativePanel.RightOf="Value"/>
+        </RelativePanel>
+
+        <TextBlock Grid.Row="4" Name="Info" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        <ListBox Grid.Row="5" x:Name="DebugInfo" FontSize="10"/>
     </Grid>
 </Page>

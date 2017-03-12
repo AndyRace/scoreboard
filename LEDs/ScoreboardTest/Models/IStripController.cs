@@ -12,6 +12,12 @@ namespace ScoreboardTest.Models
 
     Task InitialiseAsync();
 
-    Task ExecuteTestAsync(CancellationToken ct);
+    Task ExecuteTestAsync(bool start);
+
+    Task SetValueAsync(string value);
+
+    Task Dec();
+
+    Task Inc();
   }
 }

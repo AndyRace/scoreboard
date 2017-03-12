@@ -12,12 +12,10 @@ namespace FadeCandy
   // https://msdn.microsoft.com/en-us/library/windows/hardware/dn312121(v=vs.85).aspx
   public class Controller : IDisposable
   {
-    public static async Task<Controller> CreateController()
-    {
-      return new Controller(await GetDevice());
-    }
+    public RGBColour[] Pixels = new RGBColour[512];
+    private UsbDevice _usbDevice;
 
-    private static async Task<UsbDevice> GetDevice()
+    protected static async Task<UsbDevice> GetDevice()
     {
       // DeviceInterfaceGUID: {62fd4123-87e3-47fe-946a-e044f36f2fb3}
       // HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Enum\USB\VID_1D50&PID_607A&MI_00\7&34f36986&0&0000\Device Parameters
@@ -34,30 +32,26 @@ namespace FadeCandy
       // we expect 2 'devices' but we're only interested in the first
       if (myDevices.Count != 2)
       {
-        Debug.WriteLine($"Unable to find FadeCandy device", "Error");
-        throw new Exception("Device not found!");
+        throw new Exception("Unable to find FadeCandy device!");
         //return null;
       }
 
       try
       {
         Debug.WriteLine($"Found FadeCandy device");
+
         return await UsbDevice.FromIdAsync(myDevices[0].Id);
       }
-      catch (Exception ex)
+      catch (Exception)
       {
-        Debug.WriteLine(ex.Message, "Error");
+        // Debug.WriteLine(ex.Message, "Error");
 
         throw;
       }
     }
 
-    private UsbDevice _usbDevice;
-
-    public Controller(UsbDevice dev)
+    public Controller()
     {
-      _usbDevice = dev;
-      // Initialise();
     }
 
     public async Task ClearAsync()
@@ -74,20 +68,28 @@ namespace FadeCandy
 
     private async Task WriteDataAsync(byte[] data)
     {
-      UInt32 bytesWritten = 0;
-
-      UsbBulkOutPipe writePipe = _usbDevice.DefaultInterface.BulkOutPipes[0];
-      writePipe.WriteOptions |= UsbWriteOptions.ShortPacketTerminate;
-
-      var stream = writePipe.OutputStream;
-
-      DataWriter writer = new DataWriter(stream);
-
-      writer.WriteBytes(data);
-
       try
       {
-        bytesWritten = await writer.StoreAsync();
+        // todo: Is this the right approach
+        // allow callers to call this with await even though we're no longer really async
+        await Task.FromResult(0);
+
+        lock (_usbDevice)
+        {
+          UInt32 bytesWritten = 0;
+
+          UsbBulkOutPipe writePipe = _usbDevice.DefaultInterface.BulkOutPipes[0];
+          writePipe.WriteOptions |= UsbWriteOptions.ShortPacketTerminate;
+
+          var stream = writePipe.OutputStream;
+
+          DataWriter writer = new DataWriter(stream);
+
+          writer.WriteBytes(data);
+
+          // bytesWritten = await writer.StoreAsync();
+          bytesWritten = /*await*/ writer.StoreAsync().GetResults();
+        }
       }
       catch (Exception exception)
       {
@@ -109,8 +111,6 @@ namespace FadeCandy
 
       GC.SuppressFinalize(this);
     }
-
-    public RGBColour[] Pixels = new RGBColour[512];
 
     public async Task FlushAllAsync()
     {
@@ -147,6 +147,11 @@ namespace FadeCandy
 
     public async Task InitialiseAsync()
     {
+      if (_usbDevice == null)
+      {
+        _usbDevice = await GetDevice();
+      }
+
       double gammaCorrection = 1.6;
       // compute basic uniform gamma table for r/g/b
 
@@ -194,7 +199,7 @@ namespace FadeCandy
       }
     }
 
-    byte ControlByte(int type, bool final = false, int index = 0)
+    private static byte ControlByte(int type, bool final = false, int index = 0)
     {
       if (type < 0 || type > 3) throw new ArgumentException("type");
       if (index < 0 || index > 31) throw new ArgumentException("index");
@@ -226,95 +231,6 @@ namespace FadeCandy
 
 
       await WriteDataAsync(data);
-    }
-
-    public async Task ExecuteTestAsync(CancellationToken ct)
-    {
-      const int nTrips = 1;
-      int offset = 128;
-      try
-      {
-        var fwd = true;
-        double h = 0.0, s = 1, v = 1;
-        while (true)
-        {
-          Debug.WriteLine($"Offset: {offset}");
-
-          int min = 0 + offset;
-          int max = 21 + offset;
-
-          for (var trips = 0; trips < nTrips; trips++)
-          {
-            for (var pixel = fwd ? min : max; pixel != (fwd ? max : min); pixel += (fwd ? 1 : -1))
-            {
-              if (ct.IsCancellationRequested) return;
-
-              // https://en.wikipedia.org/wiki/HSL_and_HSV
-              this.Pixels[pixel] = RGBColour.FromHSV(h, s, v);
-              await this.FlushAllAsync();
-
-              await Task.Delay(TimeSpan.FromMilliseconds(30));
-
-              this.Pixels[pixel] = new RGBColour();
-              h = (h + 0.1) % 1.00;
-            }
-
-            fwd = !fwd;
-          }
-
-
-          for (var trips = 0; trips < nTrips; trips++)
-          {
-            fwd = true;
-
-            h = 0;
-            while (h >= 0 && h < 1.0)
-            {
-              if (ct.IsCancellationRequested) return;
-
-              for (var pixel = min; pixel <= max; pixel++)
-              {
-                // https://en.wikipedia.org/wiki/HSL_and_HSV
-                this.Pixels[pixel] = RGBColour.FromHSV(h, s, v);
-              }
-
-              await this.FlushAllAsync();
-
-              await Task.Delay(TimeSpan.FromMilliseconds(30));
-
-              h += fwd ? 0.02 : -0.02;
-            }
-
-            fwd = !fwd;
-          }
-
-          {
-            var colours = new[] { new RGBColour(1, 0, 0), new RGBColour(0, 1, 0), new RGBColour(0, 0, 1) };
-            foreach (var rgb in colours)
-            {
-              if (ct.IsCancellationRequested) return;
-
-              for (var pixel = min; pixel <= max; pixel++)
-              {
-                this.Pixels[pixel] = rgb;
-              }
-
-              await this.FlushAllAsync();
-              await Task.Delay(TimeSpan.FromMilliseconds(1000));
-            }
-          }
-
-          //offset = (offset + 64) % 512;
-        }
-      }
-      catch(OperationCanceledException)
-      {
-        // ignore this
-      }
-      finally
-      {
-        await this.ClearAsync();
-      }
     }
   }
 }

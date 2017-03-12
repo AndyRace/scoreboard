@@ -1,5 +1,6 @@
 ﻿using Caliburn.Micro;
 using ScoreboardTest.Models;
+using ScoreboardTest.Utils;
 using ScoreboardTest.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -15,10 +16,22 @@ namespace ScoreboardTest
   {
     private WinRTContainer _container;
     private IEventAggregator _eventAggregator;
+    private ILog _logger;
 
     public App()
     {
+      // Initialise the Caliburn Micro logger
+      LogManager.GetLog = type => new DebugLogger(type);
+      _logger = LogManager.GetLog(this.GetType());
+
+      UnhandledException += App_UnhandledException;
       InitializeComponent();
+    }
+
+    private void App_UnhandledException(object sender, Windows.UI.Xaml.UnhandledExceptionEventArgs e)
+    {
+      if (_logger != null)
+        _logger.Error(e.Exception);
     }
 
     protected override void Configure()

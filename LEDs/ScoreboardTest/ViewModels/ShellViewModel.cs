@@ -1,5 +1,6 @@
 ﻿using Caliburn.Micro;
 using ScoreboardTest.Models;
+using ScoreboardTest.Utils;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ScoreboardTest.ViewModels
 {
-  public class ShellViewModel : Screen, IDisposable
+  public class ShellViewModel : Screen
   {
 
     public ObservableCollection<string> DebugInfo { get; private set; }
@@ -29,8 +30,6 @@ namespace ScoreboardTest.ViewModels
 
     IStripController _controller = new StripController();
 
-    CancellationTokenSource _cts;
-
     public async Task Initialise()
     {
       await _controller.InitialiseAsync();
@@ -40,42 +39,36 @@ namespace ScoreboardTest.ViewModels
 
     public async Task Run()
     {
-      _cts = new CancellationTokenSource();
-      await _controller.ExecuteTestAsync(_cts.Token);
+      await _controller.ExecuteTestAsync(true);
     }
 
     public bool CanRun => _controller.IsInitialised && !_controller.IsExecutingTest;
 
-    public void Stop()
+    public async Task StopAsync()
     {
-      if (_cts != null)
-      {
-        _cts.Cancel();
-      }
+      await _controller.ExecuteTestAsync(false);
     }
 
     public bool CanStop => _controller.IsExecutingTest;
 
     public string Info => "Test";
 
-    protected virtual void Dispose(bool disposing)
+    public async Task ValueAsync(string value)
     {
-      if (disposing)
-      {
-        // dispose managed resources
-        if (_cts != null)
-        {
-          _cts.Dispose();
-          _cts = null;
-        }
-      }
-      // free native resources
+      await _controller.SetValueAsync(value);
     }
+    public bool CanValue => _controller.IsInitialised;
 
-    public void Dispose()
+    public async Task Inc()
     {
-      Dispose(true);
-      GC.SuppressFinalize(this);
+      await _controller.Inc();
     }
+    public bool CanInc => _controller.IsInitialised;
+
+    public async Task Dec()
+    {
+      await _controller.Dec();
+    }
+    public bool CanDec => _controller.IsInitialised;
   }
 }

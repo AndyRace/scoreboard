@@ -18,6 +18,7 @@ namespace ScoreboardWebServer
   {
     private static BackgroundTaskDeferral _Deferral = null;
     private CancellationTokenSource _cts;
+    private ScoreboardWebController _webController;
 
     public async void Run(IBackgroundTaskInstance taskInstance)
     {
@@ -29,7 +30,8 @@ namespace ScoreboardWebServer
       taskInstance.Canceled += TaskInstance_Canceled;
 
       var httpServer = new HttpServer(80);
-      httpServer.RestHandler.RegisterController(new ScoreboardWebController());
+      _webController = new ScoreboardWebController();
+      httpServer.RestHandler.RegisterController(_webController);
       await ThreadPool.RunAsync(async workItem =>
       {
         await httpServer.StartServerAsync();
@@ -45,6 +47,12 @@ namespace ScoreboardWebServer
         _cts.Cancel();
         _cts.Dispose();
         _cts = null;
+      }
+
+      if(_webController != null)
+      {
+        _webController.Dispose();
+        _webController = null;
       }
     }
   }

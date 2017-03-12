@@ -116,13 +116,13 @@
       <Project>{1ed5f504-dbe7-45fe-a968-f3f71b26b67e}</Project>
       <Name>Catnap.Server</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ScoreboardWebServerHelper\ScoreboardWebServerHelper.csproj">
-      <Project>{B67F3261-FC29-4275-95C2-6B02726C1CF9}</Project>
-      <Name>ScoreboardWebServerHelper</Name>
+    <ProjectReference Include="..\..\LEDs\FadeCandy\FadeCandy.csproj">
+      <Project>{ff786976-6f50-424c-b5e3-73c5eeac3ecb}</Project>
+      <Name>FadeCandy</Name>
     </ProjectReference>
-    <ProjectReference Include="..\SelfHostingHttpServer\SelfHostedHttpServer.csproj">
-      <Project>{042a2e9c-df7f-4cbd-8a47-abb16291a5f0}</Project>
-      <Name>SelfHostedHttpServer</Name>
+    <ProjectReference Include="..\..\ScoreboardFadeCandy\ScoreboardFadeCandy.csproj">
+      <Project>{45e5b44f-b391-457a-a11f-e197a91018cb}</Project>
+      <Name>ScoreboardFadeCandy</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '15.0' ">
