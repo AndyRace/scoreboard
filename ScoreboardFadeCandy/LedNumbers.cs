@@ -33,7 +33,6 @@ namespace ScoreboardFadeCandy
 
     private readonly Controller _controller;
     private readonly int _offset;
-    private readonly int _digit;
     private readonly int _ledsPerSegment;
     private readonly RGBColour _onColour, _offColour;
 

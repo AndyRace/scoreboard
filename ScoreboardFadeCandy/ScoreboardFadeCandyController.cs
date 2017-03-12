@@ -128,7 +128,7 @@ namespace ScoreboardFadeCandy
       }
     }
 
-    private object _ctsLock;
+    private object _ctsLock = new object();
     private CancellationTokenSource _cts;
 
     public async Task ExecuteTestAsync(bool start)

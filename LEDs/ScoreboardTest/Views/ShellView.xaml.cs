@@ -24,6 +24,7 @@ namespace ScoreboardTest.Views
   {
     public ShellView()
     {
+      // First time execution, initialize the logger 
       InitializeComponent();
     }
   }

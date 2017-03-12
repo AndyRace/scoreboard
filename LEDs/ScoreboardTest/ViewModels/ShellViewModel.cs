@@ -4,13 +4,16 @@ using ScoreboardTest.Utils;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics.Tracing;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace ScoreboardTest.ViewModels
 {
+  [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1001:TypesThatOwnDisposableFieldsShouldBeDisposable")]
   public class ShellViewModel : Screen
   {
+    IStripController _controller = new StripController();
 
     public ObservableCollection<string> DebugInfo { get; private set; }
 
@@ -27,8 +30,6 @@ namespace ScoreboardTest.ViewModels
       NotifyOfPropertyChange(() => CanRun);
       NotifyOfPropertyChange(() => CanStop);
     }
-
-    IStripController _controller = new StripController();
 
     public async Task Initialise()
     {
