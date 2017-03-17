@@ -7,6 +7,14 @@ namespace ScoreboardFadeCandy
 {
   public class LedDigit
   {
+    //     B 2
+    //      --
+    // A 1 |  | C 3
+    //      --  D 4
+    // E 5 |  | G 7
+    //      --
+    //      F 6
+
     /*const*/
     private static byte[] _segmentBitmaps = new byte[] {
                 // 0
@@ -14,7 +22,7 @@ namespace ScoreboardFadeCandy
                 // 1
                 0b0010001,
                 // 2
-                0b0101010,
+                0b0111110,
                 // 3
                 0b0111011,
                 // 4
@@ -32,40 +40,50 @@ namespace ScoreboardFadeCandy
                 };
 
     private readonly Controller _controller;
-    private readonly int _offset;
-    private readonly int _ledsPerSegment;
+
+    public int Offset { get; private set; }
+
+    public int LedsPerSegment { get; private set; }
+
+    public int NumPixels { get { return LedsPerSegment * 7; } }
+
     private readonly RGBColour _onColour, _offColour;
 
     public LedDigit(
       Controller fadeCandyController,
-      int offset,
+      ref int offset,
       byte ledsPerSegment,
       RGBColour? onColour = null,
       RGBColour? offColour = null)
     {
       _controller = fadeCandyController;
-      _offset = offset;
-      _ledsPerSegment = ledsPerSegment;
+      Offset = offset;
+      offset += 7 * ledsPerSegment;
+      LedsPerSegment = ledsPerSegment;
       _onColour = onColour ?? new RGBColour(1, 1, 1);
       _offColour = offColour ?? new RGBColour();
     }
 
-    public async Task SetValue(byte? value)
+    public void SetValue(byte? value)
     {
       if (value >= _segmentBitmaps.Length) throw new ArgumentOutOfRangeException("Value", value, $"Invalid value ({value}). Must be < {_segmentBitmaps.Length}.");
 
       var bmp = value.HasValue ? _segmentBitmaps[value.Value] : 0;
 
+      var offset = Offset;
+
       // each segment
-      for (int i = 7; i >= 0; i--)
+      for (int i = 0; i < 7; i++)
       {
-        for (var led = _offset; led < _ledsPerSegment; led++)
+        for (var led = 0; led < LedsPerSegment; led++)
         {
-          _controller.Pixels[led] = (bmp & 1) == 1 ? _onColour : _offColour;
+          _controller.Pixels[offset++] = (bmp & 0b1000000) != 0 ? _onColour : _offColour;
         }
+
+        bmp <<= 1;
       }
 
-      await _controller.FlushRangeAsync(_offset, 7 * _ledsPerSegment);
+      _controller.FlushRange(Offset, 7 * LedsPerSegment);
     }
   }
 
@@ -82,24 +100,29 @@ namespace ScoreboardFadeCandy
     {
       _controller = fadeCandyController;
       _digits = digits;
-      _maxValue = (int)Math.Pow(digits.Count, 10) - 1;
+      _maxValue = (int)Math.Pow(10, digits.Count) - 1;
     }
 
-    public async Task SetValueAsync(uint? value)
+    public List<LedDigit> Digits { get => _digits; }
+
+    public void SetValue(uint? value)
     {
       if (value > _maxValue) throw new ArgumentOutOfRangeException("Value", value, $"Invalid value ({value}). Must be < {_maxValue}.");
 
-      for (var iDigit = _digits.Count; iDigit >= 0; iDigit--)
+      _currentValue = value;
+
+      for (var iDigit = _digits.Count - 1; iDigit >= 0; iDigit--)
       {
         byte? digitValue = value.HasValue ? (byte?)((value.Value % 10) & 0xFF) : null;
-        await _digits[iDigit].SetValue(digitValue);
-        _currentValue = value;
+        if (value == 0 && _currentValue != 0)
+          digitValue = null;
+
+        _digits[iDigit].SetValue(digitValue);
+        if (value.HasValue) value = value / 10;
       }
     }
 
-#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
-    public async Task<uint?> GetValueAsync()
-#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
+    public uint? GetValue()
     {
       return _currentValue;
     }
@@ -116,7 +139,9 @@ namespace ScoreboardFadeCandy
       _fadeCandy = fadeCandy ?? throw new ArgumentNullException("fadeCandy");
     }
 
-    public async Task SetValueAsync(string key, string strValue)
+    public Dictionary<string, LedNumber> GroupNumbers { get => _numbers; }
+
+    public void SetStringValue(string key, string strValue)
     {
       uint? value = null;
       if (!string.IsNullOrWhiteSpace(strValue))
@@ -128,23 +153,33 @@ namespace ScoreboardFadeCandy
         value = uValue;
       }
 
-      await SetValueAsync(key, value);
+      SetValue(key, value);
     }
 
-    public async Task SetValueAsync(string key, uint? value)
+    public void SetValue(string key, uint? value)
     {
       if (!_numbers.ContainsKey(key))
         throw new ArgumentOutOfRangeException("numberIndex", $"Unknown number group ({key})");
 
-      await _numbers[key].SetValueAsync(value);
+      _numbers[key].SetValue(value);
     }
 
-    public async Task<uint?> GetValueAsync(string key)
+    public string GetStringValue(string key)
     {
       if (!_numbers.ContainsKey(key))
         throw new ArgumentOutOfRangeException("numberIndex", $"Unknown number group ({key})");
 
-      return await _numbers[key].GetValueAsync();
+      var value = _numbers[key].GetValue();
+      if (value.HasValue) return value.Value.ToString();
+      return null;
+    }
+
+    public uint? GetValue(string key)
+    {
+      if (!_numbers.ContainsKey(key))
+        throw new ArgumentOutOfRangeException("numberIndex", $"Unknown number group ({key})");
+
+      return _numbers[key].GetValue();
     }
 
     public void AddLedNumber(string key,
@@ -157,9 +192,29 @@ namespace ScoreboardFadeCandy
       var digits = new List<LedDigit>();
 
       for (int i = 0; i < nDigits; i++)
-        digits.Add(new LedDigit(_fadeCandy, ledOffset += 7 * ledsPerSegment, ledsPerSegment, onColour, offColour));
+      {
+        digits.Add(new LedDigit(_fadeCandy, ref ledOffset, ledsPerSegment, onColour, offColour));
+      }
 
       _numbers.Add(key, new LedNumber(_fadeCandy, digits));
+    }
+
+    /// <summary>
+    /// Return all 'LedDigit's in all numbers
+    /// </summary>
+    /// <returns>An LedDigit</returns>
+    public IEnumerable<LedDigit> Digits
+    {
+      get
+      {
+        foreach (var number in _numbers)
+        {
+          foreach (var digit in number.Value.Digits)
+          {
+            yield return digit;
+          }
+        }
+      }
     }
   }
 }

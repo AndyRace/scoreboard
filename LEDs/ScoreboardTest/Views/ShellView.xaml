@@ -11,15 +11,16 @@
             <RowDefinition Height="30"/>
             <RowDefinition Height="30"/>
             <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
             <RowDefinition Height="60"/>
             <RowDefinition Height="30"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Button Grid.Row="0" Name="Initialise" Content="Initialise" VerticalContentAlignment="Top" HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch"/>
-        <Button Grid.Row="1" Name="Run" Content="Run Test" VerticalContentAlignment="Top" HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch"/>
-        <Button Grid.Row="2" Name="Stop" Content="Stop Test" VerticalContentAlignment="Top" HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch"/>
-        <RelativePanel Grid.Row="3">
-            <TextBox Name="Value" Header="Value"  />
+        <CheckBox Grid.Row="1" Name="RunTest" Content="Run Test" VerticalContentAlignment="Top" HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch"/>
+        <CheckBox Grid.Row="2" Name="RunNumberTest" Content="Run Number Test" VerticalContentAlignment="Top" HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch"/>
+        <RelativePanel Grid.Row="4">
+            <TextBox Name="Value" Header="Value" IsEnabled="{Binding IsValueEnabled}"  />
             <Button Name="Inc"
                     Width="30" 
                     Content="+" 
@@ -27,7 +28,7 @@
             <Button Name="Dec" Width="30" Content="-" RelativePanel.Below="Inc" RelativePanel.RightOf="Value"/>
         </RelativePanel>
 
-        <TextBlock Grid.Row="4" Name="Info" HorizontalAlignment="Center" VerticalAlignment="Center" />
-        <ListBox Grid.Row="5" x:Name="DebugInfo" FontSize="10"/>
+        <TextBlock Grid.Row="5" Name="Info" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        <ListBox Grid.Row="6" x:Name="DebugInfo" FontSize="10"/>
     </Grid>
 </Page>

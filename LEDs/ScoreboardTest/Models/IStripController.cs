@@ -8,16 +8,17 @@ namespace ScoreboardTest.Models
   {
     bool IsInitialised { get; }
 
-    bool IsExecutingTest { get; }
-
-    Task InitialiseAsync();
+    void Initialise();
 
     Task ExecuteTestAsync(bool start);
+    Task ExecuteNumberTestAsync(bool start);
 
-    Task SetValueAsync(string value);
+    void SetStringValue(string value);
 
-    Task Dec();
+    string GetStringValue();
 
-    Task Inc();
+    void Dec();
+
+    void Inc();
   }
 }

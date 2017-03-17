@@ -54,12 +54,12 @@ namespace ScoreboardWebServer
 
     private ScoreboardFadeCandyController _scoreboard;
 
-    private async Task<ScoreboardFadeCandyController> GetScoreboardAsync()
+    private ScoreboardFadeCandyController GetScoreboard()
     {
       if (_scoreboard == null)
       {
         _scoreboard = new ScoreboardFadeCandyController();
-        await _scoreboard.InitialiseAsync();
+        _scoreboard.Initialise();
       }
 
       return _scoreboard;
@@ -87,22 +87,22 @@ namespace ScoreboardWebServer
     }
 
     [HttpPut, Route("api/value\\?group={group}&value={value}")]
-    public async Task<HttpResponse> SetValueAsync(string group, string value)
+    public HttpResponse SetValue(string group, string value)
     {
       var info = $"SetValue: {group}={value}";
       Debug.WriteLine(info);
 
-      await _scoreboard.Numbers.SetValueAsync(group, value);
+      _scoreboard.LedNumbers.SetStringValue(group, value);
       return new HttpResponse(HttpStatusCode.Ok);
     }
 
     [HttpGet, Route("api/value\\?group={group}")]
-    public async Task<HttpResponse> GetValueAsync(string group)
+    public HttpResponse GetValueAsync(string group)
     {
       var info = $"GetValue: {group}";
       Debug.WriteLine(info);
 
-      uint? result = await _scoreboard.Numbers.GetValueAsync(group);
+      uint? result = _scoreboard.LedNumbers.GetValue(group);
 
       return new JsonResponse(new { Value = result, Group = group });
     }

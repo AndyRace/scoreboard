@@ -3,6 +3,7 @@ using FadeCandy;
 using ScoreboardFadeCandy;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -11,66 +12,65 @@ namespace ScoreboardTest.Models
   class StripController : PropertyChangedBase, IStripController, IDisposable
   {
     private ScoreboardFadeCandyController _fadeCandy;
-    private bool _running;
 
-    public bool IsInitialised => _fadeCandy != null;
-
-    public bool IsExecutingTest
+    private ScoreboardFadeCandyController FadeCandy
     {
-      get
-      {
-        return _running;
-      }
+      get { return _fadeCandy; }
       set
       {
-        _running = value;
-        NotifyOfPropertyChange(() => IsExecutingTest);
+        _fadeCandy = value;
+        if (_fadeCandy != null)
+        {
+          _groupName = _fadeCandy.LedNumbers.GroupNumbers.First().Key;
+        }
       }
     }
+
+    // This is the group used for 'strings' and inc/dec
+    private string _groupName;
+
+    public bool IsInitialised => FadeCandy != null;
+
 
     public StripController()
     {
     }
 
-    private const string _groupName = "test";
-
-    public async Task InitialiseAsync()
+    public void Initialise()
     {
-      _fadeCandy = new ScoreboardFadeCandyController();
+      FadeCandy = new ScoreboardFadeCandyController();
 
-      await _fadeCandy.InitialiseAsync();
-
-      var numbers = _fadeCandy.Numbers;
-      var offset = 128;
-      numbers.AddLedNumber(_groupName, ref offset, 1, 3);
+      FadeCandy.Initialise();
 
       NotifyOfPropertyChange(() => IsInitialised);
     }
 
-    public async Task ExecuteTestAsync(bool start)
+    public async Task ExecuteTestAsync(bool execute)
     {
-      if (_fadeCandy == null) return;
-
-      IsExecutingTest = true;
-      try
-      {
-        // TODO: Configure the offset!
-        await _fadeCandy.ExecuteTestAsync(start);
-      }
-      finally
-      {
-        IsExecutingTest = false;
-      }
+      if (FadeCandy != null)
+        await FadeCandy.ExecuteTestAsync(execute);
     }
 
-    public async Task SetValueAsync(string value)
+    public async Task ExecuteNumberTestAsync(bool execute)
     {
-      await _fadeCandy.Numbers.SetValueAsync(_groupName, value);
+      if (FadeCandy != null)
+        await FadeCandy.ExecuteNumberTestAsync(execute);
     }
 
-    public async Task Inc()
+    public void SetStringValue(string value)
     {
-      uint? value = await _fadeCandy.Numbers.GetValueAsync(_groupName);
+      FadeCandy.LedNumbers.SetStringValue(_groupName, value);
+      NotifyOfPropertyChange("Value");
+    }
+
+    public string GetStringValue()
+    {
+      return FadeCandy?.LedNumbers.GetStringValue(_groupName);
+    }
+
+    public void Inc()
+    {
+      uint? value = FadeCandy.LedNumbers.GetValue(_groupName);
       if (value == null)
       {
         value = 1;
@@ -79,22 +79,37 @@ namespace ScoreboardTest.Models
       {
         value++;
       }
-      await SetValueAsync(value.ToString());
+
+      try
+      {
+        SetStringValue(value.ToString());
+      }
+      catch
+      {
+        // assume out of range
+      }
     }
 
-    public async Task Dec()
+    public void Dec()
     {
-      uint? value = await _fadeCandy.Numbers.GetValueAsync(_groupName);
+      uint? value = FadeCandy.LedNumbers.GetValue(_groupName);
       if (value == 0)
       {
         value = null;
       }
       else if (value != null)
       {
-        value++;
+        value--;
       }
 
-      await SetValueAsync(value.ToString());
+      try
+      {
+        SetStringValue(value.ToString());
+      }
+      catch
+      {
+        // assume out of range
+      }
     }
 
     #region IDisposable Support
@@ -106,10 +121,10 @@ namespace ScoreboardTest.Models
       {
         if (disposing)
         {
-          if (_fadeCandy != null)
+          if (FadeCandy != null)
           {
-            _fadeCandy.Dispose();
-            _fadeCandy = null;
+            FadeCandy.Dispose();
+            FadeCandy = null;
           }
         }
 

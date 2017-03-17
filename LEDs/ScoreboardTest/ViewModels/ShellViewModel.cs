@@ -1,11 +1,9 @@
 ﻿using Caliburn.Micro;
 using ScoreboardTest.Models;
-using ScoreboardTest.Utils;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Diagnostics.Tracing;
-using System.Threading;
+using System.Diagnostics;
 using System.Threading.Tasks;
 
 namespace ScoreboardTest.ViewModels
@@ -27,48 +25,85 @@ namespace ScoreboardTest.ViewModels
     {
       // todo: use e to determine which property changed
       NotifyOfPropertyChange(() => CanInitialise);
-      NotifyOfPropertyChange(() => CanRun);
-      NotifyOfPropertyChange(() => CanStop);
+      NotifyOfPropertyChange(() => CanRunTest);
+      NotifyOfPropertyChange(() => CanRunNumberTest);
+      NotifyOfPropertyChange(() => CanInc);
+      NotifyOfPropertyChange(() => CanDec);
+      NotifyOfPropertyChange(() => IsValueEnabled);
+      NotifyOfPropertyChange(() => Value);
     }
 
-    public async Task Initialise()
+    public void Initialise()
     {
-      await _controller.InitialiseAsync();
+      _controller.Initialise();
     }
 
-    public bool CanInitialise => !_controller.IsInitialised;
+    public bool CanInitialise => true;//!_controller.IsInitialised;
 
-    public async Task Run()
+
+    private bool _runTest;
+    public bool RunTest
     {
-      await _controller.ExecuteTestAsync(true);
+      get
+      {
+        return _runTest;
+      }
+      set
+      {
+        _runTest = value;
+        Task.Run(async () => await _controller.ExecuteTestAsync(value));
+        NotifyOfPropertyChange(() => RunTest);
+      }
     }
 
-    public bool CanRun => _controller.IsInitialised && !_controller.IsExecutingTest;
+    public bool CanRunTest => _controller.IsInitialised;
 
-    public async Task StopAsync()
+    private bool _runNumberTest;
+    public bool RunNumberTest
     {
-      await _controller.ExecuteTestAsync(false);
+      get
+      {
+        return _runNumberTest;
+      }
+      set
+      {
+        _runNumberTest = value;
+        Task.Run(async () => await _controller.ExecuteNumberTestAsync(value));
+        NotifyOfPropertyChange(() => RunNumberTest);
+      }
     }
 
-    public bool CanStop => _controller.IsExecutingTest;
+    public bool CanRunNumberTest => CanRunTest;
+
 
     public string Info => "Test";
 
-    public async Task ValueAsync(string value)
+    public string Value
     {
-      await _controller.SetValueAsync(value);
+      get => _controller.GetStringValue();
+      set {
+        try
+        {
+          _controller.SetStringValue(value);
+        }
+        catch (Exception ex)
+        {
+          Debug.WriteLine($"Error: {ex.Message}");
+        }
+      }
     }
-    public bool CanValue => _controller.IsInitialised;
 
-    public async Task Inc()
+    public bool IsValueEnabled => _controller.IsInitialised;
+
+    public void Inc()
     {
-      await _controller.Inc();
+      _controller.Inc();
     }
     public bool CanInc => _controller.IsInitialised;
 
-    public async Task Dec()
+    public void Dec()
     {
-      await _controller.Dec();
+      _controller.Dec();
     }
     public bool CanDec => _controller.IsInitialised;
   }

@@ -107,6 +107,7 @@
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FadeCandyUsbDevice.cs" />
     <Compile Include="Controller.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RGBColour.cs" />
