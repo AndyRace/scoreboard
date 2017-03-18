@@ -19,6 +19,8 @@ namespace ScoreboardTest.ViewModels
     {
       DebugInfo = new ObservableCollection<string>();
       _controller.PropertyChanged += _controller_PropertyChanged;
+
+      //_controller.Initialise();
     }
 
     private void _controller_PropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -81,7 +83,8 @@ namespace ScoreboardTest.ViewModels
     public string Value
     {
       get => _controller.GetStringValue();
-      set {
+      set
+      {
         try
         {
           _controller.SetStringValue(value);

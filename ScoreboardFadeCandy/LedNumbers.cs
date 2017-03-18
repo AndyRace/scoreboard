@@ -7,6 +7,8 @@ namespace ScoreboardFadeCandy
 {
   public class LedDigit
   {
+    private static RGBColour DefaultOnColour = RGBColour.FromHSV(0.8, 1, 1); //new RGBColour(1, 1, 1);
+
     //     B 2
     //      --
     // A 1 |  | C 3
@@ -60,7 +62,7 @@ namespace ScoreboardFadeCandy
       Offset = offset;
       offset += 7 * ledsPerSegment;
       LedsPerSegment = ledsPerSegment;
-      _onColour = onColour ?? new RGBColour(1, 1, 1);
+      _onColour = onColour ?? DefaultOnColour;
       _offColour = offColour ?? new RGBColour();
     }
 
@@ -103,6 +105,7 @@ namespace ScoreboardFadeCandy
       _maxValue = (int)Math.Pow(10, digits.Count) - 1;
     }
 
+    //digits are stored least-significant first
     public List<LedDigit> Digits { get => _digits; }
 
     public void SetValue(uint? value)
@@ -111,14 +114,15 @@ namespace ScoreboardFadeCandy
 
       _currentValue = value;
 
-      for (var iDigit = _digits.Count - 1; iDigit >= 0; iDigit--)
+      for (var iDigit = 0; iDigit < _digits.Count; iDigit++)
       {
-        byte? digitValue = value.HasValue ? (byte?)((value.Value % 10) & 0xFF) : null;
-        if (value == 0 && _currentValue != 0)
-          digitValue = null;
+        byte? digitValue = value.HasValue ? (byte?)(value.Value % 10) : null;
 
         _digits[iDigit].SetValue(digitValue);
+
         if (value.HasValue) value = value / 10;
+
+        if (value == 0) value = null;
       }
     }
 

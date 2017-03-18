@@ -1,11 +1,8 @@
 ﻿using FadeCandy;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Windows.System.Threading;
 
 namespace ScoreboardFadeCandy
 {
@@ -35,13 +32,14 @@ namespace ScoreboardFadeCandy
 
       // while we're testing we have a 6 LED (2 pixel) and a 3 LED (1 pixel) number
       {
-        int ledOffset = 128;
-
         var digits = new List<LedDigit>();
+        var Yellow = RGBColour.FromBytes(0xFF, 0xFF, 0x00);
 
-        int offset = ledOffset;
-        digits.Add(new LedDigit(this, ref offset, 2));
-        //digits.Add(new LedDigit(this, ref offset, 1));
+        // add digits least-significant first
+        int offset = 0;
+        digits.Add(new LedDigit(this, ref offset, 1, Yellow));
+        offset = 128;
+        digits.Add(new LedDigit(this, ref offset, 2, Yellow));
 
         LedNumbers.GroupNumbers.Add("test", new LedNumber(this, digits));
       }
@@ -123,94 +121,109 @@ namespace ScoreboardFadeCandy
       await _executeTest.DoExecuteTestAsync(execute, async (ct) => await ExecuteTestAsync(ct));
     }
 
-    private async Task ExecuteTestForAllDigits(CancellationToken ct, int iterations, Func<CancellationToken, int, int, int, Task> executeTest)
+    private async Task ExecuteTestForAllDigits(CancellationToken ct, Func<CancellationToken, LedDigit, Task> executeTest)
     {
       var tasks = new List<Task>();
 
-      for (var n = 0; n < iterations; n++)
+      foreach (var digit in _numbers.Digits)
       {
-        foreach (var digit in _numbers.Digits)
-        {
-          var offset = digit.Offset;
-
-          Debug.WriteLine($"Offset: {offset}");
-
-          // tasks.Add(Task.Run(() => executeTest(ct, offset, offset + digit.NumPixels - 1, n)));
-          await executeTest(ct, offset, offset + digit.NumPixels - 1, n);
-        }
-
-        // await Task.WhenAll(tasks.ToArray());
+        tasks.Add(Task.Run(() => executeTest(ct, digit)));
       }
+
+      await Task.WhenAll(tasks.ToArray());
     }
 
     private async Task ExecuteTestAsync(CancellationToken ct)
     {
       try
       {
-        var fwd = true;
-        double h = 0.0, s = 1, v = 1;
-
         while (!ct.IsCancellationRequested)
         {
-          await ExecuteTestForAllDigits(ct, 10, async (cancellationToken, min, max, iteration) =>
+          await ExecuteTestForAllDigits(ct, async (cancellationToken, digit) =>
             {
-              for (var pixel = fwd ? min : max; pixel != (fwd ? max : min); pixel += (fwd ? 1 : -1))
               {
-                if (cancellationToken.IsCancellationRequested) return;
+                var figureOf8 = new int[] { 0, 1, 2, 3, 4, 5, 6, 3 };
 
-                // https://en.wikipedia.org/wiki/HSL_and_HSV
-                Pixels[pixel] = RGBColour.FromHSV(h, s, v);
-                FlushRange(min, max - min + 1);
+                double h = 0.0, s = 1, v = 1;
 
-                await Task.Delay(TimeSpan.FromMilliseconds(30), cancellationToken);
+                for (int iteration = 0; iteration < 2; iteration++)
+                {
+                  foreach (var segment in figureOf8)
+                  {
+                    var firstPixel = digit.Offset + segment * digit.LedsPerSegment;
+                    var lastPixel = digit.Offset + (segment + 1) * digit.LedsPerSegment;
 
-                Pixels[pixel] = new RGBColour();
-                h = (h + 0.1) % 1.00;
+                    for (var pixel = firstPixel; pixel != lastPixel; pixel++)
+                    {
+                      if (cancellationToken.IsCancellationRequested) return;
+
+                      // https://en.wikipedia.org/wiki/HSL_and_HSV
+                      var rgb = RGBColour.FromHSV(h, s, v);
+
+                      Pixels[pixel] = rgb;
+
+                      FlushAll();
+
+                      // Debug.WriteLine($"Pixels[{pixel}]=r:{rgb.RByte.ToString("x2")} g:{rgb.GByte.ToString("x2")} b:{rgb.BByte.ToString("x2")} ({info})");
+
+                      await Task.Delay(TimeSpan.FromMilliseconds(100), cancellationToken);
+
+                      Pixels[pixel] = new RGBColour();
+
+                      h = (h + 0.1) % 1.00;
+                    }
+                  }
+                }
               }
 
-              fwd = !fwd;
+              var min = digit.Offset;
+              var max = digit.Offset + 7 * digit.LedsPerSegment - 1;
+
+              {
+                var fwd = true;
+                double h = 0.0, s = 1, v = 1;
+
+                for (int iteration = 0; iteration < 2; iteration++)
+                {
+                  while (h >= 0 && h < 1.0)
+                  {
+                    if (ct.IsCancellationRequested) return;
+
+                    for (var pixel = min; pixel <= max; pixel++)
+                    {
+                      // https://en.wikipedia.org/wiki/HSL_and_HSV
+                      Pixels[pixel] = RGBColour.FromHSV(h, s, v);
+                    }
+
+                    FlushRange(min, max - min + 1);
+                    await Task.Delay(TimeSpan.FromMilliseconds(30), ct);
+
+                    h += fwd ? 0.02 : -0.02;
+                  }
+
+                  fwd = !fwd;
+                }
+              }
+
+              {
+                var colours = new[] { new RGBColour(1, 0, 0), new RGBColour(0, 1, 0), new RGBColour(0, 0, 1) };
+                for (int iteration = 0; iteration < 2; iteration++)
+                {
+                  foreach (var rgb in colours)
+                  {
+                    if (ct.IsCancellationRequested) return;
+
+                    for (var pixel = min; pixel <= max; pixel++)
+                    {
+                      Pixels[pixel] = rgb;
+                    }
+
+                    FlushRange(min, max - min + 1);
+                    await Task.Delay(TimeSpan.FromMilliseconds(1000), ct);
+                  }
+                }
+              }
             });
-
-          await ExecuteTestForAllDigits(ct, 10, async (cancellationToken, min, max, iteration) =>
-          {
-            fwd = true;
-
-            h = 0;
-            while (h >= 0 && h < 1.0)
-            {
-              if (ct.IsCancellationRequested) return;
-
-              for (var pixel = min; pixel <= max; pixel++)
-              {
-                // https://en.wikipedia.org/wiki/HSL_and_HSV
-                Pixels[pixel] = RGBColour.FromHSV(h, s, v);
-              }
-
-              FlushRange(min, max - min + 1);
-              await Task.Delay(TimeSpan.FromMilliseconds(30), ct);
-
-              h += fwd ? 0.02 : -0.02;
-            }
-
-            fwd = !fwd;
-          });
-
-          await ExecuteTestForAllDigits(ct, 10, async (cancellationToken, min, max, iteration) =>
-          {
-            var colours = new[] { new RGBColour(1, 0, 0), new RGBColour(0, 1, 0), new RGBColour(0, 0, 1) };
-            foreach (var rgb in colours)
-            {
-              if (ct.IsCancellationRequested) return;
-
-              for (var pixel = min; pixel <= max; pixel++)
-              {
-                Pixels[pixel] = rgb;
-              }
-
-              FlushRange(min,  max - min + 1);
-              await Task.Delay(TimeSpan.FromMilliseconds(1000), ct);
-            }
-          });
         }
       }
       catch (OperationCanceledException)

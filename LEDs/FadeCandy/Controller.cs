@@ -1,13 +1,5 @@
 ﻿using System;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using Windows.Devices.Enumeration;
-using Windows.Devices.Usb;
-using Windows.Storage.Streams;
-using Windows.System.Threading;
-using System.Collections.Concurrent;
+using System.Collections.Generic;
 
 namespace FadeCandy
 {
@@ -25,6 +17,8 @@ namespace FadeCandy
         Pixels[pixel] = unset;
       }
 
+      // Yes we really do need to flush it twice
+      FlushAll();
       FlushAll();
     }
 
@@ -47,6 +41,11 @@ namespace FadeCandy
 
     public void FlushRange(int start, int count)
     {
+      // Unfortunately the FadeCandy can't cope with flushing ranges
+      // It seems to set the LEDs momentarily then set them to what was previously flushed!
+      start = 0;
+      count = Pixels.Length;
+
       if (start < 0 || start > 511) throw new ArgumentException("start");
       if (count < 0 || (start + count) > 512) throw new ArgumentException("count");
       const int pixelsPerChunk = 21;
@@ -54,9 +53,10 @@ namespace FadeCandy
       int firstChunk = (start / pixelsPerChunk);
       int lastChunk = ((start + count - 1) / pixelsPerChunk);
 
-      byte[] data = new byte[64];
+      var packet = new List<byte[]>();
       for (int chunk = firstChunk; chunk <= lastChunk; chunk++)
       {
+        byte[] data = new byte[64];
         int offset = chunk * pixelsPerChunk;
         data[0] = ControlByte(0, chunk == lastChunk, chunk);
         for (int i = 0; i < pixelsPerChunk; i++)
@@ -69,8 +69,10 @@ namespace FadeCandy
           data[3 + i * 3] = Pixels[i + offset].GByte;
         }
 
-        FadeCandyUsbDevice.Singleton.WriteDataBackground(data);
+        packet.Add(data);
       }
+
+      FadeCandyUsbDevice.Singleton.WriteDataBackground(packet);
     }
 
     public void Initialise()
@@ -94,12 +96,14 @@ namespace FadeCandy
       }
 
       // Send LUT 31 entries at a time.
-      byte[] data = new byte[64];
+      var packet = new List<byte[]>();
 
       int blockIndex = 0;
       int lutIndex = 0;
       while (lutIndex < lutTotalEntries)
       {
+        byte[] data = new byte[64];
+
         bool lastChunk = false;
         int lutCount = (lutTotalEntries - lutIndex);
         if (lutCount > 31)
@@ -117,11 +121,13 @@ namespace FadeCandy
           data[i * 2 + 3] = (byte)((lutValues[lutIndex + i] >> 8) & 0xFF);
         }
 
-        FadeCandyUsbDevice.Singleton.WriteDataBackground(data);
-
         blockIndex++;
         lutIndex = nextIndex;
+
+        packet.Add(data);
       }
+
+      FadeCandyUsbDevice.Singleton.WriteDataBackground(packet);
 
       // clear any lit LEDs
       Clear();
@@ -145,7 +151,7 @@ namespace FadeCandy
       if (!enableDithering)
         data[1] |= 0x01;
 
-      if (enableKeyframeInterpolation)
+      if (!enableKeyframeInterpolation)
         data[1] |= 0x02;
 
       if (manualLedControl)
@@ -156,7 +162,6 @@ namespace FadeCandy
 
       if (reservedMode)
         data[1] |= 0x10;
-
 
       FadeCandyUsbDevice.Singleton.WriteDataBackground(data);
     }
