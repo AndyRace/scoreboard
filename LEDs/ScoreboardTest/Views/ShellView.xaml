@@ -7,12 +7,20 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:vm="using:ScoreboardTest.ViewModels"
         mc:Ignorable="d"
-        d:DataContext="{d:DesignInstance Type=vm:ShellViewModel, IsDesignTimeCreatable=True}"
+        d:DataContext="{d:DesignInstance Type=vm:ShellViewDesigntimeModel, IsDesignTimeCreatable=True}"
         cm:Bind.AtDesignTime="True"
+        xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     >
+    <Page.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.ThemeDictionaries>
+                <ResourceDictionary Source="../Themes/Themes.xaml" x:Key="Light"/>
+            </ResourceDictionary.ThemeDictionaries>
+        </ResourceDictionary>
+    </Page.Resources>
+
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="30"/>
             <RowDefinition Height="30"/>
             <RowDefinition Height="30"/>
             <RowDefinition Height="30"/>
@@ -23,24 +31,81 @@
         <Button Grid.Row="0" Name="Initialise" Content="Initialise" VerticalContentAlignment="Top" HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch"/>
         <CheckBox Grid.Row="1" Name="RunTest" Content="Run Test" IsEnabled="{Binding CanRunTest}" VerticalContentAlignment="Top" HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch"/>
         <CheckBox Grid.Row="2" Name="RunNumberTest" Content="Run Number Test" IsEnabled="{Binding CanRunNumberTest}" VerticalContentAlignment="Top" HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch"/>
-        <RelativePanel Grid.Row="4">
-            <TextBox Name="Value" Header="Value" IsEnabled="{Binding IsValueEnabled}" />
-            <Button Name="Inc"
+        <RelativePanel Grid.Row="3">
+            <TextBox Name="Value" Header="Value" IsEnabled="{Binding IsValueEnabled}" Text="{Binding Value}"/>
+            <RepeatButton Name="Inc"
                     Width="30" 
                     Content="+" 
                     RelativePanel.RightOf="Value"/>
-            <Button Name="Dec" Width="30" Content="-" RelativePanel.Below="Inc" RelativePanel.RightOf="Value"/>
+            <RepeatButton Name="Dec" Width="30" Content="-" RelativePanel.Below="Inc" RelativePanel.RightOf="Value"/>
         </RelativePanel>
 
-        <TextBlock Grid.Row="5" Name="Info" HorizontalAlignment="Center" VerticalAlignment="Center" />
-        <ListBox Grid.Row="6" Name="DebugInfo" FontSize="10">
-            <!--
-            <ListBox.ItemContainerStyle>
-                <Style TargetType="ListBoxItem">
-                    <Setter Property="Height" Value="25" />
+        <TextBlock Grid.Row="4" Name="Info" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding Info}"/>
+
+        <!--<Grid Grid.Row="5" Name="DebugInfo" >
+            <Grid.Background>
+                <SolidColorBrush Color="Aquamarine"/>
+            </Grid.Background>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Padding="0" Margin="0" Text="{Binding}" />
+        </Grid>-->
+
+        <ListView Grid.Row="5" Name="DebugInfo" ItemsSource="{Binding DebugInfo}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <TextBlock Grid.Column="0" Padding="0" Margin="0"  Text="{Binding DateTime}" />
+                        <controls:GridSplitter 
+                                Grid.Column="1"
+                                Width="4"
+                                ResizeBehavior="BasedOnAlignment"
+                                ResizeDirection="Auto"
+                                Background="LightGray"/>
+
+                        <TextBlock Grid.Column="2" Padding="0" Margin="0"  Text="{Binding Category}" />
+                        <controls:GridSplitter 
+                                Grid.Column="3"
+                                Width="4"
+                                ResizeBehavior="BasedOnAlignment"
+                                ResizeDirection="Auto"
+                                Background="LightGray"/>
+
+                        <TextBlock Grid.Column="4" Padding="0" Margin="0"  Text="{Binding Info}" />
+
+                        <Grid.Background>
+                            <SolidColorBrush Color="LightGoldenrodYellow"/>
+                        </Grid.Background>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="140"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="50"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Grid.Padding>0</Grid.Padding>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="ListViewItem">
+                                <ListViewItemPresenter ContentMargin="0" Padding="0" />
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Setter Property="MinHeight" Value="20"/>
                 </Style>
-            </ListBox.ItemContainerStyle>
-            -->
-        </ListBox>
+            </ListView.ItemContainerStyle>
+        </ListView>
     </Grid>
 </Page>

@@ -17,11 +17,11 @@ namespace ScoreboardTest.ViewModels
         IStripController _controller = new StripController();
         private Func<Type, ILog> _createLogger;
 
-        public ObservableCollection<string> DebugInfo { get; private set; }
+        public ObservableCollection<DebugItemViewModel> DebugInfo { get; private set; }
 
         public ShellViewModel()
         {
-            DebugInfo = new ObservableCollection<string>();
+            DebugInfo = new ObservableCollection<DebugItemViewModel>();
             _controller.PropertyChanged += _controller_PropertyChanged;
 
             _createLogger = AggregateLogger.AddLogger((type) => this);
@@ -107,7 +107,6 @@ namespace ScoreboardTest.ViewModels
 
         public bool CanRunNumberTest => CanRunTest;
 
-
         public string Info => "Test";
 
         public string Value
@@ -142,7 +141,7 @@ namespace ScoreboardTest.ViewModels
 
         private void AddLogMessage(string category, string format, params object[] args)
         {
-            DebugInfo.Insert(0, string.Format($"{DateTime.Now.ToString("o")}: {category}: {string.Format(format, args)}"));
+            DebugInfo.Insert(0, new DebugItemViewModel(DateTime.Now, category, string.Format(format, args)));
         }
 
         void ILog.Info(string format, params object[] args)
