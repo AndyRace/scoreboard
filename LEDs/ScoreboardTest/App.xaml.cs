@@ -21,7 +21,10 @@ namespace ScoreboardTest
     public App()
     {
       // Initialise the Caliburn Micro logger
-      LogManager.GetLog = type => new DebugLogger(type);
+      LogManager.GetLog = type => new AggregateLogger(type);
+      AggregateLogger.AddLogger((type) => new DebugLogger(type));
+      AggregateLogger.AddLogger((type) => new LoggingChannelLogger(type));
+    
       _logger = LogManager.GetLog(this.GetType());
 
       UnhandledException += App_UnhandledException;

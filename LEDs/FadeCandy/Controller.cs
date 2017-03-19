@@ -72,7 +72,7 @@ namespace FadeCandy
         packet.Add(data);
       }
 
-      FadeCandyUsbDevice.Singleton.WriteDataBackground(packet);
+      FadeCandyUsbDevice.Singleton.WriteData(packet);
     }
 
     public void Initialise()
@@ -127,7 +127,7 @@ namespace FadeCandy
         packet.Add(data);
       }
 
-      FadeCandyUsbDevice.Singleton.WriteDataBackground(packet);
+      FadeCandyUsbDevice.Singleton.WriteData(packet);
 
       // clear any lit LEDs
       Clear();
@@ -163,7 +163,7 @@ namespace FadeCandy
       if (reservedMode)
         data[1] |= 0x10;
 
-      FadeCandyUsbDevice.Singleton.WriteDataBackground(data);
+      FadeCandyUsbDevice.Singleton.WriteData(data);
     }
   }
 }

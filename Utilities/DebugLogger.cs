@@ -4,7 +4,7 @@ using System.Diagnostics;
 
 namespace ScoreboardTest.Utils
 {
-  class DebugLogger: ILog
+  public class DebugLogger: ILog
   {
     #region Fields
     private readonly Type _type;

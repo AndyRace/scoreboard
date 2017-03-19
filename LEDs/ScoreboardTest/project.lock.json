@@ -2237,6 +2237,7 @@
         "type": "project",
         "framework": "UAP,Version=v10.0",
         "dependencies": {
+          "Caliburn.Micro": "1.0.0",
           "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2"
         }
       },
@@ -2245,6 +2246,15 @@
         "framework": "UAP,Version=v10.0",
         "dependencies": {
           "FadeCandy": "1.0.0",
+          "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2"
+        }
+      },
+      "Utilities/1.0.0": {
+        "type": "project",
+        "framework": "UAP,Version=v10.0",
+        "dependencies": {
+          "Caliburn.Micro": "1.0.0",
+          "Caliburn.Micro.Platform.Core": "1.0.0",
           "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2"
         }
       }
@@ -4568,6 +4578,7 @@
         "type": "project",
         "framework": "UAP,Version=v10.0",
         "dependencies": {
+          "Caliburn.Micro": "1.0.0",
           "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2"
         }
       },
@@ -4576,6 +4587,15 @@
         "framework": "UAP,Version=v10.0",
         "dependencies": {
           "FadeCandy": "1.0.0",
+          "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2"
+        }
+      },
+      "Utilities/1.0.0": {
+        "type": "project",
+        "framework": "UAP,Version=v10.0",
+        "dependencies": {
+          "Caliburn.Micro": "1.0.0",
+          "Caliburn.Micro.Platform.Core": "1.0.0",
           "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2"
         }
       }
@@ -6938,6 +6958,7 @@
         "type": "project",
         "framework": "UAP,Version=v10.0",
         "dependencies": {
+          "Caliburn.Micro": "1.0.0",
           "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2"
         }
       },
@@ -6946,6 +6967,15 @@
         "framework": "UAP,Version=v10.0",
         "dependencies": {
           "FadeCandy": "1.0.0",
+          "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2"
+        }
+      },
+      "Utilities/1.0.0": {
+        "type": "project",
+        "framework": "UAP,Version=v10.0",
+        "dependencies": {
+          "Caliburn.Micro": "1.0.0",
+          "Caliburn.Micro.Platform.Core": "1.0.0",
           "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2"
         }
       }
@@ -9278,6 +9308,7 @@
         "type": "project",
         "framework": "UAP,Version=v10.0",
         "dependencies": {
+          "Caliburn.Micro": "1.0.0",
           "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2"
         }
       },
@@ -9286,6 +9317,15 @@
         "framework": "UAP,Version=v10.0",
         "dependencies": {
           "FadeCandy": "1.0.0",
+          "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2"
+        }
+      },
+      "Utilities/1.0.0": {
+        "type": "project",
+        "framework": "UAP,Version=v10.0",
+        "dependencies": {
+          "Caliburn.Micro": "1.0.0",
+          "Caliburn.Micro.Platform.Core": "1.0.0",
           "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2"
         }
       }
@@ -11657,6 +11697,7 @@
         "type": "project",
         "framework": "UAP,Version=v10.0",
         "dependencies": {
+          "Caliburn.Micro": "1.0.0",
           "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2"
         }
       },
@@ -11665,6 +11706,15 @@
         "framework": "UAP,Version=v10.0",
         "dependencies": {
           "FadeCandy": "1.0.0",
+          "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2"
+        }
+      },
+      "Utilities/1.0.0": {
+        "type": "project",
+        "framework": "UAP,Version=v10.0",
+        "dependencies": {
+          "Caliburn.Micro": "1.0.0",
+          "Caliburn.Micro.Platform.Core": "1.0.0",
           "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2"
         }
       }
@@ -13997,6 +14047,7 @@
         "type": "project",
         "framework": "UAP,Version=v10.0",
         "dependencies": {
+          "Caliburn.Micro": "1.0.0",
           "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2"
         }
       },
@@ -14005,6 +14056,15 @@
         "framework": "UAP,Version=v10.0",
         "dependencies": {
           "FadeCandy": "1.0.0",
+          "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2"
+        }
+      },
+      "Utilities/1.0.0": {
+        "type": "project",
+        "framework": "UAP,Version=v10.0",
+        "dependencies": {
+          "Caliburn.Micro": "1.0.0",
+          "Caliburn.Micro.Platform.Core": "1.0.0",
           "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2"
         }
       }
@@ -16376,6 +16436,7 @@
         "type": "project",
         "framework": "UAP,Version=v10.0",
         "dependencies": {
+          "Caliburn.Micro": "1.0.0",
           "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2"
         }
       },
@@ -16384,6 +16445,15 @@
         "framework": "UAP,Version=v10.0",
         "dependencies": {
           "FadeCandy": "1.0.0",
+          "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2"
+        }
+      },
+      "Utilities/1.0.0": {
+        "type": "project",
+        "framework": "UAP,Version=v10.0",
+        "dependencies": {
+          "Caliburn.Micro": "1.0.0",
+          "Caliburn.Micro.Platform.Core": "1.0.0",
           "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2"
         }
       }
@@ -24692,6 +24762,11 @@
       "type": "project",
       "path": "../../ScoreboardFadeCandy/project.json",
       "msbuildProject": "../../ScoreboardFadeCandy/ScoreboardFadeCandy.csproj"
+    },
+    "Utilities/1.0.0": {
+      "type": "project",
+      "path": "../../Utilities/project.json",
+      "msbuildProject": "../../Utilities/Utilities.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -24726,6 +24801,9 @@
             "C:\\Users\\andy\\Source\\Repos\\piWeb\\ScoreboardFadeCandy\\ScoreboardFadeCandy.csproj": {
               "projectPath": "C:\\Users\\andy\\Source\\Repos\\piWeb\\ScoreboardFadeCandy\\ScoreboardFadeCandy.csproj"
             },
+            "C:\\Users\\andy\\Source\\Repos\\piWeb\\Utilities\\Utilities.csproj": {
+              "projectPath": "C:\\Users\\andy\\Source\\Repos\\piWeb\\Utilities\\Utilities.csproj"
+            },
             "C:\\Users\\andy\\Source\\Repos\\piWeb\\LEDs\\FadeCandy\\FadeCandy.csproj": {
               "projectPath": "C:\\Users\\andy\\Source\\Repos\\piWeb\\LEDs\\FadeCandy\\FadeCandy.csproj"
             }
@@ -24734,7 +24812,7 @@
       }
     },
     "dependencies": {
-      "Microsoft.NETCore.UniversalWindowsPlatform": "[5.3.1, )",
+      "Microsoft.NETCore.UniversalWindowsPlatform": "5.3.1",
       "Microsoft.Xaml.Behaviors.Uwp.Managed": "2.0.0"
     },
     "frameworks": {

@@ -2183,6 +2183,9 @@
           }
         }
       },
+      "Caliburn.Micro/1.0.0": {
+        "type": "project"
+      },
       "Catnap.Server/1.0.0": {
         "type": "project",
         "framework": "UAP,Version=v10.0",
@@ -2195,6 +2198,7 @@
         "type": "project",
         "framework": "UAP,Version=v10.0",
         "dependencies": {
+          "Caliburn.Micro": "1.0.0",
           "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2"
         }
       },
@@ -4497,6 +4501,9 @@
           "lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
       },
+      "Caliburn.Micro/1.0.0": {
+        "type": "project"
+      },
       "Catnap.Server/1.0.0": {
         "type": "project",
         "framework": "UAP,Version=v10.0",
@@ -4509,6 +4516,7 @@
         "type": "project",
         "framework": "UAP,Version=v10.0",
         "dependencies": {
+          "Caliburn.Micro": "1.0.0",
           "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2"
         }
       },
@@ -6850,6 +6858,9 @@
           "runtimes/aot/lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
       },
+      "Caliburn.Micro/1.0.0": {
+        "type": "project"
+      },
       "Catnap.Server/1.0.0": {
         "type": "project",
         "framework": "UAP,Version=v10.0",
@@ -6862,6 +6873,7 @@
         "type": "project",
         "framework": "UAP,Version=v10.0",
         "dependencies": {
+          "Caliburn.Micro": "1.0.0",
           "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2"
         }
       },
@@ -9173,6 +9185,9 @@
           "lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
       },
+      "Caliburn.Micro/1.0.0": {
+        "type": "project"
+      },
       "Catnap.Server/1.0.0": {
         "type": "project",
         "framework": "UAP,Version=v10.0",
@@ -9185,6 +9200,7 @@
         "type": "project",
         "framework": "UAP,Version=v10.0",
         "dependencies": {
+          "Caliburn.Micro": "1.0.0",
           "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2"
         }
       },
@@ -11535,6 +11551,9 @@
           "runtimes/aot/lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
       },
+      "Caliburn.Micro/1.0.0": {
+        "type": "project"
+      },
       "Catnap.Server/1.0.0": {
         "type": "project",
         "framework": "UAP,Version=v10.0",
@@ -11547,6 +11566,7 @@
         "type": "project",
         "framework": "UAP,Version=v10.0",
         "dependencies": {
+          "Caliburn.Micro": "1.0.0",
           "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2"
         }
       },
@@ -13858,6 +13878,9 @@
           "lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
       },
+      "Caliburn.Micro/1.0.0": {
+        "type": "project"
+      },
       "Catnap.Server/1.0.0": {
         "type": "project",
         "framework": "UAP,Version=v10.0",
@@ -13870,6 +13893,7 @@
         "type": "project",
         "framework": "UAP,Version=v10.0",
         "dependencies": {
+          "Caliburn.Micro": "1.0.0",
           "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2"
         }
       },
@@ -16220,6 +16244,9 @@
           "runtimes/aot/lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
       },
+      "Caliburn.Micro/1.0.0": {
+        "type": "project"
+      },
       "Catnap.Server/1.0.0": {
         "type": "project",
         "framework": "UAP,Version=v10.0",
@@ -16232,6 +16259,7 @@
         "type": "project",
         "framework": "UAP,Version=v10.0",
         "dependencies": {
+          "Caliburn.Micro": "1.0.0",
           "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2"
         }
       },
@@ -24528,6 +24556,11 @@
         "system.xml.xmlserializer.4.0.11.nupkg.sha512",
         "system.xml.xmlserializer.nuspec"
       ]
+    },
+    "Caliburn.Micro/1.0.0": {
+      "type": "project",
+      "path": "../../../Caliburn.Micro/src/Caliburn.Micro/Caliburn.Micro.csproj",
+      "msbuildProject": "../../../Caliburn.Micro/src/Caliburn.Micro/Caliburn.Micro.csproj"
     },
     "Catnap.Server/1.0.0": {
       "type": "project",
