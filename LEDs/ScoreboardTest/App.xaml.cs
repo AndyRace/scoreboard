@@ -28,6 +28,9 @@ namespace ScoreboardTest
       _logger = LogManager.GetLog(this.GetType());
 
       UnhandledException += App_UnhandledException;
+
+      CustomConventions.Initialise();
+
       InitializeComponent();
     }
 

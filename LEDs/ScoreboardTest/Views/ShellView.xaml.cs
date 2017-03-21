@@ -16,8 +16,8 @@ namespace ScoreboardTest.Views
       // First time execution, initialize the logger 
       InitializeComponent();
 
-      // Issues with 'Error Object reference not set to an instance of an object'
-      // this.ColourPicker.ColorChanged += ColourPicker_ColorChanged;
+      // Throws 'Error Object reference not set to an instance of an object'
+      // if in XAML.
 
       //< !--< Controls:ColorPicker
       //          Name = "ColourPicker"
@@ -25,10 +25,11 @@ namespace ScoreboardTest.Views
       //        VerticalAlignment = "Stretch"
       //        Grid.Row = "0" Grid.Column = "1" Grid.RowSpan = "3" Grid.ColumnSpan = "1" /> -->}
       var colorPicker = new ColorPicker();
-      Grid.SetRow(colorPicker, 0);
+      Grid.SetRow(colorPicker, 1);
       Grid.SetColumn(colorPicker, 1);
       Grid.SetRowSpan(colorPicker, 3);
       Grid.SetColumn(colorPicker, 1);
+
       colorPicker.HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment.Stretch;
       colorPicker.VerticalAlignment = Windows.UI.Xaml.VerticalAlignment.Stretch;
       colorPicker.ColorChanged += (sender, color) =>

@@ -18,30 +18,38 @@ namespace FadeCandy
       // VendorId: 0x1D50
       // ProductId: 0x607A
 
-      UInt32 vid = 0x1D50;
-      UInt32 pid = 0x607A;
+      var logger = LogManager.GetLog(typeof(FadeCandyUsbDevice));
+
+      const UInt32 vid = 0x1D50;
+      const UInt32 pid = 0x607A;
 
       var aqs = UsbDevice.GetDeviceSelector(vid, pid);
 
-      var findAllDevicesTask = DeviceInformation.FindAllAsync(aqs, null).AsTask();
-      if (!findAllDevicesTask.Wait(TimeSpan.FromSeconds(1)))
-        throw new UnableToFindFadeCandyException("Failed to search for FadeCandy devices!");
+      for (var attempt = 1; attempt <= 3; attempt++)
+      {
+        var waitDelay = TimeSpan.FromMilliseconds(attempt * 500);
 
-      var myDevices = findAllDevicesTask.Result;
+        // TODO: Document this!
+        // Using AsTask() => issues re-running
+        // var findAllDevicesTask = DeviceInformation.FindAllAsync(aqs).AsTask();
+        var findAllDevicesTask = Task.Run(async () => await DeviceInformation.FindAllAsync(aqs));
+        if (findAllDevicesTask.Wait(waitDelay))
+        {
+          var myDevices = findAllDevicesTask.Result;
 
-      // we expect 2 'devices' but we're only interested in the first
-      if (myDevices == null || myDevices.Count != 2)
-        throw new UnableToFindFadeCandyException("Unable to find FadeCandy device!");
+          // we expect 2 'devices' but we're only interested in the first
+          if (myDevices != null && myDevices.Count == 2)
+          {
+            var deviceFromIdTask = Task.Run(async () => await UsbDevice.FromIdAsync(myDevices[0].Id));
+            if (deviceFromIdTask.Wait(waitDelay) && (deviceFromIdTask.Result != null))
+            {
+              return deviceFromIdTask.Result;
+            }
+          }
+        }
+      }
 
-      var deviceFromIdTask = UsbDevice.FromIdAsync(myDevices[0].Id).AsTask();
-
-      if (!deviceFromIdTask.Wait(TimeSpan.FromSeconds(1)))
-        throw new UnableToFindFadeCandyException("Found a FadeCandy but couldn't get the id!");
-
-      if (deviceFromIdTask.Result == null)
-        throw new UnableToFindFadeCandyException("Unable to access device!");
-
-      return deviceFromIdTask.Result;
+      throw new UnableToFindFadeCandyException("Unable to find FadeCandy device!");
     }
 
     private static UsbDevice _usbDeviceSingleton;
@@ -116,17 +124,7 @@ namespace FadeCandy
       }
       catch (Exception exception)
       {
-        if (attempts < 1)
-        {
-          Logger.Info($"FadeCandy.WriteData: Retrying... ({attempts + 1})");
-
-          Reset();
-
-          Task.Delay(attempts * 1000).Wait();
-
-          DoWriteData(data, attempts + 1);
-          return;
-        }
+        Reset();
 
         //Logger.Error(exception);
 

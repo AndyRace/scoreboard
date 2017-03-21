@@ -1,4 +1,4 @@
-﻿using Caliburn.Micro;
+﻿using ScoreboardTest.Models;
 using System;
 using System.Collections.ObjectModel;
 
@@ -31,6 +31,8 @@ namespace ScoreboardTest.ViewModels
     }
 
     public bool CanRunTest => false;
+    public bool CanInc => false;
+    public bool IsValueEnabled => false;
 
     public string Info
     {

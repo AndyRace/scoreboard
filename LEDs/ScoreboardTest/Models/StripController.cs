@@ -38,15 +38,14 @@ namespace ScoreboardTest.Models
       await _fadeCandy.ExecuteNumberTestAsync(execute);
     }
 
-    public void SetStringValue(string value)
+    public string StringValue
     {
-      _fadeCandy.LedNumbers.SetStringValue(_groupName, value);
-      NotifyOfPropertyChange("Value");
-    }
-
-    public string GetStringValue()
-    {
-      return _fadeCandy.LedNumbers.GetStringValue(_groupName);
+      get => _fadeCandy.LedNumbers.GetStringValue(_groupName);
+      set
+      {
+        _fadeCandy.LedNumbers.SetStringValue(_groupName, value);
+        NotifyOfPropertyChange("Value");
+      }
     }
 
     public void Inc()
@@ -61,7 +60,7 @@ namespace ScoreboardTest.Models
         value++;
       }
 
-      SetStringValue(value.ToString());
+      StringValue = value.ToString();
     }
 
     public void Dec()
@@ -76,10 +75,23 @@ namespace ScoreboardTest.Models
         value--;
       }
 
-      SetStringValue(value.ToString());
+      StringValue = value.ToString();
     }
 
-    public Windows.UI.Color OnColour { get { return _fadeCandy.OnColour; } set { _fadeCandy.OnColour = value; } }
+    public Windows.UI.Color OnColour
+    {
+      get { return _fadeCandy.OnColour; }
+      set
+      {
+        _fadeCandy.OnColour = value;
+        NotifyOfPropertyChange(() => OnColour);
+      }
+    }
+
+    public void Reset()
+    {
+      _fadeCandy.Reset();
+    }
 
     #region IDisposable Support
     private bool disposedValue = false; // To detect redundant calls

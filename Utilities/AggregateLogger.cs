@@ -18,7 +18,10 @@ namespace ScoreboardTest.Utils
       _type = type;
 
       // _loggerClasses.ForEach((loggerType) => _loggers.Add((ILog)Activator.CreateInstance(loggerType, type)));
-      _loggerCreators.ForEach((fn) => _loggers.Add(fn(type)));
+
+      // todo: Add filtering
+      if(type.Namespace != "Caliburn.Micro")
+        _loggerCreators.ForEach((fn) => _loggers.Add(fn(type)));
     }
 
     public static Func<Type, ILog> AddLogger(Func<Type, ILog> createLogger)

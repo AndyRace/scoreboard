@@ -12,14 +12,14 @@ namespace ScoreboardTest.Models
 
     Task ExecuteNumberTestAsync(bool start);
 
-    void SetStringValue(string value);
-
-    string GetStringValue();
+    string StringValue { get; set; }
 
     void Dec();
 
     void Inc();
 
     Color OnColour { get; set; }
+
+    void Reset();
   }
 }

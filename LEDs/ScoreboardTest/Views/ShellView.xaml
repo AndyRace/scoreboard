@@ -27,10 +27,10 @@
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="30"/>
-            <RowDefinition Height="30"/>
-            <RowDefinition Height="60"/>
-            <RowDefinition Height="30"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
@@ -41,19 +41,34 @@
             
             Grid.Row="0 Grid.Column="1" Grid.RowSpan="3" Grid.ColumnSpan="1" />-->
 
-        <CheckBox Grid.Row="0" x:Name="RunTest" Content="Run Test" IsEnabled="{Binding CanRunTest}" VerticalContentAlignment="Top" HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch"/>
-        <CheckBox Grid.Row="1" x:Name="RunNumberTest" Content="Run Number Test" IsEnabled="{Binding CanRunNumberTest}" VerticalContentAlignment="Top" HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch"/>
-        <RelativePanel Grid.Row="2">
-            <TextBox x:Name="Value" Header="Value" IsEnabled="{Binding IsValueEnabled}" Text="{Binding Value}"/>
+        <TextBox x:Name="OnColour" 
+                    Grid.Row="0" Grid.Column="1"
+                    Header="Lit Colour"
+                    IsReadOnly="True"/>
+        <Button x:Name="Reset" 
+                    Grid.Row="0"
+                    Content="Reset"
+                    VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+        <CheckBox x:Name="RunTest" 
+                    Grid.Row="1"
+                    Content="Run Test" />
+        <CheckBox x:Name="RunNumberTest" 
+                    Grid.Row="2"
+                    RelativePanel.Below="RunTest" 
+                    Content="Run Number Test" />
+        <RelativePanel Grid.Row="3">
+            <TextBox x:Name="Value" 
+                    Header="Value"/>
             <RepeatButton x:Name="Inc"
                     Width="30" 
                     Content="+" 
                     RelativePanel.RightOf="Value"/>
-            <RepeatButton x:Name="Dec" Width="30" Content="-" RelativePanel.Below="Inc" RelativePanel.RightOf="Value"/>
-
+            <RepeatButton x:Name="Dec" 
+                    Width="30" 
+                    Content="-" 
+                    RelativePanel.Below="Inc" 
+                    RelativePanel.RightOf="Value"/>
         </RelativePanel>
-
-        <TextBlock Grid.Row="3" Grid.ColumnSpan="2" x:Name="Info" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding Info}"/>
 
         <!--<Grid Grid.Row="5" Name="DebugInfo" >
             <Grid.Background>
@@ -85,7 +100,7 @@
                         <Grid.Padding>
                             <Thickness>0</Thickness>
                         </Grid.Padding>
-                        <TextBlock Grid.Column="0" Padding="0" Margin="0"  Text="{Binding DateTime}" />
+                        <TextBlock Grid.Column="0" Padding="0" Margin="0" Text="{Binding DateTime}" />
                         <controls:GridSplitter 
                                 Grid.Column="1"
                                 Width="4"
@@ -93,7 +108,7 @@
                                 ResizeDirection="Auto"
                                 Background="LightGray"/>
 
-                        <TextBlock Grid.Column="2" Padding="0" Margin="0"  Text="{Binding Category}" />
+                        <TextBlock Grid.Column="2" Padding="0" Margin="0" Text="{Binding Category}" />
                         <controls:GridSplitter 
                                 Grid.Column="3"
                                 Width="4"
@@ -101,7 +116,7 @@
                                 ResizeDirection="Auto"
                                 Background="LightGray"/>
 
-                        <TextBlock Grid.Column="4" Padding="0" Margin="0"  Text="{Binding Info}" />
+                        <TextBlock Grid.Column="4" Padding="0" Margin="0" Text="{Binding Info}" />
 
                     </Grid>
                 </DataTemplate>

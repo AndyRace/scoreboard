@@ -90,7 +90,7 @@ namespace FadeCandy
     public void Reset()
     {
       IsInitialised = false;
-      Initialise();
+      //Initialise();
     }
 
     private int _inInitialise;
@@ -101,7 +101,6 @@ namespace FadeCandy
 
       if (Interlocked.CompareExchange(ref _inInitialise, 1, 0) == 0)
       {
-        _inInitialise = 1;
         try
         {
           _fadeCandyUsbDevice.Reset();

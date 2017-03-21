@@ -4,6 +4,8 @@ using ScoreboardTest.Utils;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
+using System.Threading;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Core;
 using Windows.UI.Core;
@@ -13,9 +15,7 @@ namespace ScoreboardTest.ViewModels
   [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1001:TypesThatOwnDisposableFieldsShouldBeDisposable")]
   public sealed class ShellViewModel : Screen, ILog
   {
-    ILog _logger = LogManager.GetLog(typeof(ShellViewModel));
-
-    IStripController _controller = new StripController();
+    ISafeStripController _controller;
     private Func<Type, ILog> _createLogger;
 
     public ObservableCollection<DebugItemViewModel> DebugInfo { get; private set; }
@@ -23,20 +23,16 @@ namespace ScoreboardTest.ViewModels
     public ShellViewModel()
     {
       DebugInfo = new ObservableCollection<DebugItemViewModel>();
+
+      _controller = new SafeStripController(new StripController());
+
       _controller.PropertyChanged += _controller_PropertyChanged;
 
       _createLogger = AggregateLogger.AddLogger((type) => this);
 
-      if (Execute.InDesignMode)
-        LoadDesignData();
-
-      //_controller.Initialise();
-    }
-
-    private void LoadDesignData()
-    {
-      // NOT Working :(
-      AddLogMessageAsync("Test", $"Some test data");
+      // Setting this static to true ensures the Can<action> method is called before calling the action
+      // regardless of the UI state
+      // ActionMessage.EnforceGuardsDuringInvocation = true;
     }
 
     protected override void OnDeactivate(bool close)
@@ -55,6 +51,12 @@ namespace ScoreboardTest.ViewModels
       NotifyOfPropertyChange(() => CanDec);
       NotifyOfPropertyChange(() => IsValueEnabled);
       NotifyOfPropertyChange(() => Value);
+      NotifyOfPropertyChange(() => OnColour);
+    }
+
+    public void Reset()
+    {
+      _controller.Reset();
     }
 
     private bool _runTest;
@@ -119,37 +121,95 @@ namespace ScoreboardTest.ViewModels
 
     public string Value
     {
-      get => _controller.GetStringValue();
-      set
-      {
-        _controller.SetStringValue(value);
-      }
+      get => _controller.StringValue;
+      set { _controller.StringValue = value; }
     }
 
     public bool IsValueEnabled => true;//_controller.IsInitialised;
 
-    public void Inc()
-    {
-      _controller.Inc();
-    }
-    public bool CanInc => true;//_controller.IsInitialised;
-
-    public void Dec()
-    {
-      _controller.Dec();
-    }
-    public bool CanDec => true;//_controller.IsInitialised;
-
     public void ColourChanged(Windows.UI.Color color)
     {
       _controller.OnColour = color;
+      NotifyOfPropertyChange(() => OnColour);
+    }
+
+    public string OnColour
+    {
+      get => _controller.OnColour.ToString();
+    }
+
+    // Repeat buttons will cotinually fire events if there's a delay during processing!
+    class NoBounceRepeatButton
+    {
+      private const int MinRepeatButtonDelay = 1000;
+
+      public bool CanExecute { get { return _canExecute != 0; } }
+      private Stopwatch _lastError;
+      private int _canExecute;
+
+      public NoBounceRepeatButton(bool initialState)
+      {
+        _canExecute = initialState ? 1 : 0;
+      }
+
+      public void TryAction(System.Action action, System.Action done)
+      {
+        if (Interlocked.CompareExchange(ref _canExecute, 0, 1) == 1)
+        {
+          try
+          {
+            if (_lastError != null && _lastError.ElapsedMilliseconds < MinRepeatButtonDelay)
+            {
+              // LogManager.GetLog(GetType()).Info("Ignoring bouncing repeat button");
+              return;
+            }
+
+            action();
+            _lastError = null;
+          }
+          catch (Exception ex)
+          {
+            LogManager.GetLog(GetType()).Error(ex);
+            _lastError = Stopwatch.StartNew();
+          }
+          finally
+          {
+            _canExecute = 1;
+            done();
+          }
+        }
+        else
+        {
+          // LogManager.GetLog(GetType()).Info("Ignoring re-entrant repeat button");
+        }
+      }
+    }
+
+    private NoBounceRepeatButton _decButtonAction = new NoBounceRepeatButton(true);
+
+    public bool CanDec => true;// _decButtonAction.CanExecute; //_controller.IsInitialised;
+
+    public void Dec()
+    {
+      _decButtonAction.TryAction(() => _controller.Dec(true), () => NotifyOfPropertyChange(nameof(CanDec)));
+    }
+
+    private NoBounceRepeatButton _incButtonAction = new NoBounceRepeatButton(true);
+
+    public bool CanInc => true;// _incButtonAction.CanExecute; //_controller.IsInitialised;
+
+    public void Inc()
+    {
+      _incButtonAction.TryAction(() => _controller.Inc(true), () => NotifyOfPropertyChange(nameof(CanInc)));
     }
 
     private void AddLogMessageAsync(string category, string format, params object[] args)
     {
+      var debugItem = new DebugItemViewModel(DateTime.Now, category, string.Format(format, args));
+
 #pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
       CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
-        () => DebugInfo.Insert(0, new DebugItemViewModel(DateTime.Now, category, string.Format(format, args))));
+        () => DebugInfo.Insert(0, debugItem));
 #pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
     }
 
