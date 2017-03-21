@@ -57,6 +57,7 @@ namespace ScoreboardFadeCandy
       get { return _onColour; }
       internal set
       {
+        _onColour = value;
         SetValue(_currentValue);
       }
     }
