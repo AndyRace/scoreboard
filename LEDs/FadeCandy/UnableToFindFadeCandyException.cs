@@ -2,7 +2,7 @@
 
 namespace FadeCandy
 {
-  internal class UnableToFindFadeCandyException : Exception
+  internal class UnableToFindFadeCandyException : FadeCandyException
   {
     public UnableToFindFadeCandyException()
     {

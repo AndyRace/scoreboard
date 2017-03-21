@@ -2206,6 +2206,7 @@
         "type": "project",
         "framework": "UAP,Version=v10.0",
         "dependencies": {
+          "Caliburn.Micro": "1.0.0",
           "FadeCandy": "1.0.0",
           "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2"
         }
@@ -4524,6 +4525,7 @@
         "type": "project",
         "framework": "UAP,Version=v10.0",
         "dependencies": {
+          "Caliburn.Micro": "1.0.0",
           "FadeCandy": "1.0.0",
           "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2"
         }
@@ -6881,6 +6883,7 @@
         "type": "project",
         "framework": "UAP,Version=v10.0",
         "dependencies": {
+          "Caliburn.Micro": "1.0.0",
           "FadeCandy": "1.0.0",
           "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2"
         }
@@ -9208,6 +9211,7 @@
         "type": "project",
         "framework": "UAP,Version=v10.0",
         "dependencies": {
+          "Caliburn.Micro": "1.0.0",
           "FadeCandy": "1.0.0",
           "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2"
         }
@@ -11574,6 +11578,7 @@
         "type": "project",
         "framework": "UAP,Version=v10.0",
         "dependencies": {
+          "Caliburn.Micro": "1.0.0",
           "FadeCandy": "1.0.0",
           "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2"
         }
@@ -13901,6 +13906,7 @@
         "type": "project",
         "framework": "UAP,Version=v10.0",
         "dependencies": {
+          "Caliburn.Micro": "1.0.0",
           "FadeCandy": "1.0.0",
           "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2"
         }
@@ -16267,6 +16273,7 @@
         "type": "project",
         "framework": "UAP,Version=v10.0",
         "dependencies": {
+          "Caliburn.Micro": "1.0.0",
           "FadeCandy": "1.0.0",
           "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2"
         }
@@ -24597,6 +24604,9 @@
       "frameworks": {
         "uap10.0": {
           "projectReferences": {
+            "C:\\Users\\andy\\Source\\Repos\\Caliburn.Micro\\src\\Caliburn.Micro\\Caliburn.Micro.csproj": {
+              "projectPath": "C:\\Users\\andy\\Source\\Repos\\Caliburn.Micro\\src\\Caliburn.Micro\\Caliburn.Micro.csproj"
+            },
             "C:\\Users\\andy\\Source\\Repos\\Catnap.Server\\Catnap.Server\\Catnap.Server\\Catnap.Server.csproj": {
               "projectPath": "C:\\Users\\andy\\Source\\Repos\\Catnap.Server\\Catnap.Server\\Catnap.Server\\Catnap.Server.csproj"
             },

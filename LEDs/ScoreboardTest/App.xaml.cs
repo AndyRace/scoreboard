@@ -24,7 +24,7 @@ namespace ScoreboardTest
       LogManager.GetLog = type => new AggregateLogger(type);
       AggregateLogger.AddLogger((type) => new DebugLogger(type));
       AggregateLogger.AddLogger((type) => new LoggingChannelLogger(type));
-    
+
       _logger = LogManager.GetLog(this.GetType());
 
       UnhandledException += App_UnhandledException;
@@ -35,6 +35,7 @@ namespace ScoreboardTest
     {
       if (_logger != null)
         _logger.Error(e.Exception);
+      e.Handled = true;
     }
 
     protected override void Configure()

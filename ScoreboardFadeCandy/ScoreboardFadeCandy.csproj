@@ -113,6 +113,10 @@
     <EmbeddedResource Include="Properties\ScoreboardFadeCandy.rd.xml" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Caliburn.Micro\src\Caliburn.Micro\Caliburn.Micro.csproj">
+      <Project>{6D772B52-DA8F-4784-971A-4BF50CB6D306}</Project>
+      <Name>Caliburn.Micro</Name>
+    </ProjectReference>
     <ProjectReference Include="..\LEDs\FadeCandy\FadeCandy.csproj">
       <Project>{ff786976-6f50-424c-b5e3-73c5eeac3ecb}</Project>
       <Name>FadeCandy</Name>

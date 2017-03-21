@@ -43,13 +43,25 @@ namespace ScoreboardFadeCandy
 
     private readonly Controller _controller;
 
+    private byte? _currentValue;
+
     public int Offset { get; private set; }
 
     public int LedsPerSegment { get; private set; }
 
     public int NumPixels { get { return LedsPerSegment * 7; } }
 
-    private readonly RGBColour _onColour, _offColour;
+    private RGBColour _onColour;
+    public RGBColour OnColour
+    {
+      get { return _onColour; }
+      internal set
+      {
+        SetValue(_currentValue);
+      }
+    }
+
+    private readonly RGBColour _offColour;
 
     public LedDigit(
       Controller fadeCandyController,
@@ -79,13 +91,20 @@ namespace ScoreboardFadeCandy
       {
         for (var led = 0; led < LedsPerSegment; led++)
         {
-          _controller.Pixels[offset++] = (bmp & 0b1000000) != 0 ? _onColour : _offColour;
+          _controller.Pixels[offset++] = (bmp & 0b1000000) != 0 ? OnColour : _offColour;
         }
 
         bmp <<= 1;
       }
 
       _controller.FlushRange(Offset, 7 * LedsPerSegment);
+
+      _currentValue = value;
+    }
+
+    public byte? GetValue()
+    {
+      return _currentValue;
     }
   }
 
@@ -218,6 +237,15 @@ namespace ScoreboardFadeCandy
             yield return digit;
           }
         }
+      }
+    }
+
+    public void Reset()
+    {
+      _fadeCandy.Reset();
+      foreach(var digit in Digits)
+      {
+        digit.SetValue(digit.GetValue());
       }
     }
   }

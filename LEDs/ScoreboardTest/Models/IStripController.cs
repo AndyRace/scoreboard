@@ -1,15 +1,15 @@
 ﻿using System.ComponentModel;
 using System.Threading.Tasks;
+using Windows.UI;
 
 namespace ScoreboardTest.Models
 {
-  public interface IStripController: INotifyPropertyChanged
+  public interface IStripController : INotifyPropertyChanged
   {
     bool IsInitialised { get; }
 
-    void Initialise();
-
     Task ExecuteTestAsync(bool start);
+
     Task ExecuteNumberTestAsync(bool start);
 
     void SetStringValue(string value);
@@ -19,5 +19,7 @@ namespace ScoreboardTest.Models
     void Dec();
 
     void Inc();
+
+    Color OnColour { get; set; }
   }
 }

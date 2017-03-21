@@ -1,17 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-using Windows.UI.Xaml;
+﻿using Coding4Fun.Toolkit.Controls;
+using ScoreboardTest.ViewModels;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -26,6 +15,29 @@ namespace ScoreboardTest.Views
     {
       // First time execution, initialize the logger 
       InitializeComponent();
+
+      // Issues with 'Error Object reference not set to an instance of an object'
+      // this.ColourPicker.ColorChanged += ColourPicker_ColorChanged;
+
+      //< !--< Controls:ColorPicker
+      //          Name = "ColourPicker"
+      //        HorizontalAlignment = "Stretch"
+      //        VerticalAlignment = "Stretch"
+      //        Grid.Row = "0" Grid.Column = "1" Grid.RowSpan = "3" Grid.ColumnSpan = "1" /> -->}
+      var colorPicker = new ColorPicker();
+      Grid.SetRow(colorPicker, 0);
+      Grid.SetColumn(colorPicker, 1);
+      Grid.SetRowSpan(colorPicker, 3);
+      Grid.SetColumn(colorPicker, 1);
+      colorPicker.HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment.Stretch;
+      colorPicker.VerticalAlignment = Windows.UI.Xaml.VerticalAlignment.Stretch;
+      colorPicker.ColorChanged += (sender, color) =>
+      {
+        if (DataContext is ShellViewModel)
+          ((ShellViewModel)DataContext).ColourChanged(color);
+      };
+
+      PageGrid.Children.Add(colorPicker);
     }
   }
 }

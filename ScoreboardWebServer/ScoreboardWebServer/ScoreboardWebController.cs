@@ -59,7 +59,6 @@ namespace ScoreboardWebServer
       if (_scoreboard == null)
       {
         _scoreboard = new ScoreboardFadeCandyController();
-        _scoreboard.Initialise();
       }
 
       return _scoreboard;

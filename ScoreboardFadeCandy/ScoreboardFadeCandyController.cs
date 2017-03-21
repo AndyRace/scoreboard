@@ -17,6 +17,7 @@ namespace ScoreboardFadeCandy
     //      F 6
 
     private LedNumbers _numbers;
+    private Windows.UI.Color _onColour = Windows.UI.Colors.Yellow;
 
     public ScoreboardFadeCandyController()
     {
@@ -33,13 +34,15 @@ namespace ScoreboardFadeCandy
       // while we're testing we have a 6 LED (2 pixel) and a 3 LED (1 pixel) number
       {
         var digits = new List<LedDigit>();
-        var Yellow = RGBColour.FromBytes(0xFF, 0xFF, 0x00);
+        // var onColor = RGBColour.FromBytes(0xFF, 0xFF, 0x00); // Yellow
+
+        var onColor = RGBColour.FromColor(_onColour);
 
         // add digits least-significant first
         int offset = 0;
-        digits.Add(new LedDigit(this, ref offset, 1, Yellow));
+        digits.Add(new LedDigit(this, ref offset, 1, onColor));
         offset = 128;
-        digits.Add(new LedDigit(this, ref offset, 2, Yellow));
+        digits.Add(new LedDigit(this, ref offset, 2, onColor));
 
         LedNumbers.GroupNumbers.Add("test", new LedNumber(this, digits));
       }
@@ -168,7 +171,7 @@ namespace ScoreboardFadeCandy
 
                       await Task.Delay(TimeSpan.FromMilliseconds(100), cancellationToken);
 
-                      Pixels[pixel] = new RGBColour();
+                      Pixels[pixel].Clear();
 
                       h = (h + 0.1) % 1.00;
                     }
@@ -233,6 +236,19 @@ namespace ScoreboardFadeCandy
       finally
       {
         Clear();
+      }
+    }
+
+    public Windows.UI.Color OnColour
+    {
+      get { return _onColour; }
+      set
+      {
+        _onColour = value;
+        foreach (var digit in LedNumbers.Digits)
+        {
+          digit.OnColour = RGBColour.FromColor(_onColour);
+        }
       }
     }
   }

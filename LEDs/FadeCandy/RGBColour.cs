@@ -1,4 +1,5 @@
 ﻿using System;
+using Windows.UI;
 
 namespace FadeCandy
 {
@@ -25,6 +26,16 @@ namespace FadeCandy
     public static RGBColour FromBytes(byte r, byte g, byte b)
     {
       return new RGBColour(r / 255.0, g / 255.0, b / 255.0);
+    }
+
+    public static RGBColour FromColor(Color onColour)
+    {
+      return FromBytes(onColour.R, onColour.G, onColour.B);
+    }
+
+    public void Clear()
+    {
+      R = G = B = 0;
     }
 
     //private static RGBColour FromHSVOld(double h, double s, double v)
