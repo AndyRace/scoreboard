@@ -21973,8 +21973,8 @@
     },
     "Caliburn.Micro/1.0.0": {
       "type": "project",
-      "path": "../../../Caliburn.Micro/src/Caliburn.Micro/Caliburn.Micro.csproj",
-      "msbuildProject": "../../../Caliburn.Micro/src/Caliburn.Micro/Caliburn.Micro.csproj"
+      "path": "../../../../Caliburn.Micro/src/Caliburn.Micro/Caliburn.Micro.csproj",
+      "msbuildProject": "../../../../Caliburn.Micro/src/Caliburn.Micro/Caliburn.Micro.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -21988,10 +21988,10 @@
   },
   "project": {
     "restore": {
-      "projectUniqueName": "C:\\Users\\andy\\Source\\Repos\\piWeb\\LEDs\\FadeCandy\\FadeCandy.csproj",
+      "projectUniqueName": "C:\\Users\\andy\\Source\\Repos\\piWeb\\src\\LEDs\\FadeCandy\\FadeCandy.csproj",
       "projectName": "FadeCandy",
-      "projectPath": "C:\\Users\\andy\\Source\\Repos\\piWeb\\LEDs\\FadeCandy\\FadeCandy.csproj",
-      "projectJsonPath": "C:\\Users\\andy\\Source\\Repos\\piWeb\\LEDs\\FadeCandy\\project.json",
+      "projectPath": "C:\\Users\\andy\\Source\\Repos\\piWeb\\src\\LEDs\\FadeCandy\\FadeCandy.csproj",
+      "projectJsonPath": "C:\\Users\\andy\\Source\\Repos\\piWeb\\src\\LEDs\\FadeCandy\\project.json",
       "projectStyle": "ProjectJson",
       "frameworks": {
         "uap10.0": {

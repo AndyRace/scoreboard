@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{40C48BC0-6EE0-43A0-BF68-0D6AC2C11DD2}</ProjectGuid>
+    <ProjectGuid>{FF786976-6F50-424C-B5E3-73C5EEAC3ECB}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Utilities</RootNamespace>
-    <AssemblyName>Utilities</AssemblyName>
+    <RootNamespace>FadeCandy</RootNamespace>
+    <AssemblyName>FadeCandy</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
     <TargetPlatformVersion>10.0.14393.0</TargetPlatformVersion>
@@ -107,19 +107,17 @@
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AggregateLogger.cs" />
-    <Compile Include="DebugLogger.cs" />
-    <Compile Include="LoggingChannelLogger.cs" />
+    <Compile Include="FadeCandyUsbDevice.cs" />
+    <Compile Include="Controller.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Properties\Utilities.rd.xml" />
+    <Compile Include="RGBColour.cs" />
+    <Compile Include="FadeCandyException.cs" />
+    <Compile Include="UnableToFindFadeCandyException.cs" />
+    <EmbeddedResource Include="Properties\FadeCandy.rd.xml" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Caliburn.Micro\src\Caliburn.Micro.Platform\Caliburn.Micro.Platform.Core.csproj">
-      <Project>{0ecbe3d9-aed4-419d-a6e3-c53d5ce2a02a}</Project>
-      <Name>Caliburn.Micro.Platform.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Caliburn.Micro\src\Caliburn.Micro\Caliburn.Micro.csproj">
-      <Project>{6d772b52-da8f-4784-971a-4bf50cb6d306}</Project>
+    <ProjectReference Include="..\..\..\..\Caliburn.Micro\src\Caliburn.Micro\Caliburn.Micro.csproj">
+      <Project>{6D772B52-DA8F-4784-971A-4BF50CB6D306}</Project>
       <Name>Caliburn.Micro</Name>
     </ProjectReference>
   </ItemGroup>
