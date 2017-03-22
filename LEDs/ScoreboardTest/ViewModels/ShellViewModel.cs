@@ -1,4 +1,5 @@
 ﻿using Caliburn.Micro;
+using ScoreboardFadeCandy;
 using ScoreboardTest.Models;
 using ScoreboardTest.Utils;
 using System;

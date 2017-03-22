@@ -1,7 +1,6 @@
 ﻿using FadeCandy;
 using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace ScoreboardFadeCandy
 {
@@ -81,7 +80,7 @@ namespace ScoreboardFadeCandy
 
     public void SetValue(byte? value)
     {
-      if (value >= _segmentBitmaps.Length) throw new ArgumentOutOfRangeException("Value", value, $"Invalid value ({value}). Must be < {_segmentBitmaps.Length}.");
+      if (value >= _segmentBitmaps.Length) throw new ArgumentOutOfRangeException("Value", value, $"Invalid value ({value}). Must be <= {_segmentBitmaps.Length}.");
 
       var bmp = value.HasValue ? _segmentBitmaps[value.Value] : 0;
 
@@ -130,7 +129,7 @@ namespace ScoreboardFadeCandy
 
     public void SetValue(uint? value)
     {
-      if (value > _maxValue) throw new ArgumentOutOfRangeException("Value", value, $"Invalid value ({value}). Must be < {_maxValue}.");
+      if (value > _maxValue) throw new ArgumentOutOfRangeException("Value", value, $"Invalid value ({value}). Must be <= {_maxValue}.");
 
       _currentValue = value;
 
@@ -243,7 +242,6 @@ namespace ScoreboardFadeCandy
 
     public void Reset()
     {
-      _fadeCandy.Reset();
       foreach(var digit in Digits)
       {
         digit.SetValue(digit.GetValue());

@@ -87,7 +87,7 @@ namespace FadeCandy
       _fadeCandyUsbDevice.WriteData(packet);
     }
 
-    public void Reset()
+    public virtual void Reset()
     {
       IsInitialised = false;
       //Initialise();

@@ -4,9 +4,9 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ScoreboardTest.Models
+namespace ScoreboardFadeCandy
 {
-  class StripController : PropertyChangedBase, IStripController, IDisposable
+  public class StripController : PropertyChangedBase, IStripController, IDisposable
   {
     private ScoreboardFadeCandyController _fadeCandy = new ScoreboardFadeCandyController();
 

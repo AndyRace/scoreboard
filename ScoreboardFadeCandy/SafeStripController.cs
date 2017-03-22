@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Threading.Tasks;
-using ScoreboardTest.Models;
 using Windows.UI;
 using Caliburn.Micro;
 using FadeCandy;
 
-namespace ScoreboardTest.ViewModels
+namespace ScoreboardFadeCandy
 {
-  internal class SafeStripController : PropertyChangedBase, ISafeStripController
+  public class SafeStripController : PropertyChangedBase, ISafeStripController
   {
     private IStripController _controller;
 
@@ -20,6 +19,7 @@ namespace ScoreboardTest.ViewModels
       _controller = controller;
       _controller.PropertyChanged += (sender, e) => NotifyOfPropertyChange(e.PropertyName);
     }
+
     public void Dec()
     {
       Dec(false);
@@ -61,10 +61,24 @@ namespace ScoreboardTest.ViewModels
       GuardedCall(() => _controller.Reset());
     }
 
+    const int nActionsBeforeReset = 10;
+
+    private int _resetCounter;
+
     private T2 GuardedCall<T2>(Func<T2> fn, bool throwException = true)
     {
       try
       {
+        // Reset the strip every so often
+        // I have observed the fadecandy not being correctly initialised after being
+        // powered up
+        _resetCounter++;
+        if (_resetCounter == 10)
+        {
+          _resetCounter = 0;
+          _controller.Reset();
+        }
+
         return fn();
       }
       catch (Exception ex)
@@ -81,18 +95,7 @@ namespace ScoreboardTest.ViewModels
 
     private void GuardedCall(System.Action fn, bool throwException = true)
     {
-      try
-      {
-        fn();
-      }
-      catch (Exception ex)
-      {
-        if (ex is FadeCandyException)
-          _controller.Reset();
-
-        // LogManager.GetLog(GetType()).Error(ex);
-        if (throwException) throw;
-      }
+      GuardedCall(() => { fn(); return true; });
     }
   }
 }

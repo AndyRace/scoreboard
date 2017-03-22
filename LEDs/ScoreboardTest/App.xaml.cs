@@ -47,8 +47,8 @@ namespace ScoreboardTest
       _container.RegisterWinRTServices();
 
       _container
-          .PerRequest<ShellViewModel>()
-          .PerRequest<IStripController, StripController>();
+          .PerRequest<ShellViewModel>();
+          //.PerRequest<IStripController, StripController>();
 
       _eventAggregator = _container.GetInstance<IEventAggregator>();
     }

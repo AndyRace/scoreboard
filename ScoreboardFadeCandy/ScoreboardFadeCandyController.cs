@@ -251,5 +251,12 @@ namespace ScoreboardFadeCandy
         }
       }
     }
+
+    public override void Reset()
+    {
+      base.Reset();
+
+      LedNumbers.Reset();
+    }
   }
 }

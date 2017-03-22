@@ -107,9 +107,13 @@
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ISafeStripController.cs" />
+    <Compile Include="IStripController.cs" />
     <Compile Include="LedNumbers.cs" />
+    <Compile Include="SafeStripController.cs" />
     <Compile Include="ScoreboardFadeCandyController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StripController.cs" />
     <EmbeddedResource Include="Properties\ScoreboardFadeCandy.rd.xml" />
   </ItemGroup>
   <ItemGroup>

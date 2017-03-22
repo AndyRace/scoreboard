@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Windows.UI;
 
-namespace ScoreboardTest.Models
+namespace ScoreboardFadeCandy
 {
   public interface IStripController : INotifyPropertyChanged
   {
