@@ -20,8 +20,7 @@ namespace ScoreboardTest.Utils
       // _loggerClasses.ForEach((loggerType) => _loggers.Add((ILog)Activator.CreateInstance(loggerType, type)));
 
       // todo: Add filtering
-      if(type.Namespace != "Caliburn.Micro")
-        _loggerCreators.ForEach((fn) => _loggers.Add(fn(type)));
+      _loggerCreators.ForEach((fn) => _loggers.Add(fn(type)));
     }
 
     public static Func<Type, ILog> AddLogger(Func<Type, ILog> createLogger)
@@ -50,7 +49,8 @@ namespace ScoreboardTest.Utils
     void ILog.Info(string format, params object[] args)
     {
       // DebugInfo.Add($"INFO: {CreateLogMessage(format, args)}");
-      _loggers.ForEach((logger) => logger.Info(format, args));
+      if (_type == null || _type.Namespace != "Caliburn.Micro")
+        _loggers.ForEach((logger) => logger.Info(format, args));
     }
 
     void ILog.Warn(string format, params object[] args)
