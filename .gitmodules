@@ -1,0 +1,6 @@
+[submodule "3rd Party/Caliburn-Micro"]
+	path = 3rd Party/Caliburn-Micro
+	url = https://github.com/AndyRace/Caliburn.Micro.git
+[submodule "3rd Party/Catnap.Server"]
+	path = 3rd Party/Catnap.Server
+	url = https://github.com/AndyRace/Catnap.Server.git
