@@ -2186,6 +2186,12 @@
       "Caliburn.Micro/1.0.0": {
         "type": "project"
       },
+      "Caliburn.Micro.Platform.Core/1.0.0": {
+        "type": "project",
+        "dependencies": {
+          "Caliburn.Micro": "1.0.0"
+        }
+      },
       "Catnap.Server/1.0.0": {
         "type": "project",
         "framework": "UAP,Version=v10.0",
@@ -2199,6 +2205,7 @@
         "framework": "UAP,Version=v10.0",
         "dependencies": {
           "Caliburn.Micro": "1.0.0",
+          "Caliburn.Micro.Platform.Core": "1.0.0",
           "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2"
         }
       },
@@ -4505,6 +4512,12 @@
       "Caliburn.Micro/1.0.0": {
         "type": "project"
       },
+      "Caliburn.Micro.Platform.Core/1.0.0": {
+        "type": "project",
+        "dependencies": {
+          "Caliburn.Micro": "1.0.0"
+        }
+      },
       "Catnap.Server/1.0.0": {
         "type": "project",
         "framework": "UAP,Version=v10.0",
@@ -4518,6 +4531,7 @@
         "framework": "UAP,Version=v10.0",
         "dependencies": {
           "Caliburn.Micro": "1.0.0",
+          "Caliburn.Micro.Platform.Core": "1.0.0",
           "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2"
         }
       },
@@ -6863,6 +6877,12 @@
       "Caliburn.Micro/1.0.0": {
         "type": "project"
       },
+      "Caliburn.Micro.Platform.Core/1.0.0": {
+        "type": "project",
+        "dependencies": {
+          "Caliburn.Micro": "1.0.0"
+        }
+      },
       "Catnap.Server/1.0.0": {
         "type": "project",
         "framework": "UAP,Version=v10.0",
@@ -6876,6 +6896,7 @@
         "framework": "UAP,Version=v10.0",
         "dependencies": {
           "Caliburn.Micro": "1.0.0",
+          "Caliburn.Micro.Platform.Core": "1.0.0",
           "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2"
         }
       },
@@ -9191,6 +9212,12 @@
       "Caliburn.Micro/1.0.0": {
         "type": "project"
       },
+      "Caliburn.Micro.Platform.Core/1.0.0": {
+        "type": "project",
+        "dependencies": {
+          "Caliburn.Micro": "1.0.0"
+        }
+      },
       "Catnap.Server/1.0.0": {
         "type": "project",
         "framework": "UAP,Version=v10.0",
@@ -9204,6 +9231,7 @@
         "framework": "UAP,Version=v10.0",
         "dependencies": {
           "Caliburn.Micro": "1.0.0",
+          "Caliburn.Micro.Platform.Core": "1.0.0",
           "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2"
         }
       },
@@ -11558,6 +11586,12 @@
       "Caliburn.Micro/1.0.0": {
         "type": "project"
       },
+      "Caliburn.Micro.Platform.Core/1.0.0": {
+        "type": "project",
+        "dependencies": {
+          "Caliburn.Micro": "1.0.0"
+        }
+      },
       "Catnap.Server/1.0.0": {
         "type": "project",
         "framework": "UAP,Version=v10.0",
@@ -11571,6 +11605,7 @@
         "framework": "UAP,Version=v10.0",
         "dependencies": {
           "Caliburn.Micro": "1.0.0",
+          "Caliburn.Micro.Platform.Core": "1.0.0",
           "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2"
         }
       },
@@ -13886,6 +13921,12 @@
       "Caliburn.Micro/1.0.0": {
         "type": "project"
       },
+      "Caliburn.Micro.Platform.Core/1.0.0": {
+        "type": "project",
+        "dependencies": {
+          "Caliburn.Micro": "1.0.0"
+        }
+      },
       "Catnap.Server/1.0.0": {
         "type": "project",
         "framework": "UAP,Version=v10.0",
@@ -13899,6 +13940,7 @@
         "framework": "UAP,Version=v10.0",
         "dependencies": {
           "Caliburn.Micro": "1.0.0",
+          "Caliburn.Micro.Platform.Core": "1.0.0",
           "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2"
         }
       },
@@ -16253,6 +16295,12 @@
       "Caliburn.Micro/1.0.0": {
         "type": "project"
       },
+      "Caliburn.Micro.Platform.Core/1.0.0": {
+        "type": "project",
+        "dependencies": {
+          "Caliburn.Micro": "1.0.0"
+        }
+      },
       "Catnap.Server/1.0.0": {
         "type": "project",
         "framework": "UAP,Version=v10.0",
@@ -16266,6 +16314,7 @@
         "framework": "UAP,Version=v10.0",
         "dependencies": {
           "Caliburn.Micro": "1.0.0",
+          "Caliburn.Micro.Platform.Core": "1.0.0",
           "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2"
         }
       },
@@ -24566,13 +24615,18 @@
     },
     "Caliburn.Micro/1.0.0": {
       "type": "project",
-      "path": "../../../../Caliburn.Micro/src/Caliburn.Micro/Caliburn.Micro.csproj",
-      "msbuildProject": "../../../../Caliburn.Micro/src/Caliburn.Micro/Caliburn.Micro.csproj"
+      "path": "../../../3rd Party/Caliburn-Micro/src/Caliburn.Micro/Caliburn.Micro.csproj",
+      "msbuildProject": "../../../3rd Party/Caliburn-Micro/src/Caliburn.Micro/Caliburn.Micro.csproj"
+    },
+    "Caliburn.Micro.Platform.Core/1.0.0": {
+      "type": "project",
+      "path": "../../../3rd Party/Caliburn-Micro/src/Caliburn.Micro.Platform/Caliburn.Micro.Platform.Core.csproj",
+      "msbuildProject": "../../../3rd Party/Caliburn-Micro/src/Caliburn.Micro.Platform/Caliburn.Micro.Platform.Core.csproj"
     },
     "Catnap.Server/1.0.0": {
       "type": "project",
-      "path": "../../../../Catnap.Server/Catnap.Server/Catnap.Server/project.json",
-      "msbuildProject": "../../../../Catnap.Server/Catnap.Server/Catnap.Server/Catnap.Server.csproj"
+      "path": "../../../3rd Party/Catnap.Server/Catnap.Server/Catnap.Server/project.json",
+      "msbuildProject": "../../../3rd Party/Catnap.Server/Catnap.Server/Catnap.Server/Catnap.Server.csproj"
     },
     "FadeCandy/1.0.0": {
       "type": "project",
@@ -24604,17 +24658,17 @@
       "frameworks": {
         "uap10.0": {
           "projectReferences": {
-            "C:\\Users\\andy\\Source\\Repos\\Caliburn.Micro\\src\\Caliburn.Micro\\Caliburn.Micro.csproj": {
-              "projectPath": "C:\\Users\\andy\\Source\\Repos\\Caliburn.Micro\\src\\Caliburn.Micro\\Caliburn.Micro.csproj"
-            },
-            "C:\\Users\\andy\\Source\\Repos\\Catnap.Server\\Catnap.Server\\Catnap.Server\\Catnap.Server.csproj": {
-              "projectPath": "C:\\Users\\andy\\Source\\Repos\\Catnap.Server\\Catnap.Server\\Catnap.Server\\Catnap.Server.csproj"
+            "C:\\Users\\andy\\Source\\Repos\\piWeb\\3rd Party\\Caliburn-Micro\\src\\Caliburn.Micro\\Caliburn.Micro.csproj": {
+              "projectPath": "C:\\Users\\andy\\Source\\Repos\\piWeb\\3rd Party\\Caliburn-Micro\\src\\Caliburn.Micro\\Caliburn.Micro.csproj"
             },
             "C:\\Users\\andy\\Source\\Repos\\piWeb\\src\\LEDs\\FadeCandy\\FadeCandy.csproj": {
               "projectPath": "C:\\Users\\andy\\Source\\Repos\\piWeb\\src\\LEDs\\FadeCandy\\FadeCandy.csproj"
             },
             "C:\\Users\\andy\\Source\\Repos\\piWeb\\src\\LEDs\\ScoreboardFadeCandy\\ScoreboardFadeCandy.csproj": {
               "projectPath": "C:\\Users\\andy\\Source\\Repos\\piWeb\\src\\LEDs\\ScoreboardFadeCandy\\ScoreboardFadeCandy.csproj"
+            },
+            "C:\\Users\\andy\\Source\\Repos\\piWeb\\3rd Party\\Catnap.Server\\Catnap.Server\\Catnap.Server\\Catnap.Server.csproj": {
+              "projectPath": "C:\\Users\\andy\\Source\\Repos\\piWeb\\3rd Party\\Catnap.Server\\Catnap.Server\\Catnap.Server\\Catnap.Server.csproj"
             }
           }
         }

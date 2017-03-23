@@ -112,11 +112,11 @@
     <Content Include="web\ticker.js" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\Caliburn.Micro\src\Caliburn.Micro\Caliburn.Micro.csproj">
-      <Project>{6D772B52-DA8F-4784-971A-4BF50CB6D306}</Project>
+    <ProjectReference Include="..\..\..\3rd Party\Caliburn-Micro\src\Caliburn.Micro\Caliburn.Micro.csproj">
+      <Project>{6d772b52-da8f-4784-971a-4bf50cb6d306}</Project>
       <Name>Caliburn.Micro</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\..\Catnap.Server\Catnap.Server\Catnap.Server\Catnap.Server.csproj">
+    <ProjectReference Include="..\..\..\3rd Party\Catnap.Server\Catnap.Server\Catnap.Server\Catnap.Server.csproj">
       <Project>{1ed5f504-dbe7-45fe-a968-f3f71b26b67e}</Project>
       <Name>Catnap.Server</Name>
     </ProjectReference>

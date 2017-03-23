@@ -2373,6 +2373,7 @@
         "framework": "UAP,Version=v10.0",
         "dependencies": {
           "Caliburn.Micro": "1.0.0",
+          "Caliburn.Micro.Platform.Core": "1.0.0",
           "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2"
         }
       },
@@ -2390,7 +2391,6 @@
         "framework": "UAP,Version=v10.0",
         "dependencies": {
           "Caliburn.Micro": "1.0.0",
-          "Caliburn.Micro.Platform.Core": "1.0.0",
           "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2"
         }
       }
@@ -4817,6 +4817,7 @@
         "framework": "UAP,Version=v10.0",
         "dependencies": {
           "Caliburn.Micro": "1.0.0",
+          "Caliburn.Micro.Platform.Core": "1.0.0",
           "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2"
         }
       },
@@ -4834,7 +4835,6 @@
         "framework": "UAP,Version=v10.0",
         "dependencies": {
           "Caliburn.Micro": "1.0.0",
-          "Caliburn.Micro.Platform.Core": "1.0.0",
           "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2"
         }
       }
@@ -7300,6 +7300,7 @@
         "framework": "UAP,Version=v10.0",
         "dependencies": {
           "Caliburn.Micro": "1.0.0",
+          "Caliburn.Micro.Platform.Core": "1.0.0",
           "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2"
         }
       },
@@ -7317,7 +7318,6 @@
         "framework": "UAP,Version=v10.0",
         "dependencies": {
           "Caliburn.Micro": "1.0.0",
-          "Caliburn.Micro.Platform.Core": "1.0.0",
           "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2"
         }
       }
@@ -9753,6 +9753,7 @@
         "framework": "UAP,Version=v10.0",
         "dependencies": {
           "Caliburn.Micro": "1.0.0",
+          "Caliburn.Micro.Platform.Core": "1.0.0",
           "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2"
         }
       },
@@ -9770,7 +9771,6 @@
         "framework": "UAP,Version=v10.0",
         "dependencies": {
           "Caliburn.Micro": "1.0.0",
-          "Caliburn.Micro.Platform.Core": "1.0.0",
           "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2"
         }
       }
@@ -12245,6 +12245,7 @@
         "framework": "UAP,Version=v10.0",
         "dependencies": {
           "Caliburn.Micro": "1.0.0",
+          "Caliburn.Micro.Platform.Core": "1.0.0",
           "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2"
         }
       },
@@ -12262,7 +12263,6 @@
         "framework": "UAP,Version=v10.0",
         "dependencies": {
           "Caliburn.Micro": "1.0.0",
-          "Caliburn.Micro.Platform.Core": "1.0.0",
           "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2"
         }
       }
@@ -14698,6 +14698,7 @@
         "framework": "UAP,Version=v10.0",
         "dependencies": {
           "Caliburn.Micro": "1.0.0",
+          "Caliburn.Micro.Platform.Core": "1.0.0",
           "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2"
         }
       },
@@ -14715,7 +14716,6 @@
         "framework": "UAP,Version=v10.0",
         "dependencies": {
           "Caliburn.Micro": "1.0.0",
-          "Caliburn.Micro.Platform.Core": "1.0.0",
           "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2"
         }
       }
@@ -17190,6 +17190,7 @@
         "framework": "UAP,Version=v10.0",
         "dependencies": {
           "Caliburn.Micro": "1.0.0",
+          "Caliburn.Micro.Platform.Core": "1.0.0",
           "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2"
         }
       },
@@ -17207,7 +17208,6 @@
         "framework": "UAP,Version=v10.0",
         "dependencies": {
           "Caliburn.Micro": "1.0.0",
-          "Caliburn.Micro.Platform.Core": "1.0.0",
           "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2"
         }
       }
@@ -25665,18 +25665,18 @@
     },
     "Caliburn.Micro/1.0.0": {
       "type": "project",
-      "path": "../../../../Caliburn.Micro/src/Caliburn.Micro/Caliburn.Micro.csproj",
-      "msbuildProject": "../../../../Caliburn.Micro/src/Caliburn.Micro/Caliburn.Micro.csproj"
+      "path": "../../../3rd Party/Caliburn-Micro/src/Caliburn.Micro/Caliburn.Micro.csproj",
+      "msbuildProject": "../../../3rd Party/Caliburn-Micro/src/Caliburn.Micro/Caliburn.Micro.csproj"
     },
     "Caliburn.Micro.Platform.Core/1.0.0": {
       "type": "project",
-      "path": "../../../../Caliburn.Micro/src/Caliburn.Micro.Platform/Caliburn.Micro.Platform.Core.csproj",
-      "msbuildProject": "../../../../Caliburn.Micro/src/Caliburn.Micro.Platform/Caliburn.Micro.Platform.Core.csproj"
+      "path": "../../../3rd Party/Caliburn-Micro/src/Caliburn.Micro.Platform/Caliburn.Micro.Platform.Core.csproj",
+      "msbuildProject": "../../../3rd Party/Caliburn-Micro/src/Caliburn.Micro.Platform/Caliburn.Micro.Platform.Core.csproj"
     },
     "Caliburn.Micro.Platform.UWP/1.0.0": {
       "type": "project",
-      "path": "../../../../Caliburn.Micro/src/Caliburn.Micro.Platform/Caliburn.Micro.Platform.UWP.project.json",
-      "msbuildProject": "../../../../Caliburn.Micro/src/Caliburn.Micro.Platform/Caliburn.Micro.Platform.UWP.csproj"
+      "path": "../../../3rd Party/Caliburn-Micro/src/Caliburn.Micro.Platform/Caliburn.Micro.Platform.UWP.project.json",
+      "msbuildProject": "../../../3rd Party/Caliburn-Micro/src/Caliburn.Micro.Platform/Caliburn.Micro.Platform.UWP.csproj"
     },
     "FadeCandy/1.0.0": {
       "type": "project",
@@ -25718,14 +25718,11 @@
       "frameworks": {
         "uap10.0": {
           "projectReferences": {
-            "C:\\Users\\andy\\Source\\Repos\\Caliburn.Micro\\src\\Caliburn.Micro.Platform\\Caliburn.Micro.Platform.Core.csproj": {
-              "projectPath": "C:\\Users\\andy\\Source\\Repos\\Caliburn.Micro\\src\\Caliburn.Micro.Platform\\Caliburn.Micro.Platform.Core.csproj"
+            "C:\\Users\\andy\\Source\\Repos\\piWeb\\3rd Party\\Caliburn-Micro\\src\\Caliburn.Micro.Platform\\Caliburn.Micro.Platform.UWP.csproj": {
+              "projectPath": "C:\\Users\\andy\\Source\\Repos\\piWeb\\3rd Party\\Caliburn-Micro\\src\\Caliburn.Micro.Platform\\Caliburn.Micro.Platform.UWP.csproj"
             },
-            "C:\\Users\\andy\\Source\\Repos\\Caliburn.Micro\\src\\Caliburn.Micro.Platform\\Caliburn.Micro.Platform.UWP.csproj": {
-              "projectPath": "C:\\Users\\andy\\Source\\Repos\\Caliburn.Micro\\src\\Caliburn.Micro.Platform\\Caliburn.Micro.Platform.UWP.csproj"
-            },
-            "C:\\Users\\andy\\Source\\Repos\\Caliburn.Micro\\src\\Caliburn.Micro\\Caliburn.Micro.csproj": {
-              "projectPath": "C:\\Users\\andy\\Source\\Repos\\Caliburn.Micro\\src\\Caliburn.Micro\\Caliburn.Micro.csproj"
+            "C:\\Users\\andy\\Source\\Repos\\piWeb\\3rd Party\\Caliburn-Micro\\src\\Caliburn.Micro\\Caliburn.Micro.csproj": {
+              "projectPath": "C:\\Users\\andy\\Source\\Repos\\piWeb\\3rd Party\\Caliburn-Micro\\src\\Caliburn.Micro\\Caliburn.Micro.csproj"
             },
             "C:\\Users\\andy\\Source\\Repos\\piWeb\\src\\LEDs\\ScoreboardFadeCandy\\ScoreboardFadeCandy.csproj": {
               "projectPath": "C:\\Users\\andy\\Source\\Repos\\piWeb\\src\\LEDs\\ScoreboardFadeCandy\\ScoreboardFadeCandy.csproj"

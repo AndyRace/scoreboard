@@ -96,15 +96,11 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\Caliburn.Micro\src\Caliburn.Micro.Platform\Caliburn.Micro.Platform.Core.csproj">
-      <Project>{0ecbe3d9-aed4-419d-a6e3-c53d5ce2a02a}</Project>
-      <Name>Caliburn.Micro.Platform.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\..\Caliburn.Micro\src\Caliburn.Micro.Platform\Caliburn.Micro.Platform.UWP.csproj">
+    <ProjectReference Include="..\..\..\3rd Party\Caliburn-Micro\src\Caliburn.Micro.Platform\Caliburn.Micro.Platform.UWP.csproj">
       <Project>{94d9a9c6-44c1-4e5a-877b-5761c963b2f6}</Project>
       <Name>Caliburn.Micro.Platform.UWP</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\..\Caliburn.Micro\src\Caliburn.Micro\Caliburn.Micro.csproj">
+    <ProjectReference Include="..\..\..\3rd Party\Caliburn-Micro\src\Caliburn.Micro\Caliburn.Micro.csproj">
       <Project>{6d772b52-da8f-4784-971a-4bf50cb6d306}</Project>
       <Name>Caliburn.Micro</Name>
     </ProjectReference>

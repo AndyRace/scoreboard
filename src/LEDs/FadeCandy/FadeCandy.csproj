@@ -116,8 +116,12 @@
     <EmbeddedResource Include="Properties\FadeCandy.rd.xml" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\Caliburn.Micro\src\Caliburn.Micro\Caliburn.Micro.csproj">
-      <Project>{6D772B52-DA8F-4784-971A-4BF50CB6D306}</Project>
+    <ProjectReference Include="..\..\..\3rd Party\Caliburn-Micro\src\Caliburn.Micro.Platform\Caliburn.Micro.Platform.Core.csproj">
+      <Project>{0ecbe3d9-aed4-419d-a6e3-c53d5ce2a02a}</Project>
+      <Name>Caliburn.Micro.Platform.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\3rd Party\Caliburn-Micro\src\Caliburn.Micro\Caliburn.Micro.csproj">
+      <Project>{6d772b52-da8f-4784-971a-4bf50cb6d306}</Project>
       <Name>Caliburn.Micro</Name>
     </ProjectReference>
   </ItemGroup>
